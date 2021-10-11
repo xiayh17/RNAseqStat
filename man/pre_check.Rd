@@ -4,7 +4,13 @@
 \alias{pre_check}
 \title{Pre-check you data by PCA and Heat maps}
 \usage{
-pre_check(counts_data, group_list, dir = ".")
+pre_check(
+  counts_data,
+  group_list,
+  dir = ".",
+  prefix = "1-pre_check",
+  palette = RColorBrewer::brewer.pal(3, "Set2")[1:2]
+)
 }
 \arguments{
 \item{counts_data}{a counts data frame of rows in genes and columns in samples}
@@ -12,6 +18,10 @@ pre_check(counts_data, group_list, dir = ".")
 \item{group_list}{a list ordered by samples in counts_data}
 
 \item{dir}{a directory to store results}
+
+\item{prefix}{a prefix of file names in this step}
+
+\item{palette}{a color palette for plots}
 }
 \value{
 a directory contains figures for data QC check
@@ -20,5 +30,5 @@ a directory contains figures for data QC check
 A previous check function for overview the data sets.
 }
 \examples{
-pre_check(counts_input, group_list)
+pre_check(counts_input, group_list, tempdir())
 }
