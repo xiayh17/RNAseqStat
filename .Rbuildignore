@@ -4,3 +4,4 @@
 ^dev$
 ^codecov\.yml$
 ^README\.Rmd$
+^\.github$
