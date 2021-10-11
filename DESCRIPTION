@@ -25,3 +25,4 @@ Imports:
     ggplot2,
     RColorBrewer,
     pheatmap
+biocViews: DataImport, Microarray, OneChannel, SAGE, Software, TwoChannel
