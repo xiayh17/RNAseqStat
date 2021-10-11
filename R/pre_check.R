@@ -24,13 +24,13 @@ pre_check <- function(counts_data, group_list, dir = ".", prefix = "1-pre_check"
   exprSet=counts_data
   dat=log2(cpm(exprSet)+1)
   pca_check(dat,group_list,dir = dir,prefix = prefix,palette = palette)
-  message(glue("🌲 PCA checking have done, a plot was store in {dir}."))
+  message(glue(":deciduous_tree: PCA checking have done, a plot was store in {dir}."))
   corall_check(dat,group_list,dir = dir,prefix = prefix,palette = palette)
-  message(glue("🌲 Correlation checking have done, a plot was store in {dir}."))
+  message(glue(":deciduous_tree: Correlation checking have done, a plot was store in {dir}."))
   cor500_check(exprSet,group_list,dir = dir,prefix = prefix,palette = palette)
-  message(glue("🌲 Correlation to top 500 genes checking have done, a plot was store in {dir}."))
+  message(glue(":deciduous_tree: Correlation to top 500 genes checking have done, a plot was store in {dir}."))
   top1000_check(dat,group_list,dir = dir,prefix = prefix,palette = palette)
-  message(glue("🌲 Standard Deviation top 1000 genes checking have done, a plot was store in {dir}."))
+  message(glue(":deciduous_tree: Standard Deviation top 1000 genes checking have done, a plot was store in {dir}."))
 }
 
 #' PCA QC check
@@ -56,7 +56,7 @@ pre_check <- function(counts_data, group_list, dir = ".", prefix = "1-pre_check"
 pca_check <- function(data, list, dir = ".", prefix = "1-pre_check", palette = RColorBrewer::brewer.pal(3,"Set2")[1:2]) {
   filename = glue('{dir}/{prefix}_all_samples_PCA_by_type.pdf')
   dat=t(data)
-  dat.pca <- PCA(dat , graph = FALSE)#现在dat最后一列是group_list，需要重新赋值给一个dat.pca,这个矩阵是不含有分组信息的
+  dat.pca <- PCA(dat , graph = FALSE)
   p <- fviz_pca_ind(dat.pca,
                geom.ind = "point", # show points only (nbut not "text")
                col.ind =  list, # color by groups
@@ -113,6 +113,7 @@ corall_check <- function(data, list, dir = ".", prefix = "1-pre_check",palette =
 #'
 #' @importFrom glue glue
 #' @importFrom pheatmap pheatmap
+#' @importFrom stats cor mad
 #'
 #' @return a Heatmap shows correlation of all samples to 500 genes
 #'
@@ -150,6 +151,8 @@ cor500_check <- function(data, list, dir = ".", prefix = "1-pre_check",palette =
 #'
 #' @importFrom glue glue
 #' @importFrom pheatmap pheatmap
+#' @importFrom stats sd
+#' @importFrom utils tail
 #'
 #' @return a Heatmap shows top100 genes of all samples
 #'
@@ -160,7 +163,7 @@ top1000_check <- function(data, list, dir = ".", prefix = "1-pre_check",palette 
   filename = glue('{dir}/{prefix}_heatmap_top1000_sd.pdf')
   dat = data
   cg=names(tail(sort(apply(dat,1,sd)),1000))
-  n=t(scale(t(dat[cg,]))) # 'scale'可以对log-ratio数值进行归一化
+  n=t(scale(t(dat[cg,])))
   n[n>2]=2
   n[n< -2]= -2
   n[1:4,1:4]
