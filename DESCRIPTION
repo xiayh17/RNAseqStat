@@ -16,3 +16,12 @@ URL: https://github.com/xiayh17/RNAseqStat
 BugReports: https://github.com/xiayh17/RNAseqStat/issues
 Suggests: 
     covr
+Imports: 
+    fs,
+    edgeR,
+    glue,
+    FactoMineR,
+    factoextra,
+    ggplot2,
+    RColorBrewer,
+    pheatmap
