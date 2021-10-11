@@ -20,6 +20,8 @@
 # }
 #
 # run_DESeq2 <- function(counts_data,group_list) {
+#   data
+#   group_list
 #
 # }
 
