@@ -4,10 +4,6 @@
 # RNAseqStat
 
 <!-- badges: start -->
-
-[![Codecov test
-coverage](https://codecov.io/gh/xiayh17/RNAseqStat/branch/master/graph/badge.svg)](https://codecov.io/gh/xiayh17/RNAseqStat?branch=master)
-[![R-CMD-check](https://github.com/xiayh17/RNAseqStat/workflows/R-CMD-check/badge.svg)](https://github.com/xiayh17/RNAseqStat/actions)
 <!-- badges: end -->
 
 The goal of RNAseqStat is to …
