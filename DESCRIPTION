@@ -15,6 +15,7 @@ RoxygenNote: 7.1.2
 URL: https://github.com/xiayh17/RNAseqStat
 BugReports: https://github.com/xiayh17/RNAseqStat/issues
 Suggests: 
+    testthat (>= 3.0.0),
     covr,
     usethis
 Imports: 
@@ -27,3 +28,4 @@ Imports:
     RColorBrewer,
     pheatmap
 biocViews: DataImport, Microarray, OneChannel, SAGE, Software, TwoChannel
+Config/testthat/edition: 3

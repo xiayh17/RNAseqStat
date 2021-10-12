@@ -4,6 +4,8 @@
 # RNAseqStat
 
 <!-- badges: start -->
+
+[![codecov](https://codecov.io/gh/xiayh17/RNAseqStat/branch/master/graph/badge.svg?token=6rlirZDUVo)](https://codecov.io/gh/xiayh17/RNAseqStat)
 <!-- badges: end -->
 
 The goal of RNAseqStat is to …
