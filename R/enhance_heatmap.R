@@ -17,7 +17,7 @@
 #'
 #' @examples
 #' enhance_heatmap(counts_input, deg_data, group_list, x = "log2FoldChange", y = "pvalue")
-enhance_heatmap <- function(counts_data, deg_data, group_list, x, y, top = 50, cut_P = 0.05, prefix = "2-DEG") {
+enhance_heatmap <- function(counts_data, deg_data, group_list, x, y, top = 50, cut_P = 0.05, dir = ".", prefix = "2-DEG") {
   choose_gene <- top_deg(deg_data,x = x, y = y, top = top, cut_P = cut_P)
   exprSet=log(edgeR::cpm(counts_data)+1)
   choose_matrix=exprSet[choose_gene,]
@@ -30,7 +30,7 @@ enhance_heatmap <- function(counts_data, deg_data, group_list, x, y, top = 50, c
            annotation_col = colD,fontsize = 12,
            width = 400/100*2,
            height = 550/100*3,
-           filename = glue('{prefix}_top100_heatmap.pdf'))
+           filename = glue('{dir}/{prefix}_top100_heatmap.pdf'))
 }
 
 

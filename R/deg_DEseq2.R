@@ -20,17 +20,21 @@
 #'
 #' @examples
 #' deg_DESeq2(counts_input,group_list,
-#' tg = "T", cg = "C", qc = TRUE,
-#' x = "log2FoldChange", y = "pvalue",
-#' dir = tempdir(), prefix = "2-DEG_DEseq2")
+#'           tg = "T", cg = "C", qc = TRUE,
+#'            x = "log2FoldChange", y = "pvalue",
+#'            dir = tempdir(), prefix = "2-DEG_DEseq2")
 deg_DESeq2 <- function(counts_data,group_list,
                        tg,cg,qc = TRUE,x,y,
                        dir = ".",prefix = "2-DEG_DEseq2") {
 
+  if (!fs::dir_exists(dir)) {
+    fs::dir_create(dir)
+  }
+
     deg_data <- run_DESeq2(counts_data = counts_data,group_list = group_list,
                            tg = tg,cg=cg,qc = qc,dir = dir,prefix = prefix)
 
-    enhance_heatmap(counts_data, deg_data, group_list, x = x, y = y)
+    enhance_heatmap(counts_data, deg_data, group_list, x = x, y = y, dir =dir, prefix = prefix)
     message(glue("{emoji('deciduous_tree')} DESeq2 heatmap results were store in {dir}."))
 
     res <- enhance_volcano(deg_data,x = x, y = y,
@@ -38,7 +42,7 @@ deg_DESeq2 <- function(counts_data,group_list,
                     palette = c('#66c2a5', 'grey50', '#fc8d62'),
                     cut_FC = "auto",cut_P = 0.05,top = 10, size = 2.0,expand = c(0.25,0.25),
                     genes_list = "top", highlight = NULL)
-    ggsave(res,filename = glue("{prefix}_volcano.pdf"), width = 1600,height = 1600,units = "px",limitsize = FALSE)
+    ggsave(res,filename = glue("{dir}/{prefix}_volcano.pdf"), width = 1600,height = 1600,units = "px",limitsize = FALSE)
     message(glue("{emoji('volcano')} DESeq2 volcano results were store in {dir}."))
 
 }

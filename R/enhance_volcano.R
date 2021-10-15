@@ -85,7 +85,7 @@ enhance_volcano_plot <- function(data,x,y,label = c("Down","Stable","Up"),cut_FC
 
   p <- ggplot(data=data,aes(x = log2FoldChange,y = -log10(pvalue), colour = group, alpha = group)) +
     geom_point(aes(color = group),size = 0.5) +
-    geom_vline(data=FC_data, mapping=aes(xintercept=cut_FC),color = c(palette[label[3]],palette[label[1]]), linetype="longdash",size = 0.4) +
+    geom_vline(data=FC_data, mapping=aes(xintercept=cut_FC),color = c(palette[label[1]],palette[label[3]]), linetype="longdash",size = 0.4) +
     geom_hline(aes(yintercept = -log10(cut_P)),color = palette[label[2]], linetype="longdash", size = 0.4) +
     scale_alpha_manual(values = c(1,0.5,1),
                        guide = "none")+

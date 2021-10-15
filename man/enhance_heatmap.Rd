@@ -12,6 +12,7 @@ enhance_heatmap(
   y,
   top = 50,
   cut_P = 0.05,
+  dir = ".",
   prefix = "2-DEG"
 )
 }

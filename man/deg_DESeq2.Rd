@@ -43,7 +43,7 @@ A integrated function for run DEseq2 in a counts data and return results files.
 }
 \examples{
 deg_DESeq2(counts_input,group_list,
-tg = "T", cg = "C", qc = TRUE,
-x = "log2FoldChange", y = "pvalue",
-dir = tempdir(), prefix = "2-DEG_DEseq2")
+          tg = "T", cg = "C", qc = TRUE,
+           x = "log2FoldChange", y = "pvalue",
+           dir = tempdir(), prefix = "2-DEG_DEseq2")
 }
