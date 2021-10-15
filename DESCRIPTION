@@ -27,6 +27,10 @@ Imports:
     ggplot2,
     RColorBrewer,
     pheatmap,
-    data.table
+    data.table,
+    emoji,
+    utils,
+    ggrepel,
+    stats
 biocViews: DataImport, Microarray, OneChannel, SAGE, Software, TwoChannel
 Config/testthat/edition: 3

@@ -8,6 +8,10 @@
 #' @param deg_data a DEG data frame contains logFC and p value
 #' @param group_list a character vector ordered by samples in counts_data
 #'
+#' @importFrom edgeR cpm
+#' @importFrom pheatmap pheatmap
+#' @importFrom glue glue
+#'
 #' @return a heatmap plot file
 #' @export
 #'

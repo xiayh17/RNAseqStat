@@ -12,6 +12,9 @@
 #' @param y which column is P value
 #' @param prefix a prefix of file names in this step
 #'
+#' @importFrom glue glue
+#' @importFrom ggplot2 ggsave
+#'
 #' @return a directory contains figures and csv files
 #' @export
 #'
