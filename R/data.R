@@ -7,3 +7,8 @@
 #'
 #' a list ordered by samples in counts_data
 "group_list"
+
+#' An example dataset
+#'
+#' a list ordered by samples in counts_data
+"deg_data"
