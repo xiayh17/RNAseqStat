@@ -10,6 +10,7 @@
 #'
 #' @importFrom glue glue
 #' @importFrom edgeR cpm
+#' @importFrom emoji emoji
 #' @importFrom fs dir_exists dir_create
 #'
 #' @return a directory contains figures for data QC check
@@ -24,13 +25,13 @@ pre_check <- function(counts_data, group_list, dir = ".", prefix = "1-pre_check"
   exprSet=counts_data
   dat=log2(cpm(exprSet)+1)
   pca_check(dat,group_list,dir = dir,prefix = prefix,palette = palette)
-  message(glue(":deciduous_tree: PCA checking have done, a plot was store in {dir}."))
+  message(glue("{emoji('deciduous_tree')} PCA checking have done, a plot was store in {dir}."))
   corall_check(dat,group_list,dir = dir,prefix = prefix,palette = palette)
-  message(glue(":deciduous_tree: Correlation checking have done, a plot was store in {dir}."))
+  message(glue("{emoji('deciduous_tree')} Correlation checking have done, a plot was store in {dir}."))
   cor500_check(exprSet,group_list,dir = dir,prefix = prefix,palette = palette)
-  message(glue(":deciduous_tree: Correlation to top 500 genes checking have done, a plot was store in {dir}."))
+  message(glue("{emoji('deciduous_tree')} Correlation to top 500 genes checking have done, a plot was store in {dir}."))
   top1000_check(dat,group_list,dir = dir,prefix = prefix,palette = palette)
-  message(glue(":deciduous_tree: Standard Deviation top 1000 genes checking have done, a plot was store in {dir}."))
+  message(glue("{emoji('deciduous_tree')} Standard Deviation top 1000 genes checking have done, a plot was store in {dir}."))
 }
 
 #' PCA QC check
