@@ -36,5 +36,6 @@ add group column in data frame
 group data for plot DEG volcano by FDR and logFC
 }
 \examples{
-cut_much(deg_data, x = "log2FoldChange", y = "pvalue", cut_FC = 1,cut_P = 0.05,label = c("Down","Stable","Up"), label_ns = "Stable")
+cut_much(DEG_df, x = "log2FoldChange", y = "pvalue", cut_FC = 1,cut_P = 0.05,
+label = c("Down","Stable","Up"), label_ns = "Stable")
 }

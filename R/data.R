@@ -11,4 +11,4 @@
 #' An example dataset
 #'
 #' a list ordered by samples in counts_data
-"deg_data"
+"DEG_df"

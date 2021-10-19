@@ -13,7 +13,8 @@ enhance_heatmap(
   top = 50,
   cut_P = 0.05,
   dir = ".",
-  prefix = "2-DEG"
+  prefix = "2-DEG",
+  palette = RColorBrewer::brewer.pal(3, "Set2")[1:2]
 )
 }
 \arguments{
@@ -26,6 +27,16 @@ enhance_heatmap(
 \item{x}{which column is log FC}
 
 \item{y}{which column is P value}
+
+\item{top}{a single number or a length of 2 numeric vector, if 2 numeric vector, first one is top max logFC.}
+
+\item{cut_P}{threshold value of P value, can set for every cut_FC number in numeric vector format}
+
+\item{dir}{a directory to store results}
+
+\item{prefix}{a prefix of file names in this step}
+
+\item{palette}{a color palette for plots}
 }
 \value{
 a heatmap plot file
@@ -34,5 +45,6 @@ a heatmap plot file
 default will return a top 100 deg heatmap in p value = 0.05
 }
 \examples{
-enhance_heatmap(counts_input, deg_data, group_list, x = "log2FoldChange", y = "pvalue")
+enhance_heatmap(counts_input, deg_data, group_list,
+    x = "log2FoldChange", y = "pvalue", dir = tempdir())
 }

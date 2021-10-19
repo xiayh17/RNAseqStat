@@ -31,6 +31,8 @@ Imports:
     emoji,
     utils,
     ggrepel,
-    stats
+    stats,
+    DESeq2,
+    SummarizedExperiment
 biocViews: DataImport, Microarray, OneChannel, SAGE, Software, TwoChannel
 Config/testthat/edition: 3

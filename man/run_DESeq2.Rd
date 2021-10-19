@@ -24,6 +24,10 @@ run_DESeq2(
 \item{cg}{the name of the denominator level for the fold change (Control group)}
 
 \item{qc}{qc plots}
+
+\item{dir}{a directory to store results}
+
+\item{prefix}{a prefix of file names in this step}
 }
 \value{
 a DEG data frame

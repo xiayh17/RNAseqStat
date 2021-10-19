@@ -25,5 +25,5 @@ For example, if top = 50, head 50 and tail 50 will return from a
 ordered DEG data frame after filtering by threshold value of P value
 }
 \examples{
-top_deg(deg_data, x = "log2FoldChange", y = "pvalue", 50, 0.05)
+top_deg(DEG_df, x = "log2FoldChange", y = "pvalue", 50, 0.05)
 }

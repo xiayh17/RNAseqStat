@@ -14,8 +14,9 @@
 #'
 #' @importFrom glue glue
 #' @importFrom ggplot2 ggsave
+#' @importFrom fs dir_exists dir_create
 #'
-#' @return a directory contains figures and csv files
+#' @return a directory contains figures and csv files and a deg data frame
 #' @export
 #'
 #' @examples
@@ -34,7 +35,7 @@ deg_DESeq2 <- function(counts_data,group_list,
     deg_data <- run_DESeq2(counts_data = counts_data,group_list = group_list,
                            tg = tg,cg=cg,qc = qc,dir = dir,prefix = prefix)
 
-    enhance_heatmap(counts_data, deg_data, group_list, x = x, y = y, dir =dir, prefix = prefix)
+    enhance_heatmap(counts_data, deg_data, group_list, x = x, y = y, dir = dir, prefix = prefix)
     message(glue("{emoji('deciduous_tree')} DESeq2 heatmap results were store in {dir}."))
 
     res <- enhance_volcano(deg_data,x = x, y = y,
@@ -44,6 +45,8 @@ deg_DESeq2 <- function(counts_data,group_list,
                     genes_list = "top", highlight = NULL)
     ggsave(res,filename = glue("{dir}/{prefix}_volcano.pdf"), width = 1600,height = 1600,units = "px",limitsize = FALSE)
     message(glue("{emoji('volcano')} DESeq2 volcano results were store in {dir}."))
+
+    return(deg_data)
 
 }
 
@@ -58,6 +61,8 @@ deg_DESeq2 <- function(counts_data,group_list,
 #' @param tg the name of the numerator level for the fold change (Test group)
 #' @param cg the name of the denominator level for the fold change (Control group)
 #' @param qc qc plots
+#' @param dir a directory to store results
+#' @param prefix a prefix of file names in this step
 #'
 #' @importFrom DESeq2 DESeqDataSetFromMatrix DESeq results
 #' @importFrom stats na.omit
@@ -71,6 +76,8 @@ run_DESeq2 <- function(counts_data,group_list,tg,cg,qc = TRUE,dir = ".",prefix =
 
   colData <- data.frame(row.names=colnames(counts_data),
                          group_list=group_list)
+
+  colData$group_list <- factor(colData$group_list)
 
   dds <- DESeqDataSetFromMatrix(countData = counts_data,
                                 colData = colData,
@@ -105,7 +112,7 @@ run_DESeq2 <- function(counts_data,group_list,tg,cg,qc = TRUE,dir = ".",prefix =
 #' @importClassesFrom SummarizedExperiment SummarizedExperiment
 #'
 #' @return dispersions and RAWvsNORM firures
-#' @export
+#'
 #' @noRd
 #' @examples
 #' DESeq2_qc(counts_input,dds, dir = tempdir())

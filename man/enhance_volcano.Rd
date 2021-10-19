@@ -39,6 +39,10 @@ enhance_volcano(
 
 \item{top}{a single number or a length of 2 numeric vector, if 2 numeric vector, first one is top max logFC.}
 
+\item{size}{a single number of font size}
+
+\item{expand}{if labels in plot display wrong, try increase it.}
+
 \item{genes_list}{a gene names character vectors;}
 
 \item{highlight}{a gene names character vectors; default NULL}
@@ -50,7 +54,7 @@ a ggplot ob
 an enhance_colcano function for DEG volcano plot
 }
 \examples{
-enhance_volcano(deg_data,x = 'log2FoldChange', y = 'pvalue',
+enhance_volcano(DEG_df,x = 'log2FoldChange', y = 'pvalue',
                 label = c("Down","Stable","Up"), label_ns = "Stable",
                 palette = c('#66c2a5', 'grey50', '#fc8d62'),
                 cut_FC = "auto",cut_P = 0.05,top = 10, size = 2.0,expand = c(0.25,0.25),

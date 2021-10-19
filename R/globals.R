@@ -1,1 +1,1 @@
-# utils::globalVariables(c("mad", "sd"))
+utils::globalVariables(c("log2FoldChange", "pvalue", "group", "rn"))
