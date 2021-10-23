@@ -17,7 +17,9 @@ BugReports: https://github.com/xiayh17/RNAseqStat/issues
 Suggests: 
     testthat (>= 3.0.0),
     covr,
-    usethis
+    usethis,
+    knitr,
+    rmarkdown
 Imports: 
     fs,
     edgeR,
@@ -33,6 +35,18 @@ Imports:
     ggrepel,
     stats,
     DESeq2,
-    SummarizedExperiment
+    SummarizedExperiment,
+    magrittr,
+    AnnotationDbi,
+    DOSE,
+    GO.db,
+    GOSemSim,
+    clusterProfiler,
+    furrr,
+    kit,
+    limma,
+    methods,
+    qvalue
 biocViews: DataImport, Microarray, OneChannel, SAGE, Software, TwoChannel
 Config/testthat/edition: 3
+VignetteBuilder: knitr
