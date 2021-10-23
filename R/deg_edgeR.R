@@ -5,7 +5,6 @@
 #' @param counts_data a counts data frame of rows in genes and columns in samples
 #' @param group_list a list ordered by samples in counts_data
 #' @param dir a directory to store results
-#' @param tg the name of the numerator level for the fold change (Test group)
 #' @param cg the name of the denominator level for the fold change (Control group)
 #' @param x which column is log FC
 #' @param y which column is P value
@@ -31,7 +30,7 @@ deg_edgeR <- function(counts_data,group_list,
     fs::dir_create(dir)
   }
 
-  deg_data <- run_edgeR(counts_data, group_list, cg= "C")
+  deg_data <- run_edgeR(counts_data, group_list, cg= cg)
 
   enhance_heatmap(counts_data, deg_data, group_list, x = x, y = y, dir = dir, prefix = prefix)
   message(glue("{emoji('deciduous_tree')} edgeR heatmap results were store in {dir}."))

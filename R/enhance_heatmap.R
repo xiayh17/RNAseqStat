@@ -22,7 +22,7 @@
 #' @export
 #'
 #' @examples
-#' enhance_heatmap(counts_input, deg_data, group_list,
+#' enhance_heatmap(counts_input, DEG_df, group_list,
 #'     x = "log2FoldChange", y = "pvalue", dir = tempdir())
 enhance_heatmap <- function(counts_data, deg_data, group_list, x, y, top = 50, cut_P = 0.05, dir = ".", prefix = "2-DEG", palette = RColorBrewer::brewer.pal(3,"Set2")[1:2]) {
 

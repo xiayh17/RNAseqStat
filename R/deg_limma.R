@@ -7,7 +7,6 @@
 #' @param dir a directory to store results
 #' @param tg the name of the numerator level for the fold change (Test group)
 #' @param cg the name of the denominator level for the fold change (Control group)
-#' @param qc qc plots
 #' @param x which column is log FC
 #' @param y which column is P value
 #' @param prefix a prefix of file names in this step
@@ -78,7 +77,7 @@ run_limma <- function(counts_data, group_list, cg, tg) {
   dge <- calcNormFactors(dge)
   logCPM <- cpm(dge, log=TRUE, prior.count=3)
 
-  v <- voom(dge,design,plot=TRUE, normalize="quantile")
+  v <- voom(dge,design,plot=TRUE, normalize.method="quantile")
   fit <- lmFit(v, design)
 
   con=paste0(tg,'-',cg)
@@ -87,7 +86,7 @@ run_limma <- function(counts_data, group_list, cg, tg) {
   fit2=contrasts.fit(fit,cont.matrix)
   fit2=eBayes(fit2)
 
-  tempOutput = topTable(fit2, coef=con, n=Inf)
+  tempOutput = topTable(fit2, coef=con, number=Inf)
   DEG_limma_voom = na.omit(tempOutput)
 
   return(DEG_limma_voom)
