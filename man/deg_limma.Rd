@@ -31,8 +31,6 @@ deg_limma(
 \item{dir}{a directory to store results}
 
 \item{prefix}{a prefix of file names in this step}
-
-\item{qc}{qc plots}
 }
 \value{
 a directory contains figures and csv files  and a deg data frame

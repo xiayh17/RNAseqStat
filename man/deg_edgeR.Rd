@@ -28,8 +28,6 @@ deg_edgeR(
 \item{dir}{a directory to store results}
 
 \item{prefix}{a prefix of file names in this step}
-
-\item{tg}{the name of the numerator level for the fold change (Test group)}
 }
 \value{
 a directory contains figures and csv files  and a deg data frame

@@ -45,6 +45,6 @@ a heatmap plot file
 default will return a top 100 deg heatmap in p value = 0.05
 }
 \examples{
-enhance_heatmap(counts_input, deg_data, group_list,
+enhance_heatmap(counts_input, DEG_df, group_list,
     x = "log2FoldChange", y = "pvalue", dir = tempdir())
 }
