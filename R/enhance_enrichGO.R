@@ -90,10 +90,10 @@ enhance_enrichGO <- function(gene,
 
     if (is.null(res))
       return(res)
-  }
 
-  if (simplify) {
-    res <- clusterProfiler::simplify(res)
+    if (simplify) {
+      res <- clusterProfiler::simplify(res)
+    }
   }
 
   res@keytype <- keyType
