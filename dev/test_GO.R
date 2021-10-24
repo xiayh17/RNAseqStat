@@ -35,7 +35,7 @@ gene_list <- list(
 ont = c("BP","CC","MF","ALL")
 
 ego <- map(gene_list,function(x)
-  enrichGO(gene =x, OrgDb = 'org.Hs.eg.db', keyType = "SYMBOL", ont="BP", pvalueCutoff=0.05)
+  enhance_enrichGO(gene =x, OrgDb = 'org.Hs.eg.db', keyType = "SYMBOL", ont="BP", pvalueCutoff=0.05)
 )
 
 GO_DATA <- enhance_get_GO_data(OrgDb = 'org.Hs.eg.db', ont = "ALL", keytype = "SYMBOL")
@@ -85,5 +85,28 @@ df <- do.call('rbind', future_map(lres, as.data.frame))
 
 wt <- as.data.frame(lres[[1]])
 
-lres2t <-
+data(geneList, package = "DOSE")
+de <- names(geneList)[1:100]
+
+library(furrr)
+plan(multisession, workers = 1)
+# create cluster object
+cl <- makeCluster(3)
+
+# test each number in sample_numbers for primality
+microbenchmark::microbenchmark(
+  ego <- map(gene_list,function(x)
+    RNAseqStat::enhance_enrichGO(gene =x, OrgDb = 'org.Hs.eg.db', keyType = "SYMBOL", ont="CC", pvalueCutoff=0.05)
+  ),
+  # yy1 <- enrichGO(de, 'org.Hs.eg.db', ont="BP", pvalueCutoff=0.01),
+  ego2 <- furrr::future_map(gene_list,function(x)
+    RNAseqStat::enhance_enrichGO(gene =x, OrgDb = 'org.Hs.eg.db', keyType = "SYMBOL", ont="CC", pvalueCutoff=0.05)
+  ),
+  ego3 <- parLapply(cl,gene_list,function(x)
+    RNAseqStat::enhance_enrichGO(gene =x, OrgDb = 'org.Hs.eg.db', keyType = "SYMBOL", ont="CC", pvalueCutoff=0.05)),
+  times = 1L
+)
+
+# close cluster object
+stopCluster(cl)
 
