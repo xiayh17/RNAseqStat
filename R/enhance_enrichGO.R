@@ -90,10 +90,6 @@ enhance_enrichGO <- function(gene,
 
     if (is.null(res))
       return(res)
-
-    if (simplify) {
-      res <- clusterProfiler::simplify(res)
-    }
   }
 
   res@keytype <- keyType
@@ -103,9 +99,15 @@ enhance_enrichGO <- function(gene,
   }
   res@ontology <- ont
 
+
+  if (ont != "ALL" & simplify) {
+    res <- clusterProfiler::simplify(res)
+  }
+
   if (ont == "ALL") {
     res <- add_GO_Ontology(res, GO_DATA)
   }
+
   return(res)
 }
 
