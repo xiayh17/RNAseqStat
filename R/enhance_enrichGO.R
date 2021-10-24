@@ -64,10 +64,10 @@ enhance_enrichGO <- function(gene,
       return(NULL)
 
     if (simplify) {
-      lres <- furrr::future_map(lres, function(x) clusterProfiler::simplify(x),.options = furrr_options(seed = TRUE))
+      lres <- furrr::future_map(lres, function(x) clusterProfiler::simplify(x))
     }
 
-    df <- do.call('rbind', future_map(lres, as.data.frame,.options = furrr_options(seed = TRUE)))
+    df <- do.call('rbind', future_map(lres, as.data.frame))
     geneSets <- lres[[1]]@geneSets
     if (length(lres) > 1) {
       for (i in 2:length(lres)) {
