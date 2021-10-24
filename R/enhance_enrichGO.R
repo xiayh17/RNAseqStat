@@ -52,11 +52,11 @@ enhance_enrichGO <- function(gene,
     universe <- NULL
 
   if (ont == "ALL" && !pool) {
-    lres <- furrr::future_map(c("BP", "CC", "MF"), function(ont)
+    lres <- lapply(c("BP", "CC", "MF"), function(ont)
       suppressMessages(enhance_enrichGO(gene, OrgDb, keyType, ont,
                                 pvalueCutoff, pAdjustMethod, universe,
                                 qvalueCutoff, minGSSize, maxGSSize
-      )),.options = furrr_options(seed = TRUE),.progress = FALSE
+      ))
     )
 
     lres <- lres[!vapply(lres, is.null, logical(1))]
@@ -64,10 +64,10 @@ enhance_enrichGO <- function(gene,
       return(NULL)
 
     if (simplify) {
-      lres <- furrr::future_map(lres, function(x) clusterProfiler::simplify(x))
+      lres <- lapply(lres, function(x) clusterProfiler::simplify(x))
     }
 
-    df <- do.call('rbind', future_map(lres, as.data.frame))
+    df <- do.call('rbind', lapply(lres, as.data.frame))
     geneSets <- lres[[1]]@geneSets
     if (length(lres) > 1) {
       for (i in 2:length(lres)) {

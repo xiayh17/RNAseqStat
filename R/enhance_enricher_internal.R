@@ -48,7 +48,8 @@ enhance_enricher_internal <- function(gene,
   qExtID2TermID.df <- data.frame(extID=rep(names(qExtID2TermID),
                                            times=lapply(qExtID2TermID, length)),
                                  termID=qTermID)
-  qExtID2TermID.df <- unique(qExtID2TermID.df)
+  # qExtID2TermID.df <- unique(qExtID2TermID.df)
+  qExtID2TermID.df <- qExtID2TermID.df[!kit::fduplicated(qExtID2TermID.df),]
 
   qTermID2ExtID <- with(qExtID2TermID.df,
                         split(as.character(extID), as.character(termID)))
@@ -65,14 +66,15 @@ enhance_enricher_internal <- function(gene,
     }
   }
 
-  qTermID2ExtID <- future_map(qTermID2ExtID, intersect, extID)
+  qTermID2ExtID <- lapply(qTermID2ExtID, intersect, extID)
 
   ## Term ID annotate query external ID
-  qTermID <- unique(names(qTermID2ExtID))
-
+  # qTermID <- unique(names(qTermID2ExtID))
+  qTermID <- names(qTermID2ExtID)
+  qTermID <- qTermID[!kit::fduplicated(qTermID)]
 
   termID2ExtID <- TERMID2EXTID(qTermID, USER_DATA)
-  termID2ExtID <- future_map(termID2ExtID, intersect, extID)
+  termID2ExtID <- lapply(termID2ExtID, intersect, extID)
 
   geneSets <- termID2ExtID
 
@@ -87,7 +89,9 @@ enhance_enricher_internal <- function(gene,
 
   termID2ExtID <- termID2ExtID[idx]
   qTermID2ExtID <- qTermID2ExtID[idx]
-  qTermID <- unique(names(qTermID2ExtID))
+  # qTermID <- unique(names(qTermID2ExtID))
+  qTermID <- names(qTermID2ExtID)
+  qTermID <- qTermID[!kit::fduplicated(qTermID)]
 
   ## prepare parameter for hypergeometric test
   k <- sapply(qTermID2ExtID, length)
@@ -213,7 +217,9 @@ EXTID2TERMID <- function(gene, USER_DATA) {
 
 ALLEXTID <- function(USER_DATA) {
   PATHID2EXTID <- get("PATHID2EXTID", envir = USER_DATA)
-  res <- unique(unlist(PATHID2EXTID))
+  # res <- unique(unlist(PATHID2EXTID))
+  res <- unlist(PATHID2EXTID)
+  res <- res[!kit::fduplicated(res)]
   return(res)
 }
 
