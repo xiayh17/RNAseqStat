@@ -5,6 +5,8 @@
 #' @inheritParams cut_much
 #' @inheritParams enhance_enrichGO
 #'
+#' @importFrom parallel mclapply
+#'
 #' @return enrichGO result
 #' @export
 #'
