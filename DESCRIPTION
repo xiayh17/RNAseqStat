@@ -47,7 +47,13 @@ Imports:
     limma,
     methods,
     qvalue,
-    org.Hs.eg.db
+    org.Hs.eg.db,
+    ggfun,
+    grid,
+    dplyr,
+    forcats,
+    shadowtext,
+    ggnewscale
 biocViews: DataImport, Microarray, OneChannel, SAGE, Software, TwoChannel
 Config/testthat/edition: 3
 VignetteBuilder: knitr
