@@ -121,7 +121,7 @@ barplot_base <- function(data, bar_color, split_color) {
                     bg.colour='#ffffff',bg.r = NA) +
     scale_color_manual(values = split_color)+
     new_scale_color() +
-    geom_segment(aes(x=0,y=myY-1,xend = Count,yend = myY-1,color = p.adjust),size = 1,linetype = "dotted") +
+    geom_segment(aes(x=0,y=myY-1,xend = Count,yend = myY-1,color = p.adjust),size = 1, lineend = 'round') +
     scale_y_continuous(name = "Description", breaks = data$myY, labels = data$Description, expand = c(0, 0.5)) +
     # geom_col(width = .15,alpha = 1,aes(color = p.adjust),
     #          position=position_dodge2(padding = 0.9)) +
@@ -171,7 +171,7 @@ barplot_base2 <- function(data, bar_color, text_color) {
                     bg.colour='#ffffff',bg.r = NA) +
     scale_color_manual(values = text_color)+
     new_scale_color() +
-    geom_segment(aes(x=0,y=myY-1,xend = Count,yend = myY-1,color = p.adjust),size = 1) +
+    geom_segment(aes(x=0,y=myY-1,xend = Count,yend = myY-1,color = p.adjust),size = 1, lineend = 'round') +
     scale_y_continuous(name = "Description", breaks = data$myY, labels = data$Description, expand = c(0, 0.5)) +
     # geom_col(width = .15,alpha = 1,aes(color = p.adjust),
     #          position=position_dodge2(padding = 0.9)) +
