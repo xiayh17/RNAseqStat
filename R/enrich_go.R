@@ -1,35 +1,48 @@
-# enhance_enrichGO <- function(...,gene,
-#                              orgDb = 'org.Hs.eg.db',
-#                              ont="BP",
-#                              keyType = "SYMBOL",
-#                              pvalueCutoff=0.01,
-#                              qvalueCutoff=0.2) {
-#   ego <- enrichGO(gene = gene,
-#            OrgDb = orgDb,
-#            keyType = keyType,
-#            ont = ont,
-#            pvalueCutoff = pvalueCutoff,
-#            pAdjustMethod = "BH",
-#            qvalueCutoff = qvalueCutoff,
-#            minGSSize = 10,
-#            maxGSSize = 500,
-#            readable = FALSE,
-#            pool = FALSE,...)
-#
-#   return(ego)
-# }
-#
-# enhance_enrichGO()
-#
-# data(geneList, package = "DOSE")
-# de <- names(geneList)[1:100]
-# DEG_df_g <- cut_much(DEG_df,x = "log2FoldChange",y = "pvalue",cut_FC = 2,cut_P = 0.01)
-# gene_down <- row.names(DEG_df_g[which(DEG_df_g$group == "Down"),])
-# yy <- enhance_enrichGO(gene = gene_down, orgDb = 'org.Hs.eg.db', ont="BP", pvalueCutoff=0.01)
-#
-# enrichplot::cnetplot(yy)
-# head(yy)
+#' enrich_go
+#'
+#' a funtion group deg data frame and make enrichment analysis in one step
+#'
+#' @inheritParams cut_much
+#' @inheritParams enhance_enrichGO
+#'
+#' @return enrichGO result
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' enrich_go(deg_data = DEG_df, x = "log2FoldChange", y = "pvalue")
+#' }
+enrich_go <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05,
+                      OrgDb = 'org.Hs.eg.db', keyType = "SYMBOL", ont = "ALL", simplify = TRUE,
+                      pvalueCutoff = 0.05, pAdjustMethod = "BH", qvalueCutoff = 0.2,minGSSize = 10,
+                      maxGSSize = 500, readable = FALSE, pool = FALSE,
+                      label = c("Down", "Stable", "Up"),
+                      label_ns = "Stable") {
 
+  deg_df_g <- cut_much(deg_data, x = x, y = y,cut_FC = cut_FC,cut_P = cut_P)
 
+  g <- setdiff(label,label_ns)
+
+  gene_list <- list()
+  for (i in g) {
+    gene_list[[i]] = row.names(deg_df_g[which(deg_df_g$group == i),])
+  }
+  rm(list = "i")
+
+  message(glue("{emoji('deciduous_tree')} Enrich GO analysis Start. This process will take a few minutes."))
+
+  test <- lapply(gene_list, function(x)
+    suppressMessages(enhance_enrichGO(gene = x,OrgDb = OrgDb,keyType = keyType,ont = ont,simplify = simplify,
+                          pvalueCutoff = pvalueCutoff,
+                          pAdjustMethod = pAdjustMethod,
+                          qvalueCutoff = qvalueCutoff,
+                          minGSSize = minGSSize,
+                          maxGSSize = maxGSSize,
+                          readable = FALSE,
+                          pool = FALSE)))
+
+  return(test)
+
+}
 
 
