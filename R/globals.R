@@ -1,1 +1,2 @@
-utils::globalVariables(c("log2FoldChange", "pvalue", "group", "rn"))
+utils::globalVariables(c("log2FoldChange", "pvalue", "group", "rn",
+                         "Count", "myY", "ONTOLOGY", "Description", ""))
