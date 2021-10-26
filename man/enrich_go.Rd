@@ -22,7 +22,8 @@ enrich_go(
   readable = FALSE,
   pool = FALSE,
   label = c("Down", "Stable", "Up"),
-  label_ns = "Stable"
+  label_ns = "Stable",
+  mc.cores = 1L
 )
 }
 \arguments{
