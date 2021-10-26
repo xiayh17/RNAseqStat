@@ -32,6 +32,9 @@ gene_list <- list(
   Down = row.names(DEG_df_g[which(DEG_df_g$group == "Down"),])
 )
 
+DEG_df_g <- cut_much(DEG_df,x = "log2FoldChange",y = "pvalue",cut_FC = 2,cut_P = 0.01)
+ll <- DEG_df_g[which(DEG_df_g$group %in% c("Up","Down")),]
+
 ont = c("BP","CC","MF","ALL")
 
 ego <- map(gene_list,function(x)
