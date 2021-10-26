@@ -17,7 +17,8 @@ enrich_go <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05,
                       pvalueCutoff = 0.05, pAdjustMethod = "BH", qvalueCutoff = 0.2,minGSSize = 10,
                       maxGSSize = 500, readable = FALSE, pool = FALSE,
                       label = c("Down", "Stable", "Up"),
-                      label_ns = "Stable") {
+                      label_ns = "Stable",
+                      mc.cores = 1L) {
 
   deg_df_g <- cut_much(deg_data, x = x, y = y,cut_FC = cut_FC,cut_P = cut_P)
 
@@ -29,9 +30,11 @@ enrich_go <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05,
   }
   rm(list = "i")
 
+  gene_list[["diff"]] <- unique(unlist(gene_list))
+
   message(glue("{emoji('deciduous_tree')} Enrich GO analysis Start. This process will take a few minutes."))
 
-  test <- lapply(gene_list, function(x)
+  test <- mclapply(gene_list, function(x)
     suppressMessages(enhance_enrichGO(gene = x,OrgDb = OrgDb,keyType = keyType,ont = ont,simplify = simplify,
                           pvalueCutoff = pvalueCutoff,
                           pAdjustMethod = pAdjustMethod,
@@ -39,7 +42,7 @@ enrich_go <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05,
                           minGSSize = minGSSize,
                           maxGSSize = maxGSSize,
                           readable = FALSE,
-                          pool = FALSE)))
+                          pool = FALSE)),mc.cores = getOption("mc.cores", mc.cores))
 
   return(test)
 
