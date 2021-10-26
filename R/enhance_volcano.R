@@ -98,7 +98,7 @@ enhance_volcano_plot <- function(data,x,y,label = c("Down","Stable","Up"),cut_FC
       guide = guide_legend(override.aes = list(label = ""))
     ) +
     theme_nice() +
-    labs(colour = "Group",x = "-log10(PValue)", y = "log2FoldChange",
+    labs(colour = "Group",x = "log2FoldChange", y = "-log10(PValue)",
          caption = paste(sprintf('FDR:  %.3f\n', cut_P),
                          sprintf('log 2 Fold Change: %.3f & %.3f \n',cut_FC,-cut_FC),
                          sprintf('Total: %1.0f variables',nrow(data))
