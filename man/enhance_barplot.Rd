@@ -9,6 +9,7 @@ enhance_barplot(
   split,
   top = 10,
   fillstrip = TRUE,
+  print = FALSE,
   split_color = RColorBrewer::brewer.pal(3, "Dark2"),
   bar_color = rev(RColorBrewer::brewer.pal(5, "GnBu")[3:5])
 )
@@ -21,6 +22,8 @@ enhance_barplot(
 \item{top}{filter top rows by Count}
 
 \item{fillstrip}{fill strip rect or not}
+
+\item{print}{logic for print plot}
 
 \item{split_color}{color for CC, MF, and BP}
 

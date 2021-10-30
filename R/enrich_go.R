@@ -4,8 +4,10 @@
 #'
 #' @inheritParams cut_much
 #' @inheritParams enhance_enrichGO
+#' @param mc.cores param for mclapply, choose cores to use in non-Windows machine
 #'
 #' @importFrom parallel mclapply
+#' @importFrom glue glue
 #'
 #' @return enrichGO result
 #' @export
