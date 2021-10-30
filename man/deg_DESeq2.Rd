@@ -42,7 +42,7 @@ a directory contains figures and csv files and a deg data frame
 A integrated function for run DEseq2 in a counts data and return results files.
 }
 \examples{
-/dontrun{
+\dontrun{
 deg_DESeq2(counts_input,group_list,
           tg = "T", cg = "C", qc = TRUE,
            x = "log2FoldChange", y = "pvalue",

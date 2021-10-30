@@ -12,6 +12,7 @@ enrichKEGG_run(
   cut_P = 0.05,
   top = 10,
   dir = ".",
+  prefix = "4-EnrichKEGG",
   organism = "hsa",
   keyType = "kegg",
   pvalueCutoff = 0.05,
@@ -40,6 +41,8 @@ enrichKEGG_run(
 \item{top}{top rows for up and down}
 
 \item{dir}{where to save results files}
+
+\item{prefix}{a prefix of file names in this step}
 
 \item{organism}{supported organism listed in 'http://www.genome.jp/kegg/catalog/org_list.html'}
 
@@ -72,7 +75,7 @@ a list result files of KEGG
 run enrich_kegg and plot results
 }
 \examples{
-/dontrun{
+\dontrun{
 enrichKEGG_run(deg_data = DEG_df, x = "log2FoldChange", y = "pvalue", cut_FC = 1,
 cut_P = 0.05, top = 10)
 }

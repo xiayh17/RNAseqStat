@@ -24,7 +24,7 @@ a csv file and a DEG_container ob
 run DEG module in limma, DESeq2 and edgeR
 }
 \examples{
-/dontrun{
+\dontrun{
 deg_run(counts_input,group_list,tg = "T", cg = "C",dir = tempdir())
 }
 }

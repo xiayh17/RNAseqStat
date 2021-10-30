@@ -5,6 +5,7 @@
 #' @inheritParams enrich_go
 #' @param top top rows
 #' @param dir where to save results files
+#' @param prefix a prefix of file names in this step
 #'
 #' @importFrom utils write.table
 #'
@@ -15,7 +16,7 @@
 #' \dontrun{
 #' enrichGO_run(DEG_df, x = "log2FoldChange", y = "pvalue", dir = tempdir())
 #' }
-enrichGO_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, dir = ".",
+enrichGO_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, dir = ".", prefix = "3-EnrichGO",
                        OrgDb = 'org.Hs.eg.db', keyType = "SYMBOL", ont = "ALL", simplify = TRUE,
                        pvalueCutoff = 0.05, pAdjustMethod = "BH", qvalueCutoff = 0.2,minGSSize = 10,
                        maxGSSize = 500, readable = FALSE, pool = FALSE,
@@ -31,12 +32,12 @@ enrichGO_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, dir
             label_ns = label_ns,
             mc.cores = 1L)
 
-  go_res_file <- glue("{dir}/go_result.Rdata")
+  go_res_file <- glue("{dir}/{prefix}_go_result.Rdata")
   save(go_resl,file = go_res_file)
-  message(glue::glue("Result of enrichGO stored in {dir}/{go_res_file}"))
+  message(glue::glue("Result of enrichGO stored in {dir}/{prefix}_{go_res_file}"))
 
   tmp <- lapply(seq_along(go_resl), function(x)
-    write.table(go_resl[[x]]@result,file = glue::glue('{dir}/gene_{names(go_resl)[[x]]}_GO_enrichment.csv'))
+    write.table(go_resl[[x]]@result,file = glue::glue('{dir}/{prefix}_gene_{names(go_resl)[[x]]}_GO_enrichment.csv'))
   )
 
   if (ont == "ALL") {
@@ -44,7 +45,7 @@ enrichGO_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, dir
       enhance_barplot(x@result,top=top,split = ONTOLOGY)
     )
     lapply(seq_along(plots), function(x)
-      ggsave(plot = plots[[x]], filename = glue::glue("{dir}/barplot-gene_{names(plots)[[x]]}_GO_enrichment.pdf"),
+      ggsave(plot = plots[[x]], filename = glue::glue("{dir}/{prefix}_barplot-gene_{names(plots)[[x]]}_GO_enrichment.pdf"),
              height = 880*2.5/300, width = 780*2.5/300, dpi = 300)
     )
   } else {
@@ -52,7 +53,7 @@ enrichGO_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, dir
       enhance_barplot(x@result,top=top)
     )
     lapply(seq_along(plots), function(x)
-      ggsave(plot = plots[[x]], filename = glue::glue("{dir}/barplot-gene_{names(plots)[[x]]}_GO_enrichment.pdf"),
+      ggsave(plot = plots[[x]], filename = glue::glue("{dir}/{prefix}_barplot-gene_{names(plots)[[x]]}_GO_enrichment.pdf"),
              height = 880*2.5/300/3, width = 780*2.5/300, dpi = 300)
     )
   }
@@ -69,6 +70,7 @@ enrichGO_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, dir
 #' @inheritParams kegg_barplot
 #' @param top top rows for up and down
 #' @param dir where to save results files
+#' @param prefix a prefix of file names in this step
 #'
 #' @return a list result files of KEGG
 #' @export
@@ -78,7 +80,7 @@ enrichGO_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, dir
 #' enrichKEGG_run(deg_data = DEG_df, x = "log2FoldChange", y = "pvalue", cut_FC = 1,
 #' cut_P = 0.05, top = 10)
 #' }
-enrichKEGG_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, dir= ".",
+enrichKEGG_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, dir= ".", prefix = "4-EnrichKEGG",
                            organism = "hsa",
                            keyType = "kegg",
                            pvalueCutoff = 0.05,
@@ -106,6 +108,6 @@ enrichKEGG_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, d
                            label_ns = label_ns,
                            mc.cores = mc.cores)
   p <- kegg_barplot(kegg_resl, top = top, down_label = down_label)
-  ggsave(plot = p, filename = glue::glue("{dir}/up_and_down_KEGG.pdf"),height = 7.01,width = 6.7)
+  ggsave(plot = p, filename = glue::glue("{dir}/prefix}_up_and_down_KEGG.pdf"),height = 7.01,width = 6.7)
 
 }

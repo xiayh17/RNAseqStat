@@ -12,6 +12,7 @@ enrichGO_run(
   cut_P = 0.05,
   top = 10,
   dir = ".",
+  prefix = "3-EnrichGO",
   OrgDb = "org.Hs.eg.db",
   keyType = "SYMBOL",
   ont = "ALL",
@@ -42,6 +43,8 @@ enrichGO_run(
 \item{top}{top rows}
 
 \item{dir}{where to save results files}
+
+\item{prefix}{a prefix of file names in this step}
 
 \item{OrgDb}{OrgDb}
 
@@ -78,7 +81,7 @@ a list result files of GO
 run enrich_go and plot results
 }
 \examples{
-/dontrun{
+\dontrun{
 enrichGO_run(DEG_df, x = "log2FoldChange", y = "pvalue", dir = tempdir())
 }
 }
