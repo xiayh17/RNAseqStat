@@ -20,10 +20,12 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' deg_DESeq2(counts_input,group_list,
 #'           tg = "T", cg = "C", qc = TRUE,
 #'            x = "log2FoldChange", y = "pvalue",
 #'            dir = tempdir(), prefix = "2-DEG_DEseq2")
+#' }
 deg_DESeq2 <- function(counts_data,group_list,
                        tg,cg,qc = TRUE,x,y,
                        dir = ".",prefix = "2-DEG_DEseq2") {
@@ -71,7 +73,9 @@ deg_DESeq2 <- function(counts_data,group_list,
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' run_DESeq2(counts_input, group_list,tg = "T", cg = "C", dir = tempdir())
+#' }
 run_DESeq2 <- function(counts_data,group_list,tg,cg,qc = TRUE,dir = ".",prefix = "2-DEG_DEseq2") {
 
   colData <- data.frame(row.names=colnames(counts_data),
@@ -115,7 +119,9 @@ run_DESeq2 <- function(counts_data,group_list,tg,cg,qc = TRUE,dir = ".",prefix =
 #'
 #' @noRd
 #' @examples
+#' \dontrun{
 #' DESeq2_qc(counts_input,dds, dir = tempdir())
+#' }
 DESeq2_qc <- function(counts_data, dds, dir = ".", prefix = "2-DEG") {
 
   pdf(glue("{dir}/{prefix}_qc_dispersions.pdf"), 18, 18, pointsize=35)

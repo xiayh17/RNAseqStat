@@ -36,5 +36,7 @@ a DEG data frame
 A basic function to get data and produce results of DESeq2
 }
 \examples{
+/dontrun{
 run_DESeq2(counts_input, group_list,tg = "T", cg = "C", dir = tempdir())
+}
 }

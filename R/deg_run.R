@@ -16,7 +16,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' deg_run(counts_input,group_list,tg = "T", cg = "C",dir = tempdir())
+#' }
 deg_run <- function(counts_data,group_list,tg = "T", cg = "C",dir) {
 
   if (!fs::dir_exists(dir)) {
