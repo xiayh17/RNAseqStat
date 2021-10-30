@@ -9,6 +9,7 @@
 #' @param fillstrip fill strip rect or not
 #' @param split_color color for CC, MF, and BP
 #' @param bar_color color for bar
+#' @param print logic for print plot
 #'
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom dplyr mutate top_n group_by
@@ -27,6 +28,7 @@
 #' }
 enhance_barplot <- function(data, split, top = 10,
                             fillstrip = TRUE,
+                            print = FALSE,
                             split_color = RColorBrewer::brewer.pal(3,"Dark2"),
                             bar_color = rev(RColorBrewer::brewer.pal(5,"GnBu")[3:5])
                             ) {
@@ -79,9 +81,9 @@ enhance_barplot <- function(data, split, top = 10,
       }
     }
 
-
-
-    grid.draw(g)
+    if (print) {
+      grid.draw(g)
+    }
 
     return(g)
 
@@ -187,14 +189,134 @@ barplot_base2 <- function(data, bar_color, text_color) {
   return(p)
 }
 
+#' KEGG bar plot
+#'
+#' plot for enrich_kegg result
+#'
+#' @param data a enrich_kegg result, list format contains Up and Down
+#' @param top top rows of up and down
+#' @param down_label which one is Down
+#' @importFrom stringr str_wrap
+#' @importFrom RColorBrewer brewer.pal
+#'
+#' @return a ggplot OB
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' test <- enrich_kegg(deg_data = DEG_df, x = "log2FoldChange", y = "pvalue")
+#' kegg_barplot(test)
+#' }
+kegg_barplot <- function(data,top = 10,down_label = "Down") {
 
-# test <- enrich_go(deg_data = DEG_df, logFC = "log2FoldChange", pv = "pvalue")
+  lis <- lapply(seq_along(data), function(x)
+
+    if (names(data)[[x]] == down_label) {
+      data[[x]]@result$upordown <- -1
+      data[[x]]@result
+    }
+    else {
+      data[[x]]@result$upordown <- 1
+      data[[x]]@result
+    }
+  )
+
+  names(lis) <- names(data)
+
+  lis_f <- lapply(lis, function(x)
+    x[order(x[,"pvalue"])[1:top],]
+  )
+
+  dat <- do.call(rbind,lis_f)
+
+  dat$fulog10pvalue <- (-log10(dat$pvalue))*dat$upordown
+
+  dat <- dat %>%
+    mutate(Description = fct_reorder(Description,fulog10pvalue))
+
+  p <- ggplot(dat, aes(fulog10pvalue, Description, color = as.character(upordown), fill = p.adjust)) +
+    geom_bar(stat="identity",linetype = "solid",size = 0.4) +
+    scale_color_manual(values = c("#e66101","#5e3c99"),name = "",
+                       breaks = c("1","-1"),
+                       labels= c("Up","Down")) +
+    guides(color = guide_legend(override.aes = list(size = 1, shape = c(15, 15), fill =NA))) +
+    scale_fill_gradientn(colours=rev(RColorBrewer::brewer.pal(5,"PuBuGn")[3:5]))+
+    geom_shadowtext(aes(label = stringr::str_wrap(Description,width = 30)),data = dat[which(dat["fulog10pvalue"] >= 0),],
+                    x = 0,
+                    hjust = -0.01, bg.colour='grey45',bg.r = 0.08,
+                    size = 3, color = "white", show.legend = F) +
+    geom_shadowtext(aes(label =  stringr::str_wrap(Description,width = 30)),data = dat[which(dat["fulog10pvalue"] < 0),],
+                    x = 0,
+                    hjust = 1.02, bg.colour='grey45',bg.r = 0.1,
+                    size = 3, color = "white", show.legend = F) +
+    labs(y = "Description", x = "-log10(PValue)")
+    theme_minimal()+
+    theme(
+      legend.key = element_blank(),
+      legend.justification = c(1, 0),
+      legend.position = c(0.75, 0),
+      # plot.margin=margin(b=200,l=-2,unit="pt"),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      axis.line = element_blank(),
+      axis.text.y = element_blank(),
+      # axis.text.x = element_blank(),
+      axis.ticks.y = element_blank())
+
+  return(p)
+
+}
+
+# lis <- lapply(seq_along(test), function(x)
 #
-# barplot(test$Up)
+#   if (names(test)[[x]] == "Down") {
+#     test[[x]]@result$upordown <- -1
+#     test[[x]]@result
+#   }
+#   else {
+#     test[[x]]@result$upordown <- 1
+#     test[[x]]@result
+#   }
+# )
 #
-# barplot(test$Up, split="ONTOLOGY")+ facet_grid(ONTOLOGY~., scale="free")
+# names(lis) <- names(test)
 
-
-
-
+# lis_f <- lapply(lis, function(x)
+#   x[order(x[,"pvalue"])[1:10],]
+# )
+#
+# dat <- do.call(rbind,lis_f)
+#
+# dat$fulog10pvalue <- (-log10(dat$pvalue))*dat$upordown
+#
+# dat <- dat %>%
+#   mutate(Description = fct_reorder(Description,fulog10pvalue))
+#
+# ggplot(dat, aes(fulog10pvalue, Description, color = as.character(upordown), fill = p.adjust)) +
+#   geom_bar(stat="identity",linetype = "solid",size = 0.4) +
+#   scale_color_manual(values = c("#e66101","#5e3c99"),name = "",
+#                      breaks = c("1","-1"),
+#                      labels= c("Up","Down")) +
+#   guides(color = guide_legend(override.aes = list(size = 1, shape = c(15, 15), fill =NA))) +
+#   scale_fill_gradientn(colours=rev(RColorBrewer::brewer.pal(5,"PuBuGn")[3:5]))+
+#   geom_shadowtext(aes(label = stringr::str_wrap(Description,width = 30)),data = dat[which(dat["fulog10pvalue"] >= 0),],
+#                   x = 0,
+#                   hjust = -0.01, bg.colour='grey',bg.r = 0.02,
+#                   size = 3, color = "white", show.legend = F) +
+#   geom_shadowtext(aes(label =  stringr::str_wrap(Description,width = 30)),data = dat[which(dat["fulog10pvalue"] < 0),],
+#                   x = 0,
+#                   hjust = 1.02, bg.colour='grey',bg.r = 0.02,
+#                   size = 3, color = "white", show.legend = F) +
+#   theme_minimal()+
+#   theme(
+#     legend.key = element_blank(),
+#     legend.justification = c(1, 0),
+#     legend.position = c(0.75, 0),
+#     # plot.margin=margin(b=200,l=-2,unit="pt"),
+#     panel.grid.major = element_blank(),
+#     panel.grid.minor = element_blank(),
+#     axis.line = element_blank(),
+#     axis.text.y = element_blank(),
+#     # axis.text.x = element_blank(),
+#     axis.ticks.y = element_blank())
 
