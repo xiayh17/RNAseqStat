@@ -1,0 +1,65 @@
+---
+title: "RNASeq_analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{enrichment_analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Basic Default Worflow
+
+```{r setup}
+library(RNAseqStat)
+```
+
+### Check your data
+
+This step is useful to quickly check you data. dir Can be any wherr you want to save results file.
+
+```{r}
+pre_check(counts_data = counts_input, group_list = group_list, dir = tempdir())
+```
+
+### DEG analysis
+
+DEG analysis will be run by limma edgeR and DESeq2 in this step.
+
+```{r}
+deg_run(counts_input,group_list,tg = "T", cg = "C",dir = tempdir())
+```
+
+### GO
+
+Enrichment analysis will be done in this Step.
+
+```{r}
+enrichGO_run(DEG_df, x = "log2FoldChange", y = "pvalue", dir = '~/Desktop/biotreeProject/RNAseqStat/dev/示例输出文件')
+```
+
+
+### KEGG
+
+### GSEA
+
+### More
+
+Firstly load results data from DEG analysis in step 2. For example, a DEG data frame produced by DEGSeq2 and group_list
+
+```{r loadData}
+head(DEG_df)[1:10,]
+table(group_list)
+```
+
+Up and Down gene should be grouped ahead of Enrichment analysis. A handly function proved in our package
+
+```{r groupData}
+DEG_df_g <- cut_much(DEG_df,x = "log2FoldChange",y = "pvalue",cut_FC = 2,cut_P = 0.01)
+```
