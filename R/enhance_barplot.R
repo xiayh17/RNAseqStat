@@ -249,7 +249,7 @@ kegg_barplot <- function(data,top = 10,down_label = "Down") {
                     x = 0,
                     hjust = 1.02, bg.colour='grey45',bg.r = 0.1,
                     size = 3, color = "white", show.legend = F) +
-    labs(y = "Description", x = "-log10(PValue)")
+    labs(y = "Description", x = "-log10(PValue)")+
     theme_minimal()+
     theme(
       legend.key = element_blank(),

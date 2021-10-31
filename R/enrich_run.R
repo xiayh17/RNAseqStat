@@ -108,6 +108,6 @@ enrichKEGG_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, d
                            label_ns = label_ns,
                            mc.cores = mc.cores)
   p <- kegg_barplot(kegg_resl, top = top, down_label = down_label)
-  ggsave(plot = p, filename = glue::glue("{dir}/prefix}_up_and_down_KEGG.pdf"),height = 7.01,width = 6.7)
+  ggsave(plot = p, filename = glue::glue("{dir}/{prefix}_up_and_down_KEGG.pdf"),height = 7.01,width = 6.7)
 
 }
