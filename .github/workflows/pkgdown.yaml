@@ -21,6 +21,10 @@ jobs:
         with:
           use-public-rspm: true
 
+      - name: Install system dependency libglpk-dev
+        if: runner.os == 'Linux'
+        run: sudo apt install libglpk-dev libgmp3-dev libxml2-dev
+
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
           extra-packages: pkgdown
