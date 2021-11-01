@@ -54,7 +54,9 @@ Imports:
     forcats,
     shadowtext,
     ggnewscale,
-    stringr
+    stringr,
+    enrichplot,
+    plyr
 biocViews: DataImport, Microarray, OneChannel, SAGE, Software, TwoChannel
 Config/testthat/edition: 3
 VignetteBuilder: knitr
