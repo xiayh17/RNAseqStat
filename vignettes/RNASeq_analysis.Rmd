@@ -18,36 +18,47 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(RNAseqStat)
+results_dir = "test"
 ```
 
 ### Check your data
 
 This step is useful to quickly check you data. dir Can be any wherr you want to save results file.
 
-```{r}
-pre_check(counts_data = counts_input, group_list = group_list, dir = tempdir())
+```{r eval=FALSE}
+pre_check(counts_data = counts_input, group_list = group_list, dir = results_dir)
 ```
 
 ### DEG analysis
 
 DEG analysis will be run by limma edgeR and DESeq2 in this step.
 
-```{r}
-deg_run(counts_input,group_list,tg = "T", cg = "C",dir = tempdir())
+```{r eval=FALSE}
+deg_run(counts_input,group_list,tg = "T", cg = "C",dir = results_dir)
 ```
 
 ### GO
 
-Enrichment analysis will be done in this Step.
+Enrichment analysis of GO will be done in this Step.
 
-```{r}
-enrichGO_run(DEG_df, x = "log2FoldChange", y = "pvalue", dir = '~/Desktop/biotreeProject/RNAseqStat/dev/示例输出文件')
+```{r eval=FALSE}
+enrichGO_run(DEG_df, x = "log2FoldChange", y = "pvalue", dir = results_dir)
 ```
-
 
 ### KEGG
 
+Enrichment analysis of KEGG will be done in this Step.
+
+```{r eval=FALSE}
+enrichKEGG_run(DEG_df, x = "log2FoldChange", y = "pvalue", dir = results_dir)
+```
+
 ### GSEA
+
+```{r}
+enrichgesKEGG_run(DEG_df, x = "log2FoldChange", dir = results_dir)
+```
+
 
 ### More
 
