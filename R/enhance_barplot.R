@@ -196,8 +196,15 @@ barplot_base2 <- function(data, bar_color, text_color) {
 #' @param data a enrich_kegg result, list format contains Up and Down
 #' @param top top rows of up and down
 #' @param down_label which one is Down
+#'
 #' @importFrom stringr str_wrap
 #' @importFrom RColorBrewer brewer.pal
+#' @import ggplot2
+#' @importFrom dplyr top_n mutate
+#' @importFrom forcats fct_reorder
+#' @importFrom RColorBrewer brewer.pal
+#' @importFrom shadowtext geom_shadowtext
+#' @importFrom ggnewscale new_scale_color
 #'
 #' @return a ggplot OB
 #' @export
@@ -224,7 +231,8 @@ kegg_barplot <- function(data,top = 10,down_label = "Down") {
   names(lis) <- names(data)
 
   lis_f <- lapply(lis, function(x)
-    x[order(x[,"pvalue"])[1:top],]
+    # x[order(x[,"pvalue"])[1:top],]
+    x %>% top_n(top,wt = pvalue)
   )
 
   dat <- do.call(rbind,lis_f)
@@ -267,56 +275,75 @@ kegg_barplot <- function(data,top = 10,down_label = "Down") {
 
 }
 
-# lis <- lapply(seq_along(test), function(x)
-#
-#   if (names(test)[[x]] == "Down") {
-#     test[[x]]@result$upordown <- -1
-#     test[[x]]@result
-#   }
-#   else {
-#     test[[x]]@result$upordown <- 1
-#     test[[x]]@result
-#   }
-# )
-#
-# names(lis) <- names(test)
+#' gseKEGG bar plot
+#'
+#' plot for enrich_gsekegg result
+#'
+#' @param data a enrich_gsekegg result
+#' @param pvalue_cut filter by pvalue
+#' @param enrichmentScore_cut filter by enrichmentScore
+#' @param top top rows of up and down
+#'
+#' @import ggplot2
+#' @importFrom dplyr top_n mutate
+#' @importFrom forcats fct_reorder
+#' @importFrom RColorBrewer brewer.pal
+#' @importFrom shadowtext geom_shadowtext
+#' @importFrom ggnewscale new_scale_color
+#'
+#' @return ggplot ob
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' test <- enrich_gsekegg(DEG_df,x = "log2FoldChange")
+#' geskegg_barplot(test)
+#' }
+geskegg_barplot <- function(data, pvalue_cut = 0.1, enrichmentScore_cut = 0.5, top = 10) {
+  down_kegg<-data[data$pvalue< pvalue_cut & data$enrichmentScore < -enrichmentScore_cut,];down_kegg$group=-1
+  up_kegg<-data[data$pvalue< pvalue_cut & data$enrichmentScore > enrichmentScore_cut,];up_kegg$group=1
 
-# lis_f <- lapply(lis, function(x)
-#   x[order(x[,"pvalue"])[1:10],]
-# )
-#
-# dat <- do.call(rbind,lis_f)
-#
-# dat$fulog10pvalue <- (-log10(dat$pvalue))*dat$upordown
-#
-# dat <- dat %>%
-#   mutate(Description = fct_reorder(Description,fulog10pvalue))
-#
-# ggplot(dat, aes(fulog10pvalue, Description, color = as.character(upordown), fill = p.adjust)) +
-#   geom_bar(stat="identity",linetype = "solid",size = 0.4) +
-#   scale_color_manual(values = c("#e66101","#5e3c99"),name = "",
-#                      breaks = c("1","-1"),
-#                      labels= c("Up","Down")) +
-#   guides(color = guide_legend(override.aes = list(size = 1, shape = c(15, 15), fill =NA))) +
-#   scale_fill_gradientn(colours=rev(RColorBrewer::brewer.pal(5,"PuBuGn")[3:5]))+
-#   geom_shadowtext(aes(label = stringr::str_wrap(Description,width = 30)),data = dat[which(dat["fulog10pvalue"] >= 0),],
-#                   x = 0,
-#                   hjust = -0.01, bg.colour='grey',bg.r = 0.02,
-#                   size = 3, color = "white", show.legend = F) +
-#   geom_shadowtext(aes(label =  stringr::str_wrap(Description,width = 30)),data = dat[which(dat["fulog10pvalue"] < 0),],
-#                   x = 0,
-#                   hjust = 1.02, bg.colour='grey',bg.r = 0.02,
-#                   size = 3, color = "white", show.legend = F) +
-#   theme_minimal()+
-#   theme(
-#     legend.key = element_blank(),
-#     legend.justification = c(1, 0),
-#     legend.position = c(0.75, 0),
-#     # plot.margin=margin(b=200,l=-2,unit="pt"),
-#     panel.grid.major = element_blank(),
-#     panel.grid.minor = element_blank(),
-#     axis.line = element_blank(),
-#     axis.text.y = element_blank(),
-#     # axis.text.x = element_blank(),
-#     axis.ticks.y = element_blank())
+  # down_kegg <- down_kegg[order(down_kegg[,"pvalue"])[1:top],]
+  # up_kegg <- up_kegg[order(up_kegg[,"pvalue"])[1:top],]
+  down_kegg <- down_kegg %>% top_n(top,wt = pvalue)
+  up_kegg <- up_kegg %>% top_n(top,wt = pvalue)
+
+  dat=rbind(up_kegg,down_kegg)
+  dat$fulog10pvalue = -log10(dat$pvalue)
+  dat$fulog10pvalue = dat$fulog10pvalue*dat$group
+
+  dat <- dat %>%
+    mutate(Description = fct_reorder(Description,fulog10pvalue))
+
+  ggplot(dat, aes(fulog10pvalue, Description, color = as.character(group), fill = p.adjust)) +
+    geom_bar(stat="identity",linetype = "solid",size = 0.4) +
+    scale_color_manual(values = c("#e66101","#5e3c99"),name = "",
+                       breaks = c("1","-1"),
+                       labels= c("Up","Down")) +
+    guides(color = guide_legend(override.aes = list(size = 1, shape = c(15, 15), fill =NA))) +
+    scale_fill_gradientn(colours=rev(RColorBrewer::brewer.pal(5,"PuBuGn")[3:5]))+
+    geom_shadowtext(aes(label = Description),data = dat[which(dat["fulog10pvalue"] >= 0),],
+                    x = 0,
+                    hjust = -0.01, bg.colour='grey45',bg.r = 0.08,
+                    size = 3, color = "white", show.legend = F) +
+    geom_shadowtext(aes(label =  Description),data = dat[which(dat["fulog10pvalue"] < 0),],
+                    x = 0,
+                    hjust = 1.02, bg.colour='grey45',bg.r = 0.1,
+                    size = 3, color = "white", show.legend = F) +
+    labs(y = "Description", x = "-log10(PValue)")+
+    theme_minimal()+
+    theme(
+      legend.key = element_blank(),
+      legend.justification = c(1, 0),
+      legend.position = c(0.2, 0.45),
+      # plot.margin=margin(b=200,l=-2,unit="pt"),
+      panel.grid.major.y = element_blank(),
+      panel.grid.major.x = element_line(linetype = "dotted"),
+      panel.grid.minor = element_blank(),
+      axis.line = element_blank(),
+      axis.text.y = element_blank(),
+      # axis.text.x = element_blank(),
+      axis.ticks.y = element_blank())
+
+}
 

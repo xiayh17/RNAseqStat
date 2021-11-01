@@ -24,6 +24,10 @@ enrichGO_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, dir
                        label_ns = "Stable",
                        mc.cores = 1L) {
 
+  if (!fs::dir_exists(dir)) {
+    fs::dir_create(dir)
+  }
+
   go_resl <- enrich_go(deg_data, x, y, cut_FC = cut_FC, cut_P = cut_P,
             OrgDb = OrgDb, keyType = keyType, ont = ont, simplify = simplify,
             pvalueCutoff = pvalueCutoff, pAdjustMethod = pAdjustMethod, qvalueCutoff = qvalueCutoff,minGSSize = minGSSize,
@@ -93,6 +97,10 @@ enrichKEGG_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, d
                            label_ns = "Stable",
                            mc.cores = 1L,down_label = "Down"
                            ) {
+
+  if (!fs::dir_exists(dir)) {
+    fs::dir_create(dir)
+  }
   # enrich_kegg
   kegg_resl <- enrich_kegg(deg_data = deg_data, x = x, y = y, cut_FC = 1,
                            cut_P = cut_P,
@@ -110,4 +118,90 @@ enrichKEGG_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, d
   p <- kegg_barplot(kegg_resl, top = top, down_label = down_label)
   ggsave(plot = p, filename = glue::glue("{dir}/{prefix}_up_and_down_KEGG.pdf"),height = 7.01,width = 6.7)
 
+  message(glue::glue("Result of enrichKEGG ploted in {dir}"))
+
 }
+
+#' run enrichgesKEGG
+#'
+#' run enrichgesKEGG and make output files
+#'
+#' @param dir where to save results files
+#' @param prefix a prefix of file names in this step
+#' @inheritParams enrich_gsekegg
+#' @inheritParams geskegg_barplot
+#'
+#' @importFrom glue glue
+#' @importFrom plyr l_ply
+#'
+#' @return a list of file
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' enrichgesKEGG_run(deg_data = DEG_df, x = "log2FoldChange", dir = tempdir(),eps = 0)
+#' }
+enrichgesKEGG_run <- function(deg_data,x,dir= ".", prefix = "5-EnrichgseKEGG",
+                              pvalue_cut = 0.1, enrichmentScore_cut = 0.5, top = 10,
+                              organism = "hsa",
+                              keyType = "kegg",
+                              exponent = 1,
+                              minGSSize = 10,
+                              maxGSSize = 500,
+                              eps = 1e-10,
+                              pvalueCutoff = 0.05,
+                              pAdjustMethod = "BH",
+                              verbose = TRUE,
+                              use_internal_data = FALSE,
+                              seed = FALSE,
+                              by = "fgsea") {
+
+  if (!fs::dir_exists(dir)) {
+    fs::dir_create(dir)
+  }
+
+  gsekegg_res <- enrich_gsekegg(deg_data = deg_data, x = x,
+                                organism = organism,
+                                keyType = keyType,
+                                exponent = exponent,
+                                minGSSize = minGSSize,
+                                maxGSSize = maxGSSize,
+                                eps = eps,
+                                pvalueCutoff = pvalueCutoff,
+                                pAdjustMethod = pAdjustMethod,
+                                verbose = verbose,
+                                use_internal_data = use_internal_data,
+                                seed = seed,
+                                by = by)
+
+  write.csv(gsekegg_res@result,glue('{dir}/{prefix}_kegg.gsea.csv'))
+
+  p = geskegg_barplot(gsekegg_res,pvalue_cut = pvalue_cut, enrichmentScore_cut = enrichmentScore_cut, top = top)
+
+  ggsave(plot = p,height = 7.01,width = 8.23,filename = glue("{dir}/{prefix}_gseKEGG_barplot.pdf"),dpi = 50)
+
+  message(glue::glue("Barplot of enrichgseKEGG ploted in {dir}"))
+
+  plots_l <- enhance_gseplot(gsekegg_res, top = 10,
+              pvalue_cut = 0.1, enrichmentScore_cut = 0.5)
+
+  # li_down = structure(plots_l[["down_plots"]], class = c("gglist", "ggplot"))
+  # print.gglist = function(x, ...) {plyr::l_ply(x, print, ...)}
+  # ggsave(li_down, file = glue("{dir}/{prefix}_gseKEGG_down_gseplot.pdf"))
+  #
+  # li_up = structure(plots_l[["up_plots"]], class = c("gglist", "ggplot"))
+  # ggsave(li_up, file = glue("{dir}/{prefix}_gseKEGG_up_gseplot.pdf"))
+
+  pdf(glue("{dir}/{prefix}_gseKEGG_down_gseplot.pdf"))
+  invisible(lapply(plots_l[["down_plots"]], print))
+  dev.off()
+
+  pdf(glue("{dir}/{prefix}_gseKEGG_up_gseplot.pdf"))
+  invisible(lapply(plots_l[["up_plots"]], print))
+  dev.off()
+
+  message(glue::glue("Gseplot of enrichgseKEGG ploted in {dir}"))
+
+}
+
+
