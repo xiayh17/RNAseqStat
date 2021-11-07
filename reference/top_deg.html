@@ -163,27 +163,28 @@ ordered DEG data frame after filtering by threshold value of P value</p>
     <p>a character vector of top genes</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>top_deg</span><span class='op'>(</span><span class='va'>DEG_df</span>, x <span class='op'>=</span> <span class='st'>"log2FoldChange"</span>, y <span class='op'>=</span> <span class='st'>"pvalue"</span>, <span class='fl'>50</span>, <span class='fl'>0.05</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   [1] "AP001066.1"  "AC021534.1"  "AC140658.1"  "VWA7"        "AL356489.4" 
-#&gt;   [6] "LINC02593"   "TRIM63"      "NRN1"        "LINC01844"   "HSD3B2"     
-#&gt;  [11] "SMIM10L2A"   "SNAI3"       "FER1L4"      "SLC14A2"     "SLC7A10"    
-#&gt;  [16] "AL356414.1"  "SLC7A8"      "SEC14L5"     "PLA2G4D"     "WNT6"       
-#&gt;  [21] "AL355864.1"  "NEURL3"      "SAMD11"      "STC1"        "AC108451.2" 
-#&gt;  [26] "ASB4"        "AC079466.1"  "CBFA2T3"     "BDKRB2"      "TMEM51-AS1" 
-#&gt;  [31] "CACNA1H"     "NAV2-AS4"    "CACNA1B"     "PRUNE2"      "NECTIN4-AS1"
-#&gt;  [36] "LINC02412"   "LINC01050"   "UPK1A"       "NOVA2"       "SLC6A12"    
-#&gt;  [41] "PWWP3B"      "MIR210HG"    "AC018470.1"  "AC117500.3"  "PPP1R16B"   
-#&gt;  [46] "SERPINA6"    "AC117500.5"  "AP000695.1"  "CA9"         "TREM1"      
-#&gt;  [51] "ANKRD1"      "LINC01488"   "RTL3"        "MARCHF4"     "AL356289.2" 
-#&gt;  [56] "AC100800.1"  "ANKRD2"      "KMO"         "AC245041.1"  "ANXA3"      
-#&gt;  [61] "AC245041.2"  "AC087269.3"  "LINC01776"   "C9orf135"    "NPPB"       
-#&gt;  [66] "KRTAP4-8"    "EDN1"        "LYPD6B"      "TSPAN2"      "LINC02383"  
-#&gt;  [71] "OLR1"        "AL592211.2"  "LINC01186"   "AC110792.4"  "AP003555.1" 
-#&gt;  [76] "LINC02533"   "KRTAP2-3"    "PLCE1-AS1"   "CPA4"        "CCN2"       
-#&gt;  [81] "AF015262.1"  "AC093732.1"  "CDH1"        "FLJ30679"    "AC025154.2" 
-#&gt;  [86] "RBM24"       "IL6"         "LINC00052"   "AC062015.1"  "AL357833.1" 
-#&gt;  [91] "GSTM5"       "KRT8P14"     "MYPN"        "LINC01638"   "AC080011.1" 
-#&gt;  [96] "SHISA9"      "AP001525.1"  "PSG9"        "ITGBL1"      "NAV3"       </div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'>top_deg</span><span class='op'>(</span><span class='va'>DEG_df</span>, x <span class='op'>=</span> <span class='st'>"log2FoldChange"</span>, y <span class='op'>=</span> <span class='st'>"pvalue"</span>, <span class='fl'>50</span>, <span class='fl'>0.05</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [1] "AP001066.1"  "AC021534.1"  "AC140658.1"  "VWA7"        "AL356489.4" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [6] "LINC02593"   "TRIM63"      "NRN1"        "LINC01844"   "HSD3B2"     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [11] "SMIM10L2A"   "SNAI3"       "FER1L4"      "SLC14A2"     "SLC7A10"    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [16] "AL356414.1"  "SLC7A8"      "SEC14L5"     "PLA2G4D"     "WNT6"       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [21] "AL355864.1"  "NEURL3"      "SAMD11"      "STC1"        "AC108451.2" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [26] "ASB4"        "AC079466.1"  "CBFA2T3"     "BDKRB2"      "TMEM51-AS1" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [31] "CACNA1H"     "NAV2-AS4"    "CACNA1B"     "PRUNE2"      "NECTIN4-AS1"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [36] "LINC02412"   "LINC01050"   "UPK1A"       "NOVA2"       "SLC6A12"    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [41] "PWWP3B"      "MIR210HG"    "AC018470.1"  "AC117500.3"  "PPP1R16B"   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [46] "SERPINA6"    "AC117500.5"  "AP000695.1"  "CA9"         "TREM1"      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [51] "ANKRD1"      "LINC01488"   "RTL3"        "MARCHF4"     "AL356289.2" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [56] "AC100800.1"  "ANKRD2"      "KMO"         "AC245041.1"  "ANXA3"      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [61] "AC245041.2"  "AC087269.3"  "LINC01776"   "C9orf135"    "NPPB"       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [66] "KRTAP4-8"    "EDN1"        "LYPD6B"      "TSPAN2"      "LINC02383"  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [71] "OLR1"        "AL592211.2"  "LINC01186"   "AC110792.4"  "AP003555.1" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [76] "LINC02533"   "KRTAP2-3"    "PLCE1-AS1"   "CPA4"        "CCN2"       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [81] "AF015262.1"  "AC093732.1"  "CDH1"        "FLJ30679"    "AC025154.2" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [86] "RBM24"       "IL6"         "LINC00052"   "AC062015.1"  "AL357833.1" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [91] "GSTM5"       "KRT8P14"     "MYPN"        "LINC01638"   "AC080011.1" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [96] "SHISA9"      "AP001525.1"  "PSG9"        "ITGBL1"      "NAV3"       </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -195,7 +196,7 @@ ordered DEG data frame after filtering by threshold value of P value</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by The package maintainer.</p>
+  <p>Developed by Jianming Zeng, Yonghe Xia, Biotrainee group.</p>
 </div>
 
 <div class="pkgdown">
