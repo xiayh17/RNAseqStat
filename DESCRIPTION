@@ -1,9 +1,18 @@
 Package: RNAseqStat
 Type: Package
-Title: What the Package Does (Title Case)
+Title: A Pipeline to Process RNAseq Data
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Authors@R: c(
+        person("Jianming","Zeng",
+            email = "jmzeng1314@163.com",
+            role = c("aut", "ctb")),
+        person(given = "Yonghe",
+           family = "Xia",
+           role = c("aut", "ctb", "cre"),
+           email = "xiayh17@gmail.com"),
+        person("Biotrainee group",role = c("cph","fnd"))
+    )
+Maintainer: Yonghe Xia <xiayh17@gmail.com>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: MIT + file LICENSE
