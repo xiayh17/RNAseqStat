@@ -75,9 +75,9 @@ run_edgeR <- function(counts_data, group_list, cg) {
   d <- calcNormFactors(d)
 
   dge=d
-  design <- model.matrix(~0+factor(group_list))
-  rownames(design)<-colnames(dge)
-  colnames(design)<-levels(factor(group_list))
+  design <- model.matrix(~0+g)
+  # rownames(design)<-colnames(dge)
+  # colnames(design)<-levels(g)
 
   dge <- estimateGLMCommonDisp(dge,design)
   dge <- estimateGLMTrendedDisp(dge, design)
@@ -85,7 +85,7 @@ run_edgeR <- function(counts_data, group_list, cg) {
 
   fit <- glmFit(dge, design)
   # https://www.biostars.org/p/110861/
-  lrt <- glmLRT(fit,  contrast=c(1,-1))
+  lrt <- glmLRT(fit, contrast=c(-1,1))
   nrDEG=topTags(lrt, n=nrow(dge))
   nrDEG=as.data.frame(nrDEG)
 
