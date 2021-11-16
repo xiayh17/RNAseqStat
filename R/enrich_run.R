@@ -117,9 +117,13 @@ enrichKEGG_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, d
                            label = label,
                            label_ns = label_ns,
                            mc.cores = mc.cores)
+
+  kegg_res_file <- glue("{dir}/{prefix}_kegg_result.Rdata")
+  save(kegg_resl,file = kegg_res_file)
+  message(glue::glue("Result of enrich_kegg stored in {dir}/{prefix}_{kegg_res_file}"))
+
   p <- kegg_barplot(kegg_resl, top = top, down_label = down_label)
   ggsave(plot = p, filename = glue::glue("{dir}/{prefix}_up_and_down_KEGG.pdf"),height = 7.01,width = 6.7)
-
   message(glue::glue("Result of enrichKEGG ploted in {dir}"))
 
 }
@@ -177,6 +181,10 @@ enrichgesKEGG_run <- function(deg_data,x,dir= ".", prefix = "5-EnrichgseKEGG",
                                 use_internal_data = use_internal_data,
                                 seed = seed,
                                 by = by)
+
+  gsekegg_res_file <- glue("{dir}/{prefix}_gsekegg_result.Rdata")
+  save(gsekegg_resl,file = gsekegg_res_file)
+  message(glue::glue("Result of enrich_gsekegg stored in {dir}/{prefix}_{gsekegg_res_file}"))
 
   write.csv(gsekegg_res@result,glue('{dir}/{prefix}_kegg.gsea.csv'))
 
