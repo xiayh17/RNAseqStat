@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   RNASeq_analysis: RNASeq_analysis.html
-last_built: 2021-11-16T14:48Z
+last_built: 2021-11-16T15:20Z
 urls:
   reference: http://xiayh17.top/RNAseqStat/reference
   article: http://xiayh17.top/RNAseqStat/articles
