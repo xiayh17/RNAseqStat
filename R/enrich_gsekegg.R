@@ -6,6 +6,7 @@
 #' @param x which column is log FC
 #' @param organism supported organism listed in 'http://www.genome.jp/kegg/catalog/org_list.html'
 #' @param keyType one of "kegg", 'ncbi-geneid', 'ncib-proteinid' and 'uniprot'
+#' @param OrgDb OrgDb
 #' @param exponent weight of each step
 #' @param minGSSize minimal size of each geneSet for analyzing
 #' @param maxGSSize maximal size of genes annotated for testing
@@ -31,6 +32,7 @@
 enrich_gsekegg <- function(deg_data,x,
                            organism = "hsa",
                            keyType = "kegg",
+                           OrgDb = 'org.Hs.eg.db',
                            exponent = 1,
                            minGSSize = 10,
                            maxGSSize = 500,
@@ -43,7 +45,7 @@ enrich_gsekegg <- function(deg_data,x,
                            by = "fgsea",...) {
   gene <- bitr(rownames(deg_data), fromType = "SYMBOL",
                toType =  "ENTREZID",
-               OrgDb = 'org.Hs.eg.db')
+               OrgDb = OrgDb)
   gene$logfc <- deg_data[,x][match(gene$SYMBOL,rownames(deg_data))]
 
   geneList=gene$logfc
@@ -64,7 +66,7 @@ enrich_gsekegg <- function(deg_data,x,
                     seed = seed,
                     by = by,...)
 
-  kk=DOSE::setReadable(kk_gse, OrgDb='org.Hs.eg.db',keyType='ENTREZID')
+  kk=DOSE::setReadable(kk_gse, OrgDb=OrgDb,keyType='ENTREZID')
 
   return(kk)
 }

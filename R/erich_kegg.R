@@ -5,6 +5,7 @@
 #' @inheritParams cut_much
 #' @param organism supported organism listed in 'http://www.genome.jp/kegg/catalog/org_list.html'
 #' @param keyType one of "kegg", 'ncbi-geneid', 'ncib-proteinid' and 'uniprot'
+#' @param OrgDb OrgDb
 #' @param pvalueCutoff adjusted pvalue cutoff on enrichment tests to report
 #' @param pAdjustMethod one of "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none"
 #' @param qvalueCutoff qvalue cutoff on enrichment tests to report as significant. Tests must pass i) pvalueCutoff on unadjusted pvalues, ii) pvalueCutoff on adjusted pvalues and iii) qvalueCutoff on qvalues to be reported.
@@ -27,6 +28,7 @@
 enrich_kegg <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05,
                       organism = "hsa",
                       keyType = "kegg",
+                      OrgDb = 'org.Hs.eg.db',
                       pvalueCutoff = 0.05,
                       pAdjustMethod = "BH",
                       minGSSize = 10,
@@ -47,7 +49,7 @@ enrich_kegg <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05,
     ENTREZ_id = clusterProfiler::bitr(SYMBOLS_id,
                                       fromType = "SYMBOL",
                                       toType = "ENTREZID",
-                                      OrgDb = 'org.Hs.eg.db')
+                                      OrgDb = OrgDb)
     gene_list[[i]] = ENTREZ_id[,"ENTREZID"]
   }
   rm(list = "i")
