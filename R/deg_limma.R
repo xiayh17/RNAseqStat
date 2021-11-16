@@ -5,8 +5,8 @@
 #' @param counts_data a counts data frame of rows in genes and columns in samples
 #' @param group_list a list ordered by samples in counts_data
 #' @param dir a directory to store results
-#' @param tg the name of the numerator level for the fold change (Test group)
-#' @param cg the name of the denominator level for the fold change (Control group)
+#' @param test_group the name of the numerator level for the fold change (Test group)
+#' @param control_group the name of the denominator level for the fold change (Control group)
 #' @param x which column is log FC
 #' @param y which column is P value
 #' @param prefix a prefix of file names in this step
@@ -20,11 +20,11 @@
 #'
 #' @examples
 #' deg_limma(counts_input,group_list,
-#'           tg = "T", cg = "C",
+#'           test_group = "T", control_group = "C",
 #'            x = "logFC", y = "P.Value",
 #'            dir = tempdir(), prefix = "2-DEG_limma")
 deg_limma <- function(counts_data,group_list,
-                       tg,cg,x,y,
+                       test_group,control_group,x,y,
                        dir = ".",prefix = "2-DEG_limma") {
 
   if (!fs::dir_exists(dir)) {
@@ -32,7 +32,7 @@ deg_limma <- function(counts_data,group_list,
   }
 
   deg_data <- run_limma(counts_data = counts_data,group_list = group_list,
-                         tg = tg,cg=cg)
+                         test_group = test_group,control_group=control_group)
 
   enhance_heatmap(counts_data, deg_data, group_list, x = x, y = y, dir = dir, prefix = prefix)
   message(glue("{emoji('deciduous_tree')} limma heatmap results were store in {dir}."))
@@ -55,8 +55,8 @@ deg_limma <- function(counts_data,group_list,
 #'
 #' @param counts_data a counts data frame of rows in genes and columns in samples
 #' @param group_list a character vector ordered by samples in counts_data
-#' @param tg the name of the numerator level for the fold change (Test group)
-#' @param cg the name of the denominator level for the fold change (Control group)
+#' @param test_group the name of the numerator level for the fold change (Test group)
+#' @param control_group the name of the denominator level for the fold change (Control group)
 #'
 #' @importFrom stats model.matrix na.omit
 #' @importFrom edgeR DGEList cpm calcNormFactors
@@ -66,8 +66,8 @@ deg_limma <- function(counts_data,group_list,
 #' @export
 #'
 #' @examples
-#' run_limma(counts_input, group_list, cg= "C", tg = "T")
-run_limma <- function(counts_data, group_list, cg, tg) {
+#' run_limma(counts_input, group_list, control_group= "C", test_group = "T")
+run_limma <- function(counts_data, group_list, control_group, test_group) {
 
   design <- model.matrix(~0+factor(group_list))
   colnames(design)=levels(factor(group_list))
@@ -80,7 +80,7 @@ run_limma <- function(counts_data, group_list, cg, tg) {
   v <- voom(dge,design,plot=TRUE, normalize.method="quantile")
   fit <- lmFit(v, design)
 
-  con=paste0(tg,'-',cg)
+  con=paste0(test_group,'-',control_group)
 
   cont.matrix=makeContrasts(contrasts=c(con),levels = design)
   fit2=contrasts.fit(fit,cont.matrix)

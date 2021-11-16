@@ -5,8 +5,8 @@
 #' @param counts_data a counts data frame of rows in genes and columns in samples
 #' @param group_list a list ordered by samples in counts_data
 #' @param dir a directory to store results
-#' @param tg the name of the numerator level for the fold change (Test group)
-#' @param cg the name of the denominator level for the fold change (Control group)
+#' @param test_group the name of the numerator level for the fold change (Test group)
+#' @param control_group the name of the denominator level for the fold change (Control group)
 #' @param qc qc plots
 #' @param x which column is log FC
 #' @param y which column is P value
@@ -22,12 +22,12 @@
 #' @examples
 #' \dontrun{
 #' deg_DESeq2(counts_input,group_list,
-#'           tg = "T", cg = "C", qc = TRUE,
+#'           test_group = "T", control_group = "C", qc = TRUE,
 #'            x = "log2FoldChange", y = "pvalue",
 #'            dir = tempdir(), prefix = "2-DEG_DEseq2")
 #' }
 deg_DESeq2 <- function(counts_data,group_list,
-                       tg,cg,qc = TRUE,x,y,
+                       test_group,control_group,qc = TRUE,x,y,
                        dir = ".",prefix = "2-DEG_DEseq2") {
 
   if (!fs::dir_exists(dir)) {
@@ -35,7 +35,7 @@ deg_DESeq2 <- function(counts_data,group_list,
   }
 
     deg_data <- run_DESeq2(counts_data = counts_data,group_list = group_list,
-                           tg = tg,cg=cg,qc = qc,dir = dir,prefix = prefix)
+                           test_group = test_group,control_group=control_group,qc = qc,dir = dir,prefix = prefix)
 
     enhance_heatmap(counts_data, deg_data, group_list, x = x, y = y, dir = dir, prefix = prefix)
     message(glue("{emoji('deciduous_tree')} DESeq2 heatmap results were store in {dir}."))
@@ -60,8 +60,8 @@ deg_DESeq2 <- function(counts_data,group_list,
 #'
 #' @param counts_data a counts data frame of rows in genes and columns in samples
 #' @param group_list a character vector ordered by samples in counts_data
-#' @param tg the name of the numerator level for the fold change (Test group)
-#' @param cg the name of the denominator level for the fold change (Control group)
+#' @param test_group the name of the numerator level for the fold change (Test group)
+#' @param control_group the name of the denominator level for the fold change (Control group)
 #' @param qc qc plots
 #' @param dir a directory to store results
 #' @param prefix a prefix of file names in this step
@@ -74,9 +74,9 @@ deg_DESeq2 <- function(counts_data,group_list,
 #'
 #' @examples
 #' \dontrun{
-#' run_DESeq2(counts_input, group_list,tg = "T", cg = "C", dir = tempdir())
+#' run_DESeq2(counts_input, group_list,test_group = "T", control_group = "C", dir = tempdir())
 #' }
-run_DESeq2 <- function(counts_data,group_list,tg,cg,qc = TRUE,dir = ".",prefix = "2-DEG_DEseq2") {
+run_DESeq2 <- function(counts_data,group_list,test_group,control_group,qc = TRUE,dir = ".",prefix = "2-DEG_DEseq2") {
 
   colData <- data.frame(row.names=colnames(counts_data),
                          group_list=group_list)
@@ -93,7 +93,7 @@ run_DESeq2 <- function(counts_data,group_list,tg,cg,qc = TRUE,dir = ".",prefix =
   }
 
   res <- results(dds,
-                 contrast=c("group_list",tg,cg))
+                 contrast=c("group_list",test_group,control_group))
   resOrdered <- res[order(res$padj),]
 
   DEG =as.data.frame(resOrdered)

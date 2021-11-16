@@ -5,8 +5,8 @@
 #' @param counts_data a counts data frame of rows in genes and columns in samples
 #' @param group_list a list ordered by samples in counts_data
 #' @param dir a directory to store results
-#' @param tg the name of the numerator level for the fold change (Test group)
-#' @param cg the name of the denominator level for the fold change (Control group)
+#' @param test_group the name of the numerator level for the fold change (Test group)
+#' @param control_group the name of the denominator level for the fold change (Control group)
 #'
 #' @importFrom fs dir_exists dir_create
 #' @importFrom glue glue
@@ -17,9 +17,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' deg_run(counts_input,group_list,tg = "T", cg = "C",dir = tempdir())
+#' deg_run(counts_input,group_list,test_group = "T", control_group = "C",dir = tempdir())
 #' }
-deg_run <- function(counts_data,group_list,tg = "T", cg = "C",dir) {
+deg_run <- function(counts_data,group_list,test_group = "T", control_group = "C",dir) {
 
   if (!fs::dir_exists(dir)) {
     fs::dir_create(dir)
@@ -28,17 +28,17 @@ deg_run <- function(counts_data,group_list,tg = "T", cg = "C",dir) {
   counts_data_filtered =counts_data[apply(counts_data,1, function(x) sum(x>1) > 5),]
 
   deg_df_DESeq2 <- deg_DESeq2(counts_data_filtered,group_list,
-            tg = tg, cg = cg, qc = TRUE,
+            test_group = test_group, control_group = control_group, qc = TRUE,
              x = "log2FoldChange", y = "pvalue",
              dir = dir, prefix = "2-DEG_DEseq2")
 
   deg_df_edgeR <- deg_edgeR(counts_data_filtered, group_list,
-            cg = cg,
+            control_group = control_group,
              x = "logFC", y = "PValue",
              dir = dir, prefix = "2-DEG_edgeR")
 
   deg_df_limma <- deg_limma(counts_data_filtered,group_list,
-            tg = tg, cg = cg,
+            test_group = test_group, control_group = control_group,
              x = "logFC", y = "P.Value",
              dir = dir, prefix = "2-DEG_limma")
 
@@ -121,12 +121,3 @@ create_DEG_container <- function(
       group_list = as.character(group_list)
   )
 }
-
-# setGeneric("deg_df_limma", function(x) standardGeneric("deg_df_limma"))
-# setMethod("deg_df_limma", "DEG_container", function(x) x@age)
-#
-# setGeneric("deg_df_limma<-", function(x, value) standardGeneric("deg_df_limma<-"))
-# setMethod("deg_df_limma<-", "DEG_container", function(x, value) {
-#   x@deg_df_limma <- value
-#   x
-# })

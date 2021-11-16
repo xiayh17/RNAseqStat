@@ -5,7 +5,7 @@
 #' @param counts_data a counts data frame of rows in genes and columns in samples
 #' @param group_list a list ordered by samples in counts_data
 #' @param dir a directory to store results
-#' @param cg the name of the denominator level for the fold change (Control group)
+#' @param control_group the name of the denominator level for the fold change (Control group)
 #' @param x which column is log FC
 #' @param y which column is P value
 #' @param prefix a prefix of file names in this step
@@ -19,18 +19,18 @@
 #'
 #' @examples
 #' deg_edgeR(counts_input,group_list,
-#'           cg = "C",
+#'           control_group = "C",
 #'            x = "logFC", y = "PValue",
 #'            dir = tempdir(), prefix = "2-DEG_edgeR")
 deg_edgeR <- function(counts_data,group_list,
-                       cg,x = "logFC", y = "PValue",
+                       control_group,x = "logFC", y = "PValue",
                        dir = ".",prefix = "2-DEG_edgeR") {
 
   if (!fs::dir_exists(dir)) {
     fs::dir_create(dir)
   }
 
-  deg_data <- run_edgeR(counts_data, group_list, cg= cg)
+  deg_data <- run_edgeR(counts_data, group_list, control_group= control_group)
 
   enhance_heatmap(counts_data, deg_data, group_list, x = x, y = y, dir = dir, prefix = prefix)
   message(glue("{emoji('deciduous_tree')} edgeR heatmap results were store in {dir}."))
@@ -53,7 +53,7 @@ deg_edgeR <- function(counts_data,group_list,
 #'
 #' @param counts_data a counts data frame of rows in genes and columns in samples
 #' @param group_list a character vector ordered by samples in counts_data
-#' @param cg the name of the denominator level for the fold change (Control group)
+#' @param control_group the name of the denominator level for the fold change (Control group)
 #'
 #' @importFrom stats relevel model.matrix
 #' @importFrom edgeR DGEList cpm calcNormFactors estimateGLMCommonDisp estimateGLMTrendedDisp estimateGLMTagwiseDisp glmFit glmLRT topTags
@@ -62,10 +62,10 @@ deg_edgeR <- function(counts_data,group_list,
 #' @export
 #'
 #' @examples
-#' run_edgeR(counts_input, group_list, cg= "C")
-run_edgeR <- function(counts_data, group_list, cg) {
+#' run_edgeR(counts_input, group_list, control_group= "C")
+run_edgeR <- function(counts_data, group_list, control_group) {
   g=factor(group_list)
-  g=relevel(g,cg)
+  g=relevel(g,control_group)
 
   d <- DGEList(counts=counts_data,group=g)
   keep <- rowSums(cpm(d)>1) >= 2
