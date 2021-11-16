@@ -4,16 +4,16 @@
 \alias{deg_run}
 \title{run DEG}
 \usage{
-deg_run(counts_data, group_list, tg = "T", cg = "C", dir)
+deg_run(counts_data, group_list, test_group = "T", control_group = "C", dir)
 }
 \arguments{
 \item{counts_data}{a counts data frame of rows in genes and columns in samples}
 
 \item{group_list}{a list ordered by samples in counts_data}
 
-\item{tg}{the name of the numerator level for the fold change (Test group)}
+\item{test_group}{the name of the numerator level for the fold change (Test group)}
 
-\item{cg}{the name of the denominator level for the fold change (Control group)}
+\item{control_group}{the name of the denominator level for the fold change (Control group)}
 
 \item{dir}{a directory to store results}
 }
@@ -25,6 +25,6 @@ run DEG module in limma, DESeq2 and edgeR
 }
 \examples{
 \dontrun{
-deg_run(counts_input,group_list,tg = "T", cg = "C",dir = tempdir())
+deg_run(counts_input,group_list,test_group = "T", control_group = "C",dir = tempdir())
 }
 }

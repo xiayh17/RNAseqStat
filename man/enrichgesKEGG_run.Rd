@@ -14,6 +14,7 @@ enrichgesKEGG_run(
   top = 10,
   organism = "hsa",
   keyType = "kegg",
+  OrgDb = "org.Hs.eg.db",
   exponent = 1,
   minGSSize = 10,
   maxGSSize = 500,
@@ -44,6 +45,8 @@ enrichgesKEGG_run(
 \item{organism}{supported organism listed in 'http://www.genome.jp/kegg/catalog/org_list.html'}
 
 \item{keyType}{one of "kegg", 'ncbi-geneid', 'ncib-proteinid' and 'uniprot'}
+
+\item{OrgDb}{OrgDb}
 
 \item{exponent}{weight of each step}
 

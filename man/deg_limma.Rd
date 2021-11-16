@@ -7,8 +7,8 @@
 deg_limma(
   counts_data,
   group_list,
-  tg,
-  cg,
+  test_group,
+  control_group,
   x,
   y,
   dir = ".",
@@ -20,9 +20,9 @@ deg_limma(
 
 \item{group_list}{a list ordered by samples in counts_data}
 
-\item{tg}{the name of the numerator level for the fold change (Test group)}
+\item{test_group}{the name of the numerator level for the fold change (Test group)}
 
-\item{cg}{the name of the denominator level for the fold change (Control group)}
+\item{control_group}{the name of the denominator level for the fold change (Control group)}
 
 \item{x}{which column is log FC}
 
@@ -40,7 +40,7 @@ A integrated function for run limma in a counts data and return results files.
 }
 \examples{
 deg_limma(counts_input,group_list,
-          tg = "T", cg = "C",
+          test_group = "T", control_group = "C",
            x = "logFC", y = "P.Value",
            dir = tempdir(), prefix = "2-DEG_limma")
 }

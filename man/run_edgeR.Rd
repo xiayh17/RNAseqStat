@@ -4,14 +4,14 @@
 \alias{run_edgeR}
 \title{Basic produce of edgeR}
 \usage{
-run_edgeR(counts_data, group_list, cg)
+run_edgeR(counts_data, group_list, control_group)
 }
 \arguments{
 \item{counts_data}{a counts data frame of rows in genes and columns in samples}
 
 \item{group_list}{a character vector ordered by samples in counts_data}
 
-\item{cg}{the name of the denominator level for the fold change (Control group)}
+\item{control_group}{the name of the denominator level for the fold change (Control group)}
 }
 \value{
 a DEG data frame
@@ -20,5 +20,5 @@ a DEG data frame
 A basic function to get data and produce results of edgeR
 }
 \examples{
-run_edgeR(counts_input, group_list, cg= "C")
+run_edgeR(counts_input, group_list, control_group= "C")
 }

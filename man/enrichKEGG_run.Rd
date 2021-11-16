@@ -15,6 +15,7 @@ enrichKEGG_run(
   prefix = "4-EnrichKEGG",
   organism = "hsa",
   keyType = "kegg",
+  OrgDb = "org.Hs.eg.db",
   pvalueCutoff = 0.05,
   pAdjustMethod = "BH",
   minGSSize = 10,
@@ -47,6 +48,8 @@ enrichKEGG_run(
 \item{organism}{supported organism listed in 'http://www.genome.jp/kegg/catalog/org_list.html'}
 
 \item{keyType}{one of "kegg", 'ncbi-geneid', 'ncib-proteinid' and 'uniprot'}
+
+\item{OrgDb}{OrgDb}
 
 \item{pvalueCutoff}{adjusted pvalue cutoff on enrichment tests to report}
 

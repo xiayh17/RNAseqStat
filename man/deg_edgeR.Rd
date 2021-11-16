@@ -7,7 +7,7 @@
 deg_edgeR(
   counts_data,
   group_list,
-  cg,
+  control_group,
   x = "logFC",
   y = "PValue",
   dir = ".",
@@ -19,7 +19,7 @@ deg_edgeR(
 
 \item{group_list}{a list ordered by samples in counts_data}
 
-\item{cg}{the name of the denominator level for the fold change (Control group)}
+\item{control_group}{the name of the denominator level for the fold change (Control group)}
 
 \item{x}{which column is log FC}
 
@@ -37,7 +37,7 @@ A integrated function for run edgeR in a counts data and return results files.
 }
 \examples{
 deg_edgeR(counts_input,group_list,
-          cg = "C",
+          control_group = "C",
            x = "logFC", y = "PValue",
            dir = tempdir(), prefix = "2-DEG_edgeR")
 }

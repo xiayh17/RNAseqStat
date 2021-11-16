@@ -4,16 +4,16 @@
 \alias{run_limma}
 \title{Basic produce of limma}
 \usage{
-run_limma(counts_data, group_list, cg, tg)
+run_limma(counts_data, group_list, control_group, test_group)
 }
 \arguments{
 \item{counts_data}{a counts data frame of rows in genes and columns in samples}
 
 \item{group_list}{a character vector ordered by samples in counts_data}
 
-\item{cg}{the name of the denominator level for the fold change (Control group)}
+\item{control_group}{the name of the denominator level for the fold change (Control group)}
 
-\item{tg}{the name of the numerator level for the fold change (Test group)}
+\item{test_group}{the name of the numerator level for the fold change (Test group)}
 }
 \value{
 a DEG data frame
@@ -22,5 +22,5 @@ a DEG data frame
 A basic function to get data and produce results of limma
 }
 \examples{
-run_limma(counts_input, group_list, cg= "C", tg = "T")
+run_limma(counts_input, group_list, control_group= "C", test_group = "T")
 }
