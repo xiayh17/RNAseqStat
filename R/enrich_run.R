@@ -183,7 +183,7 @@ enrichgesKEGG_run <- function(deg_data,x,dir= ".", prefix = "5-EnrichgseKEGG",
                                 by = by)
 
   gsekegg_res_file <- glue("{dir}/{prefix}_gsekegg_result.Rdata")
-  save(gsekegg_resl,file = gsekegg_res_file)
+  save(gsekegg_res,file = gsekegg_res_file)
   message(glue::glue("Result of enrich_gsekegg stored in {dir}/{prefix}_{gsekegg_res_file}"))
 
   write.csv(gsekegg_res@result,glue('{dir}/{prefix}_kegg.gsea.csv'))
