@@ -34,7 +34,7 @@ pre_check(counts_data = counts_input, group_list = group_list, dir = results_dir
 DEG analysis will be run by limma edgeR and DESeq2 in this step.
 
 ```{r eval=FALSE}
-deg_run(counts_input,group_list,tg = "T", cg = "C",dir = results_dir)
+deg_run(counts_input,group_list,test_group = "T", control_group = "C",dir = results_dir)
 ```
 
 ### GO
