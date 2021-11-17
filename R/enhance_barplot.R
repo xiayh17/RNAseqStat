@@ -53,7 +53,8 @@ enhance_barplot <- function(data, split, top = 10,
     p <- barplot_base(dat, bar_color = bar_color, split_color = split_color)
     p <- p +
       facet_grid(ONTOLOGY~., scales="free", switch="both") +
-      theme(strip.background=element_roundrect(fill=NA, color=NA, r=0.31415,size = 0.5,linetype = "dotted"))
+      theme(strip.background=element_roundrect(fill=NA, color=NA, r=0.31415,size = 0.5,linetype = "dotted"),
+            legend.background = element_roundrect(fill=NA, color="grey80", r=0.31415,size = 0.5,linetype = "solid"))
 
     g <- ggplot_gtable(ggplot_build(p))
     strip_both <- which(grepl('strip-', g$layout$name))
@@ -177,6 +178,7 @@ barplot_base2 <- function(data, bar_color, text_color) {
     scale_x_continuous(expand = c(0, 0))+
     theme_minimal()+
     theme(legend.position = "right",
+          legend.background = element_roundrect(fill=NA, color="grey80", r=0.31415,size = 0.5,linetype = "solid"),
           # plot.margin=margin(t= 100,b=2,l=-2,r= 2,unit="pt"),
           panel.grid.major.y = element_blank(),
           panel.grid.major.x = element_line(linetype = "dotted"),
@@ -214,7 +216,7 @@ barplot_base2 <- function(data, bar_color, text_color) {
 #' test <- enrich_kegg(deg_data = DEG_df, x = "log2FoldChange", y = "pvalue")
 #' kegg_barplot(test)
 #' }
-kegg_barplot <- function(data,top = 10,down_label = "Down") {
+kegg_barplot <- function(data,top = -10,down_label = "Down") {
 
   lis <- lapply(seq_along(data), function(x)
 
@@ -242,34 +244,31 @@ kegg_barplot <- function(data,top = 10,down_label = "Down") {
   dat <- dat %>%
     mutate(Description = fct_reorder(Description,fulog10pvalue))
 
-  p <- ggplot(dat, aes(fulog10pvalue, Description, color = as.character(upordown), fill = p.adjust)) +
-    geom_bar(stat="identity",linetype = "solid",size = 0.4) +
-    scale_color_manual(values = c("#e66101","#5e3c99"),name = "",
-                       breaks = c("1","-1"),
-                       labels= c("Up","Down")) +
-    guides(color = guide_legend(override.aes = list(size = 1, shape = c(15, 15), fill =NA))) +
-    scale_fill_gradientn(colours=rev(RColorBrewer::brewer.pal(5,"PuBuGn")[3:5]))+
-    geom_shadowtext(aes(label = stringr::str_wrap(Description,width = 30)),data = dat[which(dat["fulog10pvalue"] >= 0),],
-                    x = 0,
-                    hjust = -0.01, bg.colour='grey45',bg.r = 0.08,
-                    size = 3, color = "white", show.legend = F) +
-    geom_shadowtext(aes(label =  stringr::str_wrap(Description,width = 30)),data = dat[which(dat["fulog10pvalue"] < 0),],
-                    x = 0,
-                    hjust = 1.02, bg.colour='grey45',bg.r = 0.1,
-                    size = 3, color = "white", show.legend = F) +
+  p <- ggplot(dat, aes(fulog10pvalue, Description, fill = as.character(upordown))) +
+    # scale_color_manual(values = c("#e66101","#5e3c99"),name = "",
+    #                    breaks = c("1","-1"),
+    #                    labels= c("Up","Down")) +
+    geom_bar(stat="identity") +
+    scale_fill_manual(values=c("#3685af","#af4236"),guide = "none") +
+    # scale_alpha_continuous(range = c(0.3, 1)) +
+    geom_text(aes(label = Description),data = dat[which(dat["fulog10pvalue"] >= 0),],
+              x = 0,
+              hjust = 0,
+              size = 3) +
+    geom_text(aes(label = Description),data = dat[which(dat["fulog10pvalue"] < 0),],
+              x = 0,
+              hjust = 1,
+              size = 3) +
     labs(y = "Description", x = "-log10(PValue)")+
     theme_minimal()+
-    theme(
-      legend.key = element_blank(),
-      legend.justification = c(1, 0),
-      legend.position = c(0.75, 0),
-      # plot.margin=margin(b=200,l=-2,unit="pt"),
-      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank(),
-      axis.line = element_blank(),
-      axis.text.y = element_blank(),
-      # axis.text.x = element_blank(),
-      axis.ticks.y = element_blank())
+    theme(legend.position = "none",
+          # plot.margin=margin(b=200,l=-2,unit="pt"),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          axis.line = element_blank(),
+          axis.text.y = element_blank(),
+          # axis.text.x = element_blank(),
+          axis.ticks.y = element_blank())
 
   return(p)
 
@@ -299,7 +298,7 @@ kegg_barplot <- function(data,top = 10,down_label = "Down") {
 #' test <- enrich_gsekegg(DEG_df,x = "log2FoldChange")
 #' geskegg_barplot(test)
 #' }
-geskegg_barplot <- function(data, pvalue_cut = 0.1, enrichmentScore_cut = 0.5, top = 10) {
+geskegg_barplot <- function(data, pvalue_cut = 0.1, enrichmentScore_cut = 0.5, top = -10) {
   down_kegg<-data[data$pvalue< pvalue_cut & data$enrichmentScore < -enrichmentScore_cut,];down_kegg$group=-1
   up_kegg<-data[data$pvalue< pvalue_cut & data$enrichmentScore > enrichmentScore_cut,];up_kegg$group=1
 
@@ -315,35 +314,28 @@ geskegg_barplot <- function(data, pvalue_cut = 0.1, enrichmentScore_cut = 0.5, t
   dat <- dat %>%
     mutate(Description = fct_reorder(Description,fulog10pvalue))
 
-  ggplot(dat, aes(fulog10pvalue, Description, color = as.character(group), fill = p.adjust)) +
-    geom_bar(stat="identity",linetype = "solid",size = 0.4) +
-    scale_color_manual(values = c("#e66101","#5e3c99"),name = "",
-                       breaks = c("1","-1"),
-                       labels= c("Up","Down")) +
-    guides(color = guide_legend(override.aes = list(size = 1, shape = c(15, 15), fill =NA))) +
-    scale_fill_gradientn(colours=rev(RColorBrewer::brewer.pal(5,"PuBuGn")[3:5]))+
-    geom_shadowtext(aes(label = Description),data = dat[which(dat["fulog10pvalue"] >= 0),],
-                    x = 0,
-                    hjust = -0.01, bg.colour='grey45',bg.r = 0.08,
-                    size = 3, color = "white", show.legend = F) +
-    geom_shadowtext(aes(label =  Description),data = dat[which(dat["fulog10pvalue"] < 0),],
-                    x = 0,
-                    hjust = 1.02, bg.colour='grey45',bg.r = 0.1,
-                    size = 3, color = "white", show.legend = F) +
+  ggplot(dat, aes(fulog10pvalue, Description, fill = as.character(group))) +
+    geom_bar(stat="identity") +
+    scale_fill_manual(values=c("#3685af","#af4236"),guide = "none") +
+    # scale_alpha_continuous(range = c(0.3, 1)) +
+    geom_text(aes(label = Description),data = dat[which(dat["fulog10pvalue"] >= 0),],
+              x = 0,
+              hjust = 0,
+              size = 3) +
+    geom_text(aes(label = Description),data = dat[which(dat["fulog10pvalue"] < 0),],
+              x = 0,
+              hjust = 1,
+              size = 3) +
     labs(y = "Description", x = "-log10(PValue)")+
     theme_minimal()+
-    theme(
-      legend.key = element_blank(),
-      legend.justification = c(1, 0),
-      legend.position = c(0.2, 0.45),
-      # plot.margin=margin(b=200,l=-2,unit="pt"),
-      panel.grid.major.y = element_blank(),
-      panel.grid.major.x = element_line(linetype = "dotted"),
-      panel.grid.minor = element_blank(),
-      axis.line = element_blank(),
-      axis.text.y = element_blank(),
-      # axis.text.x = element_blank(),
-      axis.ticks.y = element_blank())
+    theme(legend.position = "none",
+          # plot.margin=margin(b=200,l=-2,unit="pt"),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          axis.line = element_blank(),
+          axis.text.y = element_blank(),
+          # axis.text.x = element_blank(),
+          axis.ticks.y = element_blank())
 
 }
 
