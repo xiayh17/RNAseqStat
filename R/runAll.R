@@ -11,7 +11,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' runAll(count_data = counts_input, group_list = group_list, OrgDb = 'org.Hs.eg.db', dir = tempdir())
+#' }
 runAll <- function(count_data, group_list, OrgDb = 'org.Hs.eg.db', dir = ".") {
 
   message(glue("Step1: Check you data"))
