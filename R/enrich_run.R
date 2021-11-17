@@ -38,7 +38,7 @@ enrichGO_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, dir
 
   go_res_file <- glue("{dir}/{prefix}_go_result.Rdata")
   save(go_resl,file = go_res_file)
-  message(glue::glue("Result of enrichGO stored in {dir}/{prefix}_{go_res_file}"))
+  message(glue::glue("Result of enrichGO stored in {go_res_file}"))
 
   tmp <- lapply(seq_along(go_resl), function(x)
     write.table(go_resl[[x]]@result,file = glue::glue('{dir}/{prefix}_gene_{names(go_resl)[[x]]}_GO_enrichment.csv'))
@@ -48,17 +48,27 @@ enrichGO_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, dir
     plots <- lapply(go_resl, function(x)
       enhance_barplot(x@result,top=top,split = ONTOLOGY)
     )
-    lapply(seq_along(plots), function(x)
-      ggsave(plot = plots[[x]], filename = glue::glue("{dir}/{prefix}_barplot-gene_{names(plots)[[x]]}_GO_enrichment.pdf"),
-             height = 880*2.5/300, width = 780*2.5/300, dpi = 300)
+    lapply(seq_along(plots), function(x) {
+
+      text_w <- max(strwidth(x@result$Description,units = "inch"))
+      ggsave(plot = plots[[x]],
+             filename = glue::glue("{dir}/{prefix}_barplot-gene_{names(plots)[[x]]}_GO_enrichment.pdf"),
+             height = 880*2.5/300, width = text_w+1, dpi = 300)
+
+    }
     )
   } else {
     plots <- lapply(go_resl, function(x)
       enhance_barplot(x@result,top=top)
     )
-    lapply(seq_along(plots), function(x)
+    lapply(seq_along(plots), function(x) {
+
+      text_w <- max(strwidth(x@result$Description,units = "inch"))
       ggsave(plot = plots[[x]], filename = glue::glue("{dir}/{prefix}_barplot-gene_{names(plots)[[x]]}_GO_enrichment.pdf"),
-             height = 880*2.5/300/3, width = 780*2.5/300, dpi = 300)
+             height = 880*2.5/300/3, width = text_w+1, dpi = 300)
+
+    }
+
     )
   }
 

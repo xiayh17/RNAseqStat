@@ -50,6 +50,8 @@ deg_run <- function(counts_data,group_list,test_group = "T", control_group = "C"
               deg_df_edgeR[allg,c(1,5)],
               deg_df_DESeq2[allg,c(2,6)])
 
+  colnames(deg_df_intersect) <- paste0(colnames(deg_df_intersect),"_",rep(c("limma","edgeR","DESeq2"),each=2))
+
   write.csv(deg_df_intersect,file =  glue('{dir}/2-DEG_intersect_results.csv'))
 
   deg_results <- create_DEG_container(
