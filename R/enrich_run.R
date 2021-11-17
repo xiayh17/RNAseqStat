@@ -48,9 +48,12 @@ enrichGO_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, dir
     plots <- lapply(go_resl, function(x)
       enhance_barplot(x@result,top=top,split = ONTOLOGY)
     )
+    text_w_l <- lapply(go_resl, function(x)
+      max(strwidth(x@result$Description,units = "inch"))
+    )
     lapply(seq_along(plots), function(x) {
 
-      text_w <- max(strwidth(x@result$Description,units = "inch"))
+      text_w <- text_w_l[[x]]
       ggsave(plot = plots[[x]],
              filename = glue::glue("{dir}/{prefix}_barplot-gene_{names(plots)[[x]]}_GO_enrichment.pdf"),
              height = 880*2.5/300, width = text_w+1, dpi = 300)
@@ -61,9 +64,12 @@ enrichGO_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, dir
     plots <- lapply(go_resl, function(x)
       enhance_barplot(x@result,top=top)
     )
+    text_w_l <- lapply(go_resl, function(x)
+      max(strwidth(x@result$Description,units = "inch"))
+    )
     lapply(seq_along(plots), function(x) {
 
-      text_w <- max(strwidth(x@result$Description,units = "inch"))
+      text_w <- text_w_l[[x]]
       ggsave(plot = plots[[x]], filename = glue::glue("{dir}/{prefix}_barplot-gene_{names(plots)[[x]]}_GO_enrichment.pdf"),
              height = 880*2.5/300/3, width = text_w+1, dpi = 300)
 
@@ -92,9 +98,10 @@ enrichGO_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, dir
 #' @examples
 #' \dontrun{
 #' enrichKEGG_run(deg_data = DEG_df, x = "log2FoldChange", y = "pvalue", cut_FC = 1,
-#' cut_P = 0.05, top = 10)
+#' cut_P = 0.05, top = -10)
 #' }
-enrichKEGG_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, dir= ".", prefix = "4-EnrichKEGG",
+enrichKEGG_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = -10,
+                           dir= ".", prefix = "4-EnrichKEGG",
                            organism = "hsa",
                            keyType = "kegg",
                            OrgDb = 'org.Hs.eg.db',
@@ -106,7 +113,7 @@ enrichKEGG_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, d
                            use_internal_data = FALSE,
                            label = c("Down", "Stable", "Up"),
                            label_ns = "Stable",
-                           mc.cores = 1L,down_label = "Down"
+                           mc.cores = 1L,down_label = "Down",...
                            ) {
 
   if (!fs::dir_exists(dir)) {
@@ -132,8 +139,11 @@ enrichKEGG_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, d
   save(kegg_resl,file = kegg_res_file)
   message(glue::glue("Result of enrich_kegg stored in {dir}/{prefix}_{kegg_res_file}"))
 
+  text_w <- max(strwidth(kegg_resl$Down@result$Description,units = "inch"),
+      strwidth(kegg_resl$Up@result$Description,units = "inch"))
+
   p <- kegg_barplot(kegg_resl, top = top, down_label = down_label)
-  ggsave(plot = p, filename = glue::glue("{dir}/{prefix}_up_and_down_KEGG.pdf"),height = 7.01,width = 6.7)
+  ggsave(plot = p, filename = glue::glue("{dir}/{prefix}_up_and_down_KEGG.pdf"),height = 5, width = text_w + 3)
   message(glue::glue("Result of enrichKEGG ploted in {dir}"))
 
 }
@@ -144,6 +154,7 @@ enrichKEGG_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, d
 #'
 #' @param dir where to save results files
 #' @param prefix a prefix of file names in this step
+#' @param ... more param for ggsave
 #' @inheritParams enrich_gsekegg
 #' @inheritParams geskegg_barplot
 #'
@@ -158,7 +169,7 @@ enrichKEGG_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, d
 #' enrichgesKEGG_run(deg_data = DEG_df, x = "log2FoldChange", dir = tempdir(),eps = 0)
 #' }
 enrichgesKEGG_run <- function(deg_data,x,dir= ".", prefix = "5-EnrichgseKEGG",
-                              pvalue_cut = 0.1, enrichmentScore_cut = 0.5, top = 10,
+                              pvalue_cut = 0.1, enrichmentScore_cut = 0.5, top = -10,
                               organism = "hsa",
                               keyType = "kegg",
                               OrgDb = 'org.Hs.eg.db',
@@ -198,13 +209,14 @@ enrichgesKEGG_run <- function(deg_data,x,dir= ".", prefix = "5-EnrichgseKEGG",
 
   write.csv(gsekegg_res@result,glue('{dir}/{prefix}_kegg.gsea.csv'))
 
-  p = geskegg_barplot(gsekegg_res,pvalue_cut = pvalue_cut, enrichmentScore_cut = enrichmentScore_cut, top = top)
+  text_w <- max(strwidth(gsekegg_res@result$Description,units = "inch"))
 
-  ggsave(plot = p,height = 7.01,width = 8.23,filename = glue("{dir}/{prefix}_gseKEGG_barplot.pdf"),dpi = 50)
+  p = geskegg_barplot(gsekegg_res,pvalue_cut = pvalue_cut, enrichmentScore_cut = enrichmentScore_cut, top = top)
+  ggsave(plot = p,filename = glue("{dir}/{prefix}_gseKEGG_barplot.pdf"),height = 5, width = text_w+3)
 
   message(glue::glue("Barplot of enrichgseKEGG ploted in {dir}"))
 
-  plots_l <- enhance_gseplot(gsekegg_res, top = 10,
+  plots_l <- enhance_gseplot(gsekegg_res, top = top,
               pvalue_cut = 0.1, enrichmentScore_cut = 0.5)
 
   # li_down = structure(plots_l[["down_plots"]], class = c("gglist", "ggplot"))
@@ -214,11 +226,11 @@ enrichgesKEGG_run <- function(deg_data,x,dir= ".", prefix = "5-EnrichgseKEGG",
   # li_up = structure(plots_l[["up_plots"]], class = c("gglist", "ggplot"))
   # ggsave(li_up, file = glue("{dir}/{prefix}_gseKEGG_up_gseplot.pdf"))
 
-  pdf(glue("{dir}/{prefix}_gseKEGG_down_gseplot.pdf"))
+  pdf(glue("{dir}/{prefix}_gseKEGG_down_gseplot.pdf"),height = 3,width = 4)
   invisible(lapply(plots_l[["down_plots"]], print))
   dev.off()
 
-  pdf(glue("{dir}/{prefix}_gseKEGG_up_gseplot.pdf"))
+  pdf(glue("{dir}/{prefix}_gseKEGG_up_gseplot.pdf"),height = 3,width = 4)
   invisible(lapply(plots_l[["up_plots"]], print))
   dev.off()
 
