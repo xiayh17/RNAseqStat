@@ -2,8 +2,15 @@ pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
+  Check_your_data: Check_your_data.html
+  DEG_analysis: DEG_analysis.html
   RNASeq_analysis: RNASeq_analysis.html
-last_built: 2021-11-17T14:51Z
+  Visualization: Visualization.html
+  go: go.html
+  gseKegg: gseKegg.html
+  kegg: kegg.html
+  tool_sets: tool_sets.html
+last_built: 2021-11-18T16:34Z
 urls:
   reference: http://xiayh17.top/RNAseqStat/reference
   article: http://xiayh17.top/RNAseqStat/articles

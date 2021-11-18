@@ -54,7 +54,28 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/Check_your_data.html">Check_your_data</a>
+    </li>
+    <li>
+      <a href="../articles/DEG_analysis.html">DEG_analysis</a>
+    </li>
+    <li>
       <a href="../articles/RNASeq_analysis.html">RNASeq_analysis</a>
+    </li>
+    <li>
+      <a href="../articles/Visualization.html">Visualization</a>
+    </li>
+    <li>
+      <a href="../articles/go.html">GO</a>
+    </li>
+    <li>
+      <a href="../articles/gseKegg.html">gseKEGG</a>
+    </li>
+    <li>
+      <a href="../articles/kegg.html">KEGG</a>
+    </li>
+    <li>
+      <a href="../articles/tool_sets.html">Tool Sets</a>
     </li>
   </ul>
 </li>
@@ -96,114 +117,47 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/xiayh17/RNAseqStat">RNAseqStat</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="va">results_dir</span> <span class="op">=</span> <span class="st">"test"</span></code></pre></div>
+</div>
+<div id="run-all-in-one-time" class="section level2">
+<h2 class="hasAnchor">
+<a href="#run-all-in-one-time" class="anchor"></a>run all in one time</h2>
+<p><code>runAll</code> will run full workflow in default parameters</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/runAll.html">runAll</a></span><span class="op">(</span>count_data <span class="op">=</span> <span class="va">counts_input</span>, group_list <span class="op">=</span> <span class="va">group_list</span>, OrgDb <span class="op">=</span> <span class="st">'org.Hs.eg.db'</span>, dir <span class="op">=</span> <span class="va">results_dir</span><span class="op">)</span></code></pre></div>
+<p>This step contains following 5 steps, more detail parameters can be set in following functions.</p>
 <div id="check-your-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#check-your-data" class="anchor"></a>Check your data</h3>
 <p>This step is useful to quickly check you data. dir Can be any wherr you want to save results file.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/pre_check.html">pre_check</a></span><span class="op">(</span>counts_data <span class="op">=</span> <span class="va">counts_input</span>, group_list <span class="op">=</span> <span class="va">group_list</span>, dir <span class="op">=</span> <span class="va">results_dir</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="deg-analysis" class="section level3">
 <h3 class="hasAnchor">
 <a href="#deg-analysis" class="anchor"></a>DEG analysis</h3>
 <p>DEG analysis will be run by limma edgeR and DESeq2 in this step.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/deg_run.html">deg_run</a></span><span class="op">(</span><span class="va">counts_input</span>,<span class="va">group_list</span>,test_group <span class="op">=</span> <span class="st">"T"</span>, control_group <span class="op">=</span> <span class="st">"C"</span>,dir <span class="op">=</span> <span class="va">results_dir</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="go" class="section level3">
 <h3 class="hasAnchor">
 <a href="#go" class="anchor"></a>GO</h3>
 <p>Enrichment analysis of GO will be done in this Step.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/enrichGO_run.html">enrichGO_run</a></span><span class="op">(</span><span class="va">DEG_df</span>, x <span class="op">=</span> <span class="st">"log2FoldChange"</span>, y <span class="op">=</span> <span class="st">"pvalue"</span>, dir <span class="op">=</span> <span class="va">results_dir</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="kegg" class="section level3">
 <h3 class="hasAnchor">
 <a href="#kegg" class="anchor"></a>KEGG</h3>
 <p>Enrichment analysis of KEGG will be done in this Step.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/enrichKEGG_run.html">enrichKEGG_run</a></span><span class="op">(</span><span class="va">DEG_df</span>, x <span class="op">=</span> <span class="st">"log2FoldChange"</span>, y <span class="op">=</span> <span class="st">"pvalue"</span>, dir <span class="op">=</span> <span class="va">results_dir</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="gsea" class="section level3">
 <h3 class="hasAnchor">
 <a href="#gsea" class="anchor"></a>GSEA</h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/enrichgesKEGG_run.html">enrichgesKEGG_run</a></span><span class="op">(</span><span class="va">DEG_df</span>, x <span class="op">=</span> <span class="st">"log2FoldChange"</span>, dir <span class="op">=</span> <span class="va">results_dir</span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: org.Hs.eg.db</span>
-<span class="co">#&gt; Loading required package: AnnotationDbi</span>
-<span class="co">#&gt; Loading required package: stats4</span>
-<span class="co">#&gt; Loading required package: BiocGenerics</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'BiocGenerics'</span>
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     IQR, mad, sd, var, xtabs</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     anyDuplicated, append, as.data.frame, basename, cbind, colnames,</span>
-<span class="co">#&gt;     dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,</span>
-<span class="co">#&gt;     grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,</span>
-<span class="co">#&gt;     order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,</span>
-<span class="co">#&gt;     rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,</span>
-<span class="co">#&gt;     union, unique, unsplit, which.max, which.min</span>
-<span class="co">#&gt; Loading required package: Biobase</span>
-<span class="co">#&gt; Welcome to Bioconductor</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     Vignettes contain introductory material; view with</span>
-<span class="co">#&gt;     'browseVignettes()'. To cite Bioconductor, see</span>
-<span class="co">#&gt;     'citation("Biobase")', and for packages 'citation("pkgname")'.</span>
-<span class="co">#&gt; Loading required package: IRanges</span>
-<span class="co">#&gt; Loading required package: S4Vectors</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'S4Vectors'</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     expand.grid, I, unname</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; 'select()' returned 1:many mapping between keys and columns</span>
-<span class="co">#&gt; Warning in bitr(rownames(deg_data), fromType = "SYMBOL", toType = "ENTREZID", :</span>
-<span class="co">#&gt; 22.34% of input gene IDs are fail to map...</span>
-<span class="co">#&gt; Reading KEGG annotation online:</span>
-<span class="co">#&gt; Reading KEGG annotation online:</span>
-<span class="co">#&gt; preparing geneSet collections...</span>
-<span class="co">#&gt; GSEA analysis...</span>
-<span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize, gseaParam, : There are ties in the preranked stats (0.26% of the list).</span>
-<span class="co">#&gt; The order of those tied genes will be arbitrary, which may produce unexpected results.</span>
-<span class="co">#&gt; Warning in fgseaMultilevel(...): For some pathways, in reality P-values are less</span>
-<span class="co">#&gt; than 1e-10. You can set the `eps` argument to zero for better estimation.</span>
-<span class="co">#&gt; leading edge analysis...</span>
-<span class="co">#&gt; done...</span>
-<span class="co">#&gt; Result of enrich_gsekegg stored in test/5-EnrichgseKEGG_test/5-EnrichgseKEGG_gsekegg_result.Rdata</span>
-<span class="co">#&gt; Barplot of enrichgseKEGG ploted in test</span>
-<span class="co">#&gt; Gseplot of enrichgseKEGG ploted in test</span></code></pre></div>
-</div>
-<div id="more" class="section level3">
-<h3 class="hasAnchor">
-<a href="#more" class="anchor"></a>More</h3>
-<p>Firstly load results data from DEG analysis in step 2. For example, a DEG data frame produced by DEGSeq2 and group_list</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">DEG_df</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="op">]</span>
-<span class="co">#&gt;          baseMean log2FoldChange      lfcSE      stat pvalue padj</span>
-<span class="co">#&gt; DHCR24  15710.817       1.997022 0.04245749  47.03580      0    0</span>
-<span class="co">#&gt; CCN1     3372.485      -3.193418 0.07507660 -42.53546      0    0</span>
-<span class="co">#&gt; PPFIA4   1248.142       3.523610 0.08701872  40.49255      0    0</span>
-<span class="co">#&gt; IGFBP5   1669.065       4.210671 0.09077780  46.38436      0    0</span>
-<span class="co">#&gt; BHLHE40  2926.493       3.876095 0.07768120  49.89746      0    0</span>
-<span class="co">#&gt; PFKFB4   4544.589       2.806343 0.05287833  53.07170      0    0</span>
-<span class="co">#&gt; NA             NA             NA         NA        NA     NA   NA</span>
-<span class="co">#&gt; NA.1           NA             NA         NA        NA     NA   NA</span>
-<span class="co">#&gt; NA.2           NA             NA         NA        NA     NA   NA</span>
-<span class="co">#&gt; NA.3           NA             NA         NA        NA     NA   NA</span>
-<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">group_list</span><span class="op">)</span>
-<span class="co">#&gt; group_list</span>
-<span class="co">#&gt; C T </span>
-<span class="co">#&gt; 3 3</span></code></pre></div>
-<p>Up and Down gene should be grouped ahead of Enrichment analysis. A handly function proved in our package</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">DEG_df_g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cut_much.html">cut_much</a></span><span class="op">(</span><span class="va">DEG_df</span>,x <span class="op">=</span> <span class="st">"log2FoldChange"</span>,y <span class="op">=</span> <span class="st">"pvalue"</span>,cut_FC <span class="op">=</span> <span class="fl">2</span>,cut_P <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>
-<span class="co">#&gt; Down 249 </span>
-<span class="co">#&gt; Stable 24046 </span>
-<span class="co">#&gt; Up 657</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/enrichgesKEGG_run.html">enrichgesKEGG_run</a></span><span class="op">(</span><span class="va">DEG_df</span>, x <span class="op">=</span> <span class="st">"log2FoldChange"</span>, dir <span class="op">=</span> <span class="va">results_dir</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
   </div>

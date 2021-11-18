@@ -73,6 +73,9 @@
     <loc>http://xiayh17.top/RNAseqStat/reference/geskegg_barplot.html</loc>
   </url>
   <url>
+    <loc>http://xiayh17.top/RNAseqStat/reference/go_res.html</loc>
+  </url>
+  <url>
     <loc>http://xiayh17.top/RNAseqStat/reference/group_list.html</loc>
   </url>
   <url>
@@ -83,6 +86,9 @@
   </url>
   <url>
     <loc>http://xiayh17.top/RNAseqStat/reference/reexports.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/reference/runAll.html</loc>
   </url>
   <url>
     <loc>http://xiayh17.top/RNAseqStat/reference/run_DESeq2.html</loc>
@@ -97,6 +103,27 @@
     <loc>http://xiayh17.top/RNAseqStat/reference/top_deg.html</loc>
   </url>
   <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/Check_your_data.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/DEG_analysis.html</loc>
+  </url>
+  <url>
     <loc>http://xiayh17.top/RNAseqStat/articles/RNASeq_analysis.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/Visualization.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/go.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/gseKegg.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/kegg.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/tool_sets.html</loc>
   </url>
 </urlset>

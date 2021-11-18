@@ -55,7 +55,28 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/Check_your_data.html">Check_your_data</a>
+    </li>
+    <li>
+      <a href="articles/DEG_analysis.html">DEG_analysis</a>
+    </li>
+    <li>
       <a href="articles/RNASeq_analysis.html">RNASeq_analysis</a>
+    </li>
+    <li>
+      <a href="articles/Visualization.html">Visualization</a>
+    </li>
+    <li>
+      <a href="articles/go.html">GO</a>
+    </li>
+    <li>
+      <a href="articles/gseKegg.html">gseKEGG</a>
+    </li>
+    <li>
+      <a href="articles/kegg.html">KEGG</a>
+    </li>
+    <li>
+      <a href="articles/tool_sets.html">Tool Sets</a>
     </li>
   </ul>
 </li>
@@ -84,7 +105,8 @@
 <a href="#rnaseqstat" class="anchor"></a>RNAseqStat</h1></div>
 <!-- badges: start -->
 
-<p>The goal of RNAseqStat is to …</p>
+<!-- badges: end -->
+<p>The goal of RNAseqStat is a workflow for DEG analysis.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -102,21 +124,30 @@
 <p>This is a basic example which shows you how to solve a common problem:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/xiayh17/RNAseqStat">RNAseqStat</a></span><span class="op">)</span>
+<span class="co">#&gt; </span>
 <span class="co">## basic example code</span></code></pre></div>
-<p>What is special about using <code>README.Rmd</code> instead of just <code>README.md</code>? You can include R chunks like so:</p>
+</div>
+<div id="run-all-in-one-time" class="section level2">
+<h2 class="hasAnchor">
+<a href="#run-all-in-one-time" class="anchor"></a>run all in one time</h2>
+<p><code>runAll</code> will run full workflow in default parameters.</p>
+<p>This include 5 steps:</p>
+<ol>
+<li>Check your data</li>
+<li>DEG analysis</li>
+<li>GO</li>
+<li>KEGG</li>
+<li>GSEA</li>
+</ol>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">cars</span><span class="op">)</span>
-<span class="co">#&gt;      speed           dist       </span>
-<span class="co">#&gt;  Min.   : 4.0   Min.   :  2.00  </span>
-<span class="co">#&gt;  1st Qu.:12.0   1st Qu.: 26.00  </span>
-<span class="co">#&gt;  Median :15.0   Median : 36.00  </span>
-<span class="co">#&gt;  Mean   :15.4   Mean   : 42.98  </span>
-<span class="co">#&gt;  3rd Qu.:19.0   3rd Qu.: 56.00  </span>
-<span class="co">#&gt;  Max.   :25.0   Max.   :120.00</span></code></pre></div>
-<p>You’ll still need to render <code>README.Rmd</code> regularly, to keep <code>README.md</code> up-to-date. <code>devtools::build_readme()</code> is handy for this. You could also use GitHub Actions to re-render <code>README.Rmd</code> every time you push. An example workflow can be found here: <a href="https://github.com/r-lib/actions/tree/master/examples" class="uri">https://github.com/r-lib/actions/tree/master/examples</a>.</p>
-<p>You can also embed plots, for example:</p>
-<p><img src="reference/figures/README-pressure-1.png" width="100%"></p>
-<p>In that case, don’t forget to commit and push the resulting figure files, so they display on GitHub and CRAN.</p>
+<code class="sourceCode R"><span class="fu"><a href="reference/runAll.html">runAll</a></span><span class="op">(</span>count_data <span class="op">=</span> <span class="va">counts_input</span>, group_list <span class="op">=</span> <span class="va">group_list</span>, OrgDb <span class="op">=</span> <span class="st">'org.Hs.eg.db'</span>, dir <span class="op">=</span> <span class="va">results_dir</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="every-step-can-be-run-separately" class="section level2">
+<h2 class="hasAnchor">
+<a href="#every-step-can-be-run-separately" class="anchor"></a>Every step can be run separately.</h2>
+<p>Your can check more in xiayh17.top/rnaseqstat</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xiayh17/Figs@main/uPic/paste-912DEDCA.png" alt="paste-912DEDCA"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xiayh17/Figs@main/uPic/paste-AED756ED.png" alt="paste-AED756ED"></p>
 </div>
 </div>
   </div>
