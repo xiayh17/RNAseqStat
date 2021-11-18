@@ -21,6 +21,16 @@ library(RNAseqStat)
 results_dir = "test"
 ```
 
+## run all in one time
+
+`runAll` will run full workflow in default parameters
+
+```r
+runAll(count_data = counts_input, group_list = group_list, OrgDb = 'org.Hs.eg.db', dir = results_dir)
+```
+
+This step contains following 5 steps, more detail parameters can be set in following functions.
+
 ### Check your data
 
 This step is useful to quickly check you data. dir Can be any wherr you want to save results file.
@@ -57,20 +67,4 @@ enrichKEGG_run(DEG_df, x = "log2FoldChange", y = "pvalue", dir = results_dir)
 
 ```{r}
 enrichgesKEGG_run(DEG_df, x = "log2FoldChange", dir = results_dir)
-```
-
-
-### More
-
-Firstly load results data from DEG analysis in step 2. For example, a DEG data frame produced by DEGSeq2 and group_list
-
-```{r loadData}
-head(DEG_df)[1:10,]
-table(group_list)
-```
-
-Up and Down gene should be grouped ahead of Enrichment analysis. A handly function proved in our package
-
-```{r groupData}
-DEG_df_g <- cut_much(DEG_df,x = "log2FoldChange",y = "pvalue",cut_FC = 2,cut_P = 0.01)
 ```
