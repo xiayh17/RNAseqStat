@@ -11,7 +11,7 @@ enrichgesKEGG_run(
   prefix = "5-EnrichgseKEGG",
   pvalue_cut = 0.1,
   enrichmentScore_cut = 0.5,
-  top = 10,
+  top = -10,
   organism = "hsa",
   keyType = "kegg",
   OrgDb = "org.Hs.eg.db",
@@ -67,6 +67,8 @@ enrichgesKEGG_run(
 \item{seed}{logical}
 
 \item{by}{one of 'fgsea' or 'DOSE'}
+
+\item{...}{more param for ggsave}
 }
 \value{
 a list of file

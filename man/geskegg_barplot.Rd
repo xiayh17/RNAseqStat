@@ -4,7 +4,7 @@
 \alias{geskegg_barplot}
 \title{gseKEGG bar plot}
 \usage{
-geskegg_barplot(data, pvalue_cut = 0.1, enrichmentScore_cut = 0.5, top = 10)
+geskegg_barplot(data, pvalue_cut = 0.1, enrichmentScore_cut = 0.5, top = -10)
 }
 \arguments{
 \item{data}{a enrich_gsekegg result}

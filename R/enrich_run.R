@@ -8,6 +8,7 @@
 #' @param prefix a prefix of file names in this step
 #'
 #' @importFrom utils write.table
+#' @importFrom graphics strwidth
 #'
 #' @return a list result files of GO
 #' @export
@@ -113,7 +114,7 @@ enrichKEGG_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = -10,
                            use_internal_data = FALSE,
                            label = c("Down", "Stable", "Up"),
                            label_ns = "Stable",
-                           mc.cores = 1L,down_label = "Down",...
+                           mc.cores = 1L,down_label = "Down"
                            ) {
 
   if (!fs::dir_exists(dir)) {

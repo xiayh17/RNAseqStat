@@ -65,6 +65,6 @@ enrichKEGG_run(DEG_df, x = "log2FoldChange", y = "pvalue", dir = results_dir)
 
 ### GSEA
 
-```{r}
+```{r eval=FALSE}
 enrichgesKEGG_run(DEG_df, x = "log2FoldChange", dir = results_dir)
 ```

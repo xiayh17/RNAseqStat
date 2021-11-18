@@ -4,7 +4,7 @@
 \alias{kegg_barplot}
 \title{KEGG bar plot}
 \usage{
-kegg_barplot(data, top = 10, down_label = "Down")
+kegg_barplot(data, top = -10, down_label = "Down")
 }
 \arguments{
 \item{data}{a enrich_kegg result, list format contains Up and Down}

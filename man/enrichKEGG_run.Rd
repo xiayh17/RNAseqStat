@@ -10,7 +10,7 @@ enrichKEGG_run(
   y,
   cut_FC = 1,
   cut_P = 0.05,
-  top = 10,
+  top = -10,
   dir = ".",
   prefix = "4-EnrichKEGG",
   organism = "hsa",
@@ -80,6 +80,6 @@ run enrich_kegg and plot results
 \examples{
 \dontrun{
 enrichKEGG_run(deg_data = DEG_df, x = "log2FoldChange", y = "pvalue", cut_FC = 1,
-cut_P = 0.05, top = 10)
+cut_P = 0.05, top = -10)
 }
 }
