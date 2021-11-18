@@ -6,9 +6,10 @@
 <!-- badges: start -->
 
 [![codecov](https://codecov.io/gh/xiayh17/RNAseqStat/branch/master/graph/badge.svg?token=6rlirZDUVo)](https://codecov.io/gh/xiayh17/RNAseqStat)
+
 <!-- badges: end -->
 
-The goal of RNAseqStat is to …
+The goal of RNAseqStat is a workflow for DEG analysis.
 
 ## Installation
 
@@ -32,32 +33,30 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(RNAseqStat)
+#> 
 ## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+## run all in one time
+
+`runAll` will run full workflow in default parameters.
+
+This include 5 steps:
+
+1.  Check your data
+2.  DEG analysis
+3.  GO
+4.  KEGG
+5.  GSEA
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+runAll(count_data = counts_input, group_list = group_list, OrgDb = 'org.Hs.eg.db', dir = results_dir)
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/master/examples>.
+## Every step can be run separately.
 
-You can also embed plots, for example:
+Your can check more in xiayh17.top/rnaseqstat
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+![paste-912DEDCA](https://cdn.jsdelivr.net/gh/xiayh17/Figs@main/uPic/paste-912DEDCA.png)
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+![paste-AED756ED](https://cdn.jsdelivr.net/gh/xiayh17/Figs@main/uPic/paste-AED756ED.png)
