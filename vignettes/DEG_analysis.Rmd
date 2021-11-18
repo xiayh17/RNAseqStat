@@ -1,0 +1,57 @@
+---
+title: "DEG_analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{DEG_analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(RNAseqStat)
+```
+
+## DEG analysis
+
+DEG analysis will be run by limma edgeR and DESeq2 in this step.
+
+```{r eval=FALSE}
+deg_run(counts_input,group_list,test_group = "T", control_group = "C",dir = results_dir)
+```
+
+# Resluts Overview
+```{r include=FALSE}
+fl <- list.files("../dev/example_output/")
+modules <- fl[grep("2-DEG_DEseq2",fl)]
+bitmap_l <- lapply(modules, function(x){
+  pdftools::pdf_render_page(glue::glue("../dev/example_output/{x}"), page = 1, dpi = 300)
+})
+basenames <- gsub(pattern = "\\.pdf$", "", modules)
+names(bitmap_l) <- basenames
+tmp <- lapply(seq_along(bitmap_l), function(x){
+  png::writePNG(bitmap_l[[x]], glue::glue("{names(bitmap_l)[[x]]}.png"))
+})
+```
+
+```{r qc, echo=FALSE, out.width="100%", fig.show='hold', fig.cap='QC'}
+knitr::include_graphics("2-DEG_DEseq2_qc_dispersions.png")
+```
+
+```{r rawvsnorm, echo=FALSE, out.width="100%", fig.show='hold', fig.cap='RAWvsNORM'}
+knitr::include_graphics("2-DEG_DEseq2_RAWvsNORM.png")
+```
+
+```{r top100, echo=FALSE, out.width="100%", fig.show='hold', fig.cap='Top100'}
+knitr::include_graphics("2-DEG_DEseq2_top100_heatmap.png")
+```
+
+```{r volcano, echo=FALSE, out.width="100%", fig.show='hold', fig.cap='Volcano'}
+knitr::include_graphics("2-DEG_DEseq2_volcano.png")
+```

@@ -1,0 +1,57 @@
+---
+title: "Check_your_data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Check_your_data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(RNAseqStat)
+```
+
+## Check your data
+
+This step is useful to quickly check you data. dir Can be any wherr you want to save results file.
+
+```{r eval=FALSE}
+pre_check(counts_data = counts_input, group_list = group_list, dir = results_dir)
+```
+
+# Resluts Overview
+```{r include=FALSE}
+fl <- list.files("../dev/example_output/")
+pre_check <- fl[grep("1-pre_check",fl)]
+bitmap_l <- lapply(pre_check, function(x){
+  pdftools::pdf_render_page(glue::glue("../dev/example_output/{x}"), page = 1, dpi = 300)
+})
+basenames <- gsub(pattern = "\\.pdf$", "", pre_check)
+names(bitmap_l) <- basenames
+tmp <- lapply(seq_along(bitmap_l), function(x){
+  png::writePNG(bitmap_l[[x]], glue::glue("{names(bitmap_l)[[x]]}.png"))
+})
+```
+
+```{r pca, echo=FALSE, out.width="100%", fig.show='hold', fig.cap='PCA'}
+knitr::include_graphics("1-pre_check_all_samples_PCA_by_type.png")
+```
+
+```{r cor_all, echo=FALSE, out.width="100%", fig.show='hold', fig.cap='cor_all'}
+knitr::include_graphics("1-pre_check_cor_all.png")
+```
+
+```{r cor_top500, echo=FALSE, out.width="100%", fig.show='hold', fig.cap='cor_top500'}
+knitr::include_graphics("1-pre_check_cor_top500.png")
+```
+
+```{r cor_top1000, echo=FALSE, out.width="100%", fig.show='hold', fig.cap='cor_top1000'}
+knitr::include_graphics("1-pre_check_heatmap_top1000_sd.png")
+```

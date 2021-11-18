@@ -1,0 +1,29 @@
+---
+title: "Visualization"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Visualization}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(RNAseqStat)
+```
+
+```{r, fig.align='center', fig.width=6, fig.height=8}
+#test <- enrich_go(deg_data = DEG_df, x = "log2FoldChange", y = "pvalue")
+# p <- enhance_barplot(test$Up@result,top=10,split = ONTOLOGY)
+p <- enhance_barplot(go_res,top=10,split = ONTOLOGY)
+grid::grid.newpage()
+grid::grid.draw(p)
+enhance_barplot(go_res,top=30)
+```
+

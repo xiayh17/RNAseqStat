@@ -1,0 +1,45 @@
+---
+title: "gseKEGG"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{gseKEGG}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(RNAseqStat)
+```
+
+# Resluts Overview
+```{r include=FALSE}
+fl <- list.files("../dev/example_output/")
+modules <- fl[grep("5-Enrich.*.pdf",fl)]
+bitmap_l <- lapply(modules, function(x){
+  pdftools::pdf_render_page(glue::glue("../dev/example_output/{x}"), page = 1, dpi = 300)
+})
+basenames <- gsub(pattern = "\\.pdf$", "", modules)
+names(bitmap_l) <- basenames
+tmp <- lapply(seq_along(bitmap_l), function(x){
+  png::writePNG(bitmap_l[[x]], glue::glue("{names(bitmap_l)[[x]]}.png"))
+})
+```
+
+```{r barplot, echo=FALSE, out.width="100%", fig.show='hold', fig.cap='Barplot'}
+knitr::include_graphics("5-EnrichgseKEGG_gseKEGG_barplot.png")
+```
+
+```{r up, echo=FALSE, out.width="100%", fig.show='hold', fig.cap='Up GSEplot'}
+knitr::include_graphics("5-EnrichgseKEGG_gseKEGG_up_gseplot.png")
+```
+
+```{r down, echo=FALSE, out.width="100%", fig.show='hold', fig.cap='Down GSEplot'}
+knitr::include_graphics("5-EnrichgseKEGG_gseKEGG_down_gseplot.png")
+```

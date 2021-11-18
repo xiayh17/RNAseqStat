@@ -1,0 +1,27 @@
+---
+title: "Tool Sets"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tool Sets}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(RNAseqStat)
+```
+
+### More tools for you
+
+Up and Down gene should be grouped ahead of Enrichment analysis. A handly function proved in our package
+
+```{r groupData}
+DEG_df_g <- cut_much(DEG_df,x = "log2FoldChange",y = "pvalue",cut_FC = 2,cut_P = 0.01)
+```

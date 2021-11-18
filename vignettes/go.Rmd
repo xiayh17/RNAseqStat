@@ -1,0 +1,54 @@
+---
+title: "GO"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{GO}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(RNAseqStat)
+```
+
+## GO
+
+Enrichment analysis of GO will be done in this Step.
+
+```{r eval=FALSE}
+enrichGO_run(DEG_df, x = "log2FoldChange", y = "pvalue", dir = results_dir)
+```
+
+# Resluts Overview
+```{r include=FALSE}
+fl <- list.files("../dev/example_output/")
+modules <- fl[grep("3-EnrichGO.*.pdf",fl)]
+bitmap_l <- lapply(modules, function(x){
+  pdftools::pdf_render_page(glue::glue("../dev/example_output/{x}"), page = 1, dpi = 300)
+})
+basenames <- gsub(pattern = "\\.pdf$", "", modules)
+names(bitmap_l) <- basenames
+tmp <- lapply(seq_along(bitmap_l), function(x){
+  png::writePNG(bitmap_l[[x]], glue::glue("{names(bitmap_l)[[x]]}.png"))
+})
+```
+
+```{r up, echo=FALSE, out.width="100%", fig.show='hold', fig.cap='Up'}
+knitr::include_graphics("3-EnrichGO_barplot-gene_Up_GO_enrichment.png")
+```
+
+```{r down, echo=FALSE, out.width="100%", fig.show='hold', fig.cap='Down'}
+knitr::include_graphics("3-EnrichGO_barplot-gene_Down_GO_enrichment.png")
+```
+
+```{r diff, echo=FALSE, out.width="100%", fig.show='hold', fig.cap='Diff(Up+Down)'}
+knitr::include_graphics("3-EnrichGO_barplot-gene_diff_GO_enrichment.png")
+```
+
