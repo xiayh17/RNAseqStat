@@ -155,7 +155,6 @@ enrichKEGG_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = -10,
 #'
 #' @param dir where to save results files
 #' @param prefix a prefix of file names in this step
-#' @param ... more param for ggsave
 #' @inheritParams enrich_gsekegg
 #' @inheritParams geskegg_barplot
 #'
