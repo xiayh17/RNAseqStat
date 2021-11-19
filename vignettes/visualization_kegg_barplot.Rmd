@@ -1,0 +1,27 @@
+---
+title: "visualization_kegg_barplot"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{visualization_kegg_barplot}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(RNAseqStat)
+```
+
+An `DOSE::enrichResult-class` will produced by `clusterProfiler::enrichKEGG` or `RNAseqStat::enrich_kegg`. `RNAseqStat::kegg_barplot` make a barplot from `enrichResult`. 
+
+```{r kegg_barplot}
+test <- enrich_kegg(deg_data = DEG_df, x = "log2FoldChange", y = "pvalue")
+kegg_barplot(test)
+```
+

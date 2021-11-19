@@ -1,0 +1,26 @@
+---
+title: "tools_topDEG"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{tools_topDEG}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(RNAseqStat)
+```
+
+For example, if top = 50, head 50 and tail 50 will return from a ordered DEG data frame after filtering by threshold value of P value
+
+```{r}
+top_deg(deg_data, x, y, top, cut_P = 0.05)
+```
+

@@ -1,0 +1,27 @@
+---
+title: "visualization_deg_heatmap"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{visualization_deg_heatmap}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(RNAseqStat)
+```
+
+`RNAseqStat::enhance_heatmap` need counts data, group info, and DEG data frame. A heatmap of top deg genes. Plot will store in a pdf file or show in plot window when `dir = NA`.
+
+```{r, fig.align='center', fig.width=6, fig.height=14}
+enhance_heatmap(counts_input, DEG_df, group_list,
+    x = "log2FoldChange", y = "pvalue", dir = NA)
+```
+

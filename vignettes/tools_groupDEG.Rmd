@@ -1,8 +1,8 @@
 ---
-title: "Tool Sets"
+title: "Tool_for_group_DEG"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Tool Sets}
+  %\VignetteIndexEntry{Tool_for_group_DEG}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

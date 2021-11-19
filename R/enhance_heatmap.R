@@ -28,6 +28,12 @@ enhance_heatmap <- function(counts_data, deg_data, group_list, x, y, top = 50, c
 
   choose_gene <- top_deg(deg_data,x = x, y = y, top = top, cut_P = cut_P)
 
+  if (is.na(dir)) {
+    filename = NA
+  } else {
+    filename = glue('{dir}/{prefix}_top{top*2}_heatmap.pdf')
+  }
+
   exprSet=log(edgeR::cpm(counts_data)+1)
   choose_matrix=exprSet[choose_gene,]
   choose_matrix=t(scale(t(choose_matrix)))
@@ -41,7 +47,7 @@ enhance_heatmap <- function(counts_data, deg_data, group_list, x, y, top = 50, c
            width = (ncol(choose_matrix)*0.3+2.2) *2,
            height = 550/100*3,
            annotation_colors = list(Groups = palette),
-           filename = glue('{dir}/{prefix}_top100_heatmap.pdf'))
+           filename = filename)
 }
 
 

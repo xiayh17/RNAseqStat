@@ -1,0 +1,27 @@
+---
+title: "visualization_gseplot"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{visualization_gseplot}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(RNAseqStat)
+```
+
+An `DOSE::gseaResult-class` will produced by `clusterProfiler::gseKEGG` or `RNAseqStat::enrich_gsekegg`. `RNAseqStat::enhance_gseplot` make a GSE plot from `gseaResult`. 
+
+```{r enhance_gseplot}
+gsekegg_res <- enrich_gsekegg(DEG_df,x = "log2FoldChange")
+plots_l <- enhance_gseplot(gsekegg_res)
+```
+

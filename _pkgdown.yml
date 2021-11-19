@@ -40,12 +40,24 @@ navbar:
           href: articles/gseKegg.html
         - text: -------
         - text: Visualizations
-        - text: "Visualization"
-          href: articles/Visualization.html
+        - text: "Visualization DEG Volcano"
+          href: articles/visualization_deg_volcano.html
+        - text: "Visualization DEG Heatmap"
+          href: articles/visualization_deg_heatmap.html
+        - text: "Visualization GO Barplot"
+          href: articles/visualization_go_barplot.html
+        - text: "Visualization KEGG Barplot"
+          href: articles/visualization_kegg_barplot.html
+        - text: "Visualization gseKEGG Barplot"
+          href: articles/visualization_gsekegg_barplot.html
+        - text: "Visualization GSE plot"
+          href: articles/visualization_gseplot.html
         - text: -------
         - text: Tools
-        - text: "Tool Sets"
-          href: articles/tool_sets.html
+        - text: "Group DEG"
+          href: articles/tools_groupDEG.html
+        - text: "Choose top DEG"
+          href: articles/tools_topDEG.html
 
 reference:
 

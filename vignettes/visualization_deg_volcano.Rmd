@@ -1,0 +1,26 @@
+---
+title: "visualization_deg_volcano"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{visualization_deg_volcano}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(RNAseqStat)
+```
+
+`RNAseqStat::enhance_volcano` can make a volcano from DEG data frame which contains log Fold Change and P value.
+
+```{r enhance_volcano}
+enhance_volcano(DEG_df,x = 'log2FoldChange', y = 'pvalue')
+```
+

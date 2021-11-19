@@ -1,8 +1,8 @@
 ---
-title: "Visualization"
+title: "visualization_go_barplot"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Visualization}
+  %\VignetteIndexEntry{visualization_go_barplot}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -18,6 +18,8 @@ knitr::opts_chunk$set(
 library(RNAseqStat)
 ```
 
+An `DOSE::enrichResult-class` will contains a data frame in result slot. `RNAseqStat::enhance_barplot` can make a plot from this data frame.
+
 ```{r, fig.align='center', fig.width=6, fig.height=8}
 #test <- enrich_go(deg_data = DEG_df, x = "log2FoldChange", y = "pvalue")
 # p <- enhance_barplot(test$Up@result,top=10,split = ONTOLOGY)
@@ -26,4 +28,3 @@ grid::grid.newpage()
 grid::grid.draw(p)
 enhance_barplot(go_res,top=30)
 ```
-
