@@ -21,6 +21,6 @@ library(RNAseqStat)
 For example, if top = 50, head 50 and tail 50 will return from a ordered DEG data frame after filtering by threshold value of P value
 
 ```{r}
-top_deg(deg_data, x, y, top, cut_P = 0.05)
+top_deg(DEG_df,x = "log2FoldChange",y = "pvalue", top ＝ 10, cut_P = 0.05)
 ```
 
