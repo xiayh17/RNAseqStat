@@ -1,2 +1,110 @@
 url: http://xiayh17.top/RNAseqStat
 
+development:
+  mode: auto
+
+template:
+  params:
+    bootswatch: cosmo
+    ganalytics: G-PMYT07QDM3
+
+authors:
+  Jianming Zeng:
+    href: https://github.com/jmzeng1314
+  Yonghe Xia:
+    href: https://github.com/xiayh17
+  Biotrainee group:
+    href: https://wemp.app/accounts/9b0e20f5-631b-40f3-8f16-4bdb30bc9753
+
+navbar:
+  title: RNAseqStat
+  left:
+    - icon: fa-home
+      href: index.html
+    - text: Functions and data
+      icon: fa-code
+      href: reference/index.html
+    - text: "Guide"
+      icon: paper-plane
+      menu:
+        - text: Workflow
+        - text: "1. Check your data"
+          href: articles/Check_your_data.html
+        - text: "2. DEG analysis"
+          href: articles/DEG_analysis.html
+        - text: "3. GO"
+          href: articles/go.html
+        - text: "4. KEGG"
+          href: articles/kegg.html
+        - text: "5. gseKEGG"
+          href: articles/gseKegg.html
+        - text: -------
+        - text: Visualizations
+        - text: "Visualization"
+          href: articles/Visualization.html
+        - text: -------
+        - text: Tools
+        - text: "Tool Sets"
+          href: articles/tool_sets.html
+
+reference:
+
+  - title: run
+    desc: Function for running the full workflow in one step
+    contents:
+    - runAll
+
+  - title: Pre Check
+    desc: Function for checking your data
+    contents:
+    - pre_check
+
+  - title: DEG Analysis
+    desc: Functions for DEG analysis by limma edgeR and DESeq2
+    contents:
+    - DEG_container-class
+    - starts_with("deg")
+    - run_DESeq2
+    - run_edgeR
+    - run_limma
+
+  - title: GO
+    desc: Functions for enrichment analysis of GO
+    contents:
+    - enrichGO_run
+    - enrich_go
+    - enhance_enrichGO
+    - enhance_enricher_internal
+
+  - title: KEGG
+    desc: Functions for enrichment analysis of KEGG
+    contents:
+    - enrichKEGG_run
+    - enrich_kegg
+
+  - title: gseKEGG
+    desc: Functions for enrichment analysis of gseKEGG
+    contents:
+    - enrichgesKEGG_run
+    - enrich_gsekegg
+
+  - title: Visualizations
+    desc: Functions for Visualizations
+    contents:
+    - contains("plot")
+    - enhance_heatmap
+    - enhance_volcano
+
+  - title: Tools
+    desc: Functions for data processing
+    contents:
+    - cut_much
+    - top_deg
+
+  - title: Example Data
+    desc: Some sample data
+    contents:
+    - counts_input
+    - go_res
+    - group_list
+    - DEG_df
