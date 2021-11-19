@@ -11,6 +11,8 @@
 
 The goal of RNAseqStat is a workflow for DEG analysis.
 
+![RNAseqStat](https://cdn.jsdelivr.net/gh/xiayh17/Figs@main/uPic/RNAseqStat.png)
+
 ## Installation
 
 You can install the released version of RNAseqStat from
@@ -55,7 +57,7 @@ runAll(count_data = counts_input, group_list = group_list, OrgDb = 'org.Hs.eg.db
 
 ## Every step can be run separately.
 
-Your can check more in https://xiayh17.top/RNAseqStat/
+Your can check more in xiayh17.top/rnaseqstat
 
 ![paste-912DEDCA](https://cdn.jsdelivr.net/gh/xiayh17/Figs@main/uPic/paste-912DEDCA.png)
 
