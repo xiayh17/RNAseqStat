@@ -11,7 +11,7 @@
 
 The goal of RNAseqStat is a workflow for DEG analysis.
 
-![RNAseqStat](https://cdn.jsdelivr.net/gh/xiayh17/Figs@main/uPic/RNAseqStat.png)
+![RNAseqStat2](https://cdn.jsdelivr.net/gh/xiayh17/Figs@main/uPic/RNAseqStat2.png)
 
 ## Installation
 
