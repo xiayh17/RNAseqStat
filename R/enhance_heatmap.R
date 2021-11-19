@@ -45,7 +45,7 @@ enhance_heatmap <- function(counts_data, deg_data, group_list, x, y, top = 50, c
   pheatmap(choose_matrix,
            annotation_col = colD,fontsize = 12,
            width = (ncol(choose_matrix)*0.3+2.2) *2,
-           height = 550/100*3,
+           height = 550/100*3*nrow(choose_matrix)/100,
            annotation_colors = list(Groups = palette),
            filename = filename)
 }
