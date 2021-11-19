@@ -55,7 +55,7 @@ runAll(count_data = counts_input, group_list = group_list, OrgDb = 'org.Hs.eg.db
 
 ## Every step can be run separately.
 
-Your can check more in xiayh17.top/rnaseqstat
+Your can check more in https://xiayh17.top/RNAseqStat/
 
 ![paste-912DEDCA](https://cdn.jsdelivr.net/gh/xiayh17/Figs@main/uPic/paste-912DEDCA.png)
 
