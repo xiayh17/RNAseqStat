@@ -2,7 +2,7 @@
 title: "RNASeq_analysis"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{enrichment_analysis}
+  %\VignetteIndexEntry{RNASeq_analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
