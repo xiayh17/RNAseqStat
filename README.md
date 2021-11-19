@@ -4,7 +4,7 @@
 # RNAseqStat
 
 <!-- badges: start -->
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1d7e5456-6648-4dde-a9d5-080cdf966ef3/deploy-status)](https://app.netlify.com/sites/cocky-shaw-501f45/deploys)
 [![codecov](https://codecov.io/gh/xiayh17/RNAseqStat/branch/master/graph/badge.svg?token=6rlirZDUVo)](https://codecov.io/gh/xiayh17/RNAseqStat)
 
 <!-- badges: end -->
