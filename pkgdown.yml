@@ -5,12 +5,18 @@ articles:
   Check_your_data: Check_your_data.html
   DEG_analysis: DEG_analysis.html
   RNASeq_analysis: RNASeq_analysis.html
-  Visualization: Visualization.html
   go: go.html
   gseKegg: gseKegg.html
   kegg: kegg.html
-  tool_sets: tool_sets.html
-last_built: 2021-11-19T03:56Z
+  tools_groupDEG: tools_groupDEG.html
+  tools_topDEG: tools_topDEG.html
+  visualization_deg_heatmap: visualization_deg_heatmap.html
+  visualization_deg_volcano: visualization_deg_volcano.html
+  visualization_go_barplot: visualization_go_barplot.html
+  visualization_gsekegg_barplot: visualization_gsekegg_barplot.html
+  visualization_gseplot: visualization_gseplot.html
+  visualization_kegg_barplot: visualization_kegg_barplot.html
+last_built: 2021-11-19T06:05Z
 urls:
   reference: http://xiayh17.top/RNAseqStat/reference
   article: http://xiayh17.top/RNAseqStat/articles
