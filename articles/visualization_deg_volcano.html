@@ -151,7 +151,25 @@
 <span class="co">#&gt; Down 275 </span>
 <span class="co">#&gt; Stable 24015 </span>
 <span class="co">#&gt; Up 662</span></code></pre></div>
-<p><img src="visualization_deg_volcano_files/figure-html/enhance_volcano-1.png" width="700"></p>
+<p><img src="visualization_deg_volcano_files/figure-html/enhance_volcano-1.png" width="700"> Show more top genes.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/enhance_volcano.html">enhance_volcano</a></span><span class="op">(</span><span class="va">DEG_df</span>,x <span class="op">=</span> <span class="st">'log2FoldChange'</span>, y <span class="op">=</span> <span class="st">'pvalue'</span>,top <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
+<span class="co">#&gt; Down 275 </span>
+<span class="co">#&gt; Stable 24015 </span>
+<span class="co">#&gt; Up 662</span>
+<span class="co">#&gt; Warning: ggrepel: 3 unlabeled data points (too many overlaps). Consider</span>
+<span class="co">#&gt; increasing max.overlaps</span>
+
+<span class="co">#&gt; Warning: ggrepel: 3 unlabeled data points (too many overlaps). Consider</span>
+<span class="co">#&gt; increasing max.overlaps</span></code></pre></div>
+<p><img src="visualization_deg_volcano_files/figure-html/enhance_volcano_top-1.png" width="700"></p>
+<p>highlight special gene</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/enhance_volcano.html">enhance_volcano</a></span><span class="op">(</span><span class="va">DEG_df</span>,x <span class="op">=</span> <span class="st">'log2FoldChange'</span>, y <span class="op">=</span> <span class="st">'pvalue'</span>, highlight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"KRT80"</span>,<span class="st">"ALPP"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Down 275 </span>
+<span class="co">#&gt; Stable 24015 </span>
+<span class="co">#&gt; Up 662</span></code></pre></div>
+<p><img src="visualization_deg_volcano_files/figure-html/enhance_volcano_high-1.png" width="700"></p>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
