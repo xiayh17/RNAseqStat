@@ -23,4 +23,14 @@ library(RNAseqStat)
 ```{r enhance_volcano}
 enhance_volcano(DEG_df,x = 'log2FoldChange', y = 'pvalue')
 ```
+Show more top genes.
 
+```{r enhance_volcano_top}
+enhance_volcano(DEG_df,x = 'log2FoldChange', y = 'pvalue',top = 20)
+```
+
+highlight special gene
+
+```{r enhance_volcano_high}
+enhance_volcano(DEG_df,x = 'log2FoldChange', y = 'pvalue', highlight = c("KRT80","ALPP"))
+```

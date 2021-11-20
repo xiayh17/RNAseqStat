@@ -46,7 +46,7 @@ enhance_volcano <- function(deg_data,x, y,
 
   plot <- enhance_volcano_plot(deg_data_g,x = x, y = y, label = label, cut_FC = cut_FC, cut_P = cut_P)
   #
-  if (any(is.null(genes_list),is.null(highlight))) {
+  if (any(!is.null(genes_list),!is.null(highlight))) {
     plot <- show_genes(deg_data_g, x = x, y = y, genes_list, highlight,plot,size,expand)
   }
   #
