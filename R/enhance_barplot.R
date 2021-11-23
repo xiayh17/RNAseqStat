@@ -36,7 +36,9 @@ enhance_barplot <- function(data, split, top = 10,
   if (missing(split)){
     dat <- data %>%
       mutate(Description = fct_reorder(.data$Description,.data$Count)) %>%
-      top_n({{ top }}) %>%
+      arrange(desc(Count),desc(-pvalue),desc(-p.adjust),desc(-qvalue)) %>%
+      mutate(rank=cumsum(!duplicated(.))) %>%
+      filter(rank<={{top}}) %>%
       mutate(myY = as.numeric(.data$Description))
 
     p <- barplot_base2(dat, bar_color = bar_color, text_color = split_color[[1]])
@@ -47,7 +49,9 @@ enhance_barplot <- function(data, split, top = 10,
     dat <- data %>%
       group_by({{ split }}) %>%
       mutate(Description = fct_reorder(Description,Count)) %>%
-      top_n({{ top }}) %>%
+      arrange(desc(Count),desc(-pvalue),desc(-p.adjust),desc(-qvalue)) %>%
+      mutate(rank=cumsum(!duplicated(.))) %>%
+      filter(rank<={{top}}) %>%
       mutate(myY = as.numeric(Description))
 
     p <- barplot_base(dat, bar_color = bar_color, split_color = split_color)
