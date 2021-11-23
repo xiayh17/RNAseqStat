@@ -67,8 +67,6 @@ enrichgesKEGG_run(
 \item{seed}{logical}
 
 \item{by}{one of 'fgsea' or 'DOSE'}
-
-\item{...}{more param for ggsave}
 }
 \value{
 a list of file
