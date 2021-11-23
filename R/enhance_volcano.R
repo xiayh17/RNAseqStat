@@ -33,6 +33,12 @@ enhance_volcano <- function(deg_data,x, y,
                             cut_FC = "auto", cut_P = 0.05, top = 10,size = 2.0,expand=c(0.25,0.25),
                             genes_list = "top", highlight = NULL) {
 
+  if (!x %in% colnames(deg_data)) stop("x must be a character belongs to column names of deg_data")
+
+  if (!y %in% colnames(deg_data)) stop("y must be a character belongs to column names of deg_data")
+
+  if (!label_ns %in% label) stop("label_ns must be one of label")
+
   if (cut_FC == "auto") {
     cut_FC = mean(abs(deg_data[,x])) + 2*sd(abs(deg_data[,x]))
   }
