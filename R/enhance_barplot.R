@@ -12,7 +12,7 @@
 #' @param print logic for print plot
 #'
 #' @importFrom RColorBrewer brewer.pal
-#' @importFrom dplyr mutate top_n group_by
+#' @importFrom dplyr mutate desc group_by arrange filter
 #' @importFrom forcats fct_reorder
 #' @importFrom ggfun element_roundrect
 #' @importFrom grid grid.draw
@@ -38,7 +38,7 @@ enhance_barplot <- function(data, split, top = 10,
       mutate(Description = fct_reorder(.data$Description,.data$Count)) %>%
       arrange(desc(Count),desc(-pvalue),desc(-p.adjust),desc(-qvalue)) %>%
       mutate(rank=cumsum(!duplicated(.))) %>%
-      filter(rank<={{top}}) %>%
+      dplyr::filter(rank<={{top}}) %>%
       mutate(myY = as.numeric(.data$Description))
 
     p <- barplot_base2(dat, bar_color = bar_color, text_color = split_color[[1]])
@@ -51,7 +51,7 @@ enhance_barplot <- function(data, split, top = 10,
       mutate(Description = fct_reorder(Description,Count)) %>%
       arrange(desc(Count),desc(-pvalue),desc(-p.adjust),desc(-qvalue)) %>%
       mutate(rank=cumsum(!duplicated(.))) %>%
-      filter(rank<={{top}}) %>%
+      dplyr::filter(rank<={{top}}) %>%
       mutate(myY = as.numeric(Description))
 
     p <- barplot_base(dat, bar_color = bar_color, split_color = split_color)
