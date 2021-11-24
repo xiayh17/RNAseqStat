@@ -145,18 +145,16 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/xiayh17/RNAseqStat">RNAseqStat</a></span><span class="op">)</span>
 <span class="co">#&gt; </span></code></pre></div>
-<p>An <code>DOSE::enrichResult-class</code> will contains a data frame in result slot. <code><a href="../reference/enhance_barplot.html">RNAseqStat::enhance_barplot</a></code> can make a plot from this data frame.</p>
+<p>An <code>DOSE::enrichResult-class</code> will contains a data frame in result slot. <code><a href="../reference/enhance_barplot.html">RNAseqStat::enhance_barplot</a></code> can make a plot from this data frame or enrichResult.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#test &lt;- enrich_go(deg_data = DEG_df, x = "log2FoldChange", y = "pvalue")</span>
-<span class="co"># p &lt;- enhance_barplot(test$Up@result,top=10,split = ONTOLOGY)</span>
-<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/enhance_barplot.html">enhance_barplot</a></span><span class="op">(</span><span class="va">go_res</span>,top<span class="op">=</span><span class="fl">10</span>,split <span class="op">=</span> <span class="va">ONTOLOGY</span><span class="op">)</span>
-<span class="co">#&gt; Selecting by Count</span>
+<span class="co"># p &lt;- enhance_barplot(test$Up,showCategory=10,split = "ONTOLOGY")</span>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/enhance_barplot.html">enhance_barplot</a></span><span class="op">(</span><span class="va">go_res</span>,showCategory<span class="op">=</span><span class="fl">10</span>,split <span class="op">=</span> <span class="st">"ONTOLOGY"</span><span class="op">)</span>
 <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></code></pre></div>
 <p><img src="visualization_go_barplot_files/figure-html/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/enhance_barplot.html">enhance_barplot</a></span><span class="op">(</span><span class="va">go_res</span>,top<span class="op">=</span><span class="fl">30</span><span class="op">)</span>
-<span class="co">#&gt; Selecting by Count</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/enhance_barplot.html">enhance_barplot</a></span><span class="op">(</span><span class="va">go_res</span>,showCategory<span class="op">=</span><span class="fl">30</span><span class="op">)</span></code></pre></div>
 <p><img src="visualization_go_barplot_files/figure-html/unnamed-chunk-2-2.png" width="576" style="display: block; margin: auto;"></p>
   </div>
 

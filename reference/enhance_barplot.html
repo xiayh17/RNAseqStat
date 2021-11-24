@@ -188,8 +188,11 @@
 
     <pre class="usage"><span class='fu'>enhance_barplot</span><span class='op'>(</span>
   <span class='va'>data</span>,
-  <span class='va'>split</span>,
-  top <span class='op'>=</span> <span class='fl'>10</span>,
+  showCategory <span class='op'>=</span> <span class='fl'>10</span>,
+  by <span class='op'>=</span> <span class='st'>"Count"</span>,
+  split <span class='op'>=</span> <span class='cn'>NULL</span>,
+  order <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  drop <span class='op'>=</span> <span class='cn'>FALSE</span>,
   fillstrip <span class='op'>=</span> <span class='cn'>TRUE</span>,
   print <span class='op'>=</span> <span class='cn'>FALSE</span>,
   split_color <span class='op'>=</span> <span class='fu'>RColorBrewer</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html'>brewer.pal</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='st'>"Dark2"</span><span class='op'>)</span>,
@@ -201,15 +204,27 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>a data frame of enrichGO result</p></td>
+      <td><p>'enrichResult' object, enrichGO result</p></td>
+    </tr>
+    <tr>
+      <th>showCategory</th>
+      <td><p>Category numbers to show</p></td>
+    </tr>
+    <tr>
+      <th>by</th>
+      <td><p>one of Count and GeneRatio</p></td>
     </tr>
     <tr>
       <th>split</th>
-      <td><p>if enrichGO ALL, split by ONTOLOGY is useful</p></td>
+      <td><p>separate result by 'split' variable</p></td>
     </tr>
     <tr>
-      <th>top</th>
-      <td><p>filter top rows by Count</p></td>
+      <th>order</th>
+      <td><p>logical</p></td>
+    </tr>
+    <tr>
+      <th>drop</th>
+      <td><p>logical</p></td>
     </tr>
     <tr>
       <th>fillstrip</th>
@@ -236,8 +251,8 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span class='r-in'><span class='va'>test</span> <span class='op'>&lt;-</span> <span class='fu'><a href='enrich_go.html'>enrich_go</a></span><span class='op'>(</span>deg_data <span class='op'>=</span> <span class='va'>DEG_df</span>, x <span class='op'>=</span> <span class='st'>"log2FoldChange"</span>, y <span class='op'>=</span> <span class='st'>"pvalue"</span><span class='op'>)</span></span>
-<span class='r-in'><span class='fu'>enhance_barplot</span><span class='op'>(</span><span class='va'>test</span><span class='op'>$</span><span class='va'>Down</span><span class='op'>@</span><span class='va'>result</span>,top<span class='op'>=</span><span class='fl'>10</span>,split <span class='op'>=</span> <span class='va'>ONTOLOGY</span><span class='op'>)</span></span>
-<span class='r-in'><span class='fu'>enhance_barplot</span><span class='op'>(</span><span class='va'>test</span><span class='op'>$</span><span class='va'>Down</span><span class='op'>@</span><span class='va'>result</span>,top<span class='op'>=</span><span class='fl'>30</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>enhance_barplot</span><span class='op'>(</span><span class='va'>test</span><span class='op'>$</span><span class='va'>Down</span>,showCategory<span class='op'>=</span><span class='fl'>10</span>,split <span class='op'>=</span> <span class='st'>"ONTOLOGY"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>enhance_barplot</span><span class='op'>(</span><span class='va'>test</span><span class='op'>$</span><span class='va'>Down</span>,showCategory<span class='op'>=</span><span class='fl'>30</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>
 </pre>
   </div>
