@@ -22,9 +22,9 @@ An `DOSE::enrichResult-class` will contains a data frame in result slot. `RNAseq
 
 ```{r, fig.align='center', fig.width=6, fig.height=8}
 #test <- enrich_go(deg_data = DEG_df, x = "log2FoldChange", y = "pvalue")
-# p <- enhance_barplot(test$Up@result,top=10,split = ONTOLOGY)
-p <- enhance_barplot(go_res,top=10,split = ONTOLOGY)
+# p <- enhance_barplot(test$Up,showCategory=10,split = "ONTOLOGY")
+p <- enhance_barplot(go_res,showCategory=10,split = "ONTOLOGY")
 grid::grid.newpage()
 grid::grid.draw(p)
-enhance_barplot(go_res,top=30)
+enhance_barplot(go_res,showCategory=30)
 ```

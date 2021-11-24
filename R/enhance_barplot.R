@@ -3,17 +3,18 @@
 #'
 #' plot enrich result in bar plot
 #'
-#' @param data a data frame of enrichGO result
-#' @param split if enrichGO ALL, split by ONTOLOGY is useful
-#' @param top filter top rows by Count
+#' @param data 'enrichResult' object, enrichGO result
 #' @param fillstrip fill strip rect or not
 #' @param split_color color for CC, MF, and BP
 #' @param bar_color color for bar
 #' @param print logic for print plot
+#' @param showCategory Category numbers to show
+#' @param by one of Count and GeneRatio
+#' @param order logical
+#' @param drop logical
+#' @param split separate result by 'split' variable
 #'
 #' @importFrom RColorBrewer brewer.pal
-#' @importFrom dplyr mutate desc group_by arrange filter
-#' @importFrom forcats fct_reorder
 #' @importFrom ggfun element_roundrect
 #' @importFrom grid grid.draw
 #'
@@ -23,10 +24,12 @@
 #' @examples
 #' \dontrun{
 #' test <- enrich_go(deg_data = DEG_df, x = "log2FoldChange", y = "pvalue")
-#' enhance_barplot(test$Down@result,top=10,split = ONTOLOGY)
-#' enhance_barplot(test$Down@result,top=30)
+#' enhance_barplot(test$Down,showCategory=10,split = "ONTOLOGY")
+#' enhance_barplot(test$Down,showCategory=30)
 #' }
-enhance_barplot <- function(data, split, top = 10,
+enhance_barplot <- function(data, showCategory = 10,by = "Count",split=NULL,
+                            order = FALSE,
+                            drop = FALSE,
                             fillstrip = TRUE,
                             print = FALSE,
                             split_color = RColorBrewer::brewer.pal(3,"Dark2"),
@@ -34,31 +37,23 @@ enhance_barplot <- function(data, split, top = 10,
                             ) {
 
   if (missing(split)){
-    dat <- data %>%
-      mutate(Description = fct_reorder(.data$Description,.data$Count)) %>%
-      arrange(desc(Count),desc(-pvalue),desc(-p.adjust),desc(-qvalue)) %>%
-      mutate(rank=cumsum(!duplicated(.))) %>%
-      dplyr::filter(rank<={{top}}) %>%
-      mutate(myY = as.numeric(.data$Description))
+    dat <- fortify.enrichResult(model = data, showCategory = showCategory, by = by, order = order, drop = drop) %>%
+      sort_goTerms(by=by,split = split)
 
     p <- barplot_base2(dat, bar_color = bar_color, text_color = split_color[[1]])
 
     return(p)
 
   } else {
-    dat <- data %>%
-      group_by({{ split }}) %>%
-      mutate(Description = fct_reorder(Description,Count)) %>%
-      arrange(desc(Count),desc(-pvalue),desc(-p.adjust),desc(-qvalue)) %>%
-      mutate(rank=cumsum(!duplicated(.))) %>%
-      dplyr::filter(rank<={{top}}) %>%
-      mutate(myY = as.numeric(Description))
+    dat <- fortify.enrichResult(model = data, showCategory = showCategory, by = by, order = order, drop = drop, split = split) %>%
+      sort_goTerms(by=by,split = split)
 
     p <- barplot_base(dat, bar_color = bar_color, split_color = split_color)
     p <- p +
-      facet_grid(ONTOLOGY~., scales="free", switch="both") +
-      theme(strip.background=element_roundrect(fill=NA, color=NA, r=0.31415,size = 0.5,linetype = "dotted"),
-            legend.background = element_roundrect(fill=NA, color="grey80", r=0.31415,size = 0.5,linetype = "solid"))
+      facet_grid(ONTOLOGY~., scales="free", space="free_y", switch = "both") +
+      theme(strip.background=element_roundrect(fill=NA, color=NA, r=0.31415,size = 0.5,linetype = "dotted")
+            # ,legend.background = element_roundrect(fill=NA, color="grey80", r=0.31415,size = 0.5,linetype = "solid")
+            )
 
     g <- ggplot_gtable(ggplot_build(p))
     strip_both <- which(grepl('strip-', g$layout$name))
@@ -343,3 +338,19 @@ geskegg_barplot <- function(data, pvalue_cut = 0.1, enrichmentScore_cut = 0.5, t
 
 }
 
+fortify.enrichResult <- enrichplot:::fortify.enrichResult
+
+sort_goTerms <- function(data,split,by) {
+  if (is.null(split)) {
+    data <- data[
+      order( data[,by], decreasing = FALSE),
+    ]
+  } else {
+    data <- data[
+      order( data[,split], data[,by], decreasing = FALSE),
+    ]
+  }
+  data$Description <- factor(data$Description,levels = data$Description)
+  data$myY <- as.numeric(data$Description)
+  return(data)
+}

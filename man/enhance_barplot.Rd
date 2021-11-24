@@ -6,8 +6,11 @@
 \usage{
 enhance_barplot(
   data,
-  split,
-  top = 10,
+  showCategory = 10,
+  by = "Count",
+  split = NULL,
+  order = FALSE,
+  drop = FALSE,
   fillstrip = TRUE,
   print = FALSE,
   split_color = RColorBrewer::brewer.pal(3, "Dark2"),
@@ -15,11 +18,17 @@ enhance_barplot(
 )
 }
 \arguments{
-\item{data}{a data frame of enrichGO result}
+\item{data}{'enrichResult' object, enrichGO result}
 
-\item{split}{if enrichGO ALL, split by ONTOLOGY is useful}
+\item{showCategory}{Category numbers to show}
 
-\item{top}{filter top rows by Count}
+\item{by}{one of Count and GeneRatio}
+
+\item{split}{separate result by 'split' variable}
+
+\item{order}{logical}
+
+\item{drop}{logical}
 
 \item{fillstrip}{fill strip rect or not}
 
@@ -38,7 +47,7 @@ plot enrich result in bar plot
 \examples{
 \dontrun{
 test <- enrich_go(deg_data = DEG_df, x = "log2FoldChange", y = "pvalue")
-enhance_barplot(test$Down@result,top=10,split = ONTOLOGY)
-enhance_barplot(test$Down@result,top=30)
+enhance_barplot(test$Down,showCategory=10,split = "ONTOLOGY")
+enhance_barplot(test$Down,showCategory=30)
 }
 }
