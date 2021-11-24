@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 library(RNAseqStat)
 ```
 
-An `DOSE::enrichResult-class` will contains a data frame in result slot. `RNAseqStat::enhance_barplot` can make a plot from this data frame.
+An `DOSE::enrichResult-class` will contains a data frame in result slot. `RNAseqStat::enhance_barplot` can make a plot from this data frame or enrichResult.
 
 ```{r, fig.align='center', fig.width=6, fig.height=8}
 #test <- enrich_go(deg_data = DEG_df, x = "log2FoldChange", y = "pvalue")

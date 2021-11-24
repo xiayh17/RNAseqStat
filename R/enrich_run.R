@@ -3,7 +3,7 @@
 #' run enrich_go and plot results
 #'
 #' @inheritParams enrich_go
-#' @param top top rows
+#' @param showCategory Category numbers to show
 #' @param dir where to save results files
 #' @param prefix a prefix of file names in this step
 #'
@@ -17,7 +17,7 @@
 #' \dontrun{
 #' enrichGO_run(DEG_df, x = "log2FoldChange", y = "pvalue", dir = tempdir())
 #' }
-enrichGO_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, dir = ".", prefix = "3-EnrichGO",
+enrichGO_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, showCategory = 10, dir = ".", prefix = "3-EnrichGO",
                        OrgDb = 'org.Hs.eg.db', keyType = "SYMBOL", ont = "ALL", simplify = TRUE,
                        pvalueCutoff = 0.05, pAdjustMethod = "BH", qvalueCutoff = 0.2,minGSSize = 10,
                        maxGSSize = 500, readable = FALSE, pool = FALSE,
@@ -47,7 +47,7 @@ enrichGO_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = 10, dir
 
   if (ont == "ALL") {
     plots <- lapply(go_resl, function(x)
-      enhance_barplot(x@result,top=top,split = ONTOLOGY)
+      enhance_barplot(x@result,showCategory=showCategory,split = 'ONTOLOGY')
     )
     text_w_l <- lapply(go_resl, function(x)
       max(strwidth(x@result$Description,units = "inch"))

@@ -10,7 +10,7 @@ enrichGO_run(
   y,
   cut_FC = 1,
   cut_P = 0.05,
-  top = 10,
+  showCategory = 10,
   dir = ".",
   prefix = "3-EnrichGO",
   OrgDb = "org.Hs.eg.db",
@@ -40,7 +40,7 @@ enrichGO_run(
 
 \item{cut_P}{threshold value of P value, can set for every cut_FC number in numeric vector format}
 
-\item{top}{top rows}
+\item{showCategory}{Category numbers to show}
 
 \item{dir}{where to save results files}
 
