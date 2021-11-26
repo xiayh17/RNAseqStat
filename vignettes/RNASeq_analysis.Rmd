@@ -25,8 +25,10 @@ results_dir = "test"
 
 `runAll` will run full workflow in default parameters
 
-```r
-runAll(count_data = counts_input, group_list = group_list, OrgDb = 'org.Hs.eg.db', dir = results_dir)
+``` r
+runAll(count_data = counts_input, group_list = group_list, 
+       test_group = "T", control_group = "C",
+       OrgDb = 'org.Hs.eg.db', dir = results_dir)
 ```
 
 This step contains following 5 steps, more detail parameters can be set in following functions.

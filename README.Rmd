@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 
 The goal of RNAseqStat is a workflow for DEG analysis.
 
-![RNAseqStat2](https://cdn.jsdelivr.net/gh/xiayh17/Figs@main/uPic/RNAseqStat2.png)
+![RNAseqStat](https://cdn.jsdelivr.net/gh/xiayh17/Figs@main/uPic/RNAseqStat.svg)
 
 ## Installation
 
@@ -62,7 +62,9 @@ This include 5 steps:
 5.  GSEA
 
 ``` r
-runAll(count_data = counts_input, group_list = group_list, OrgDb = 'org.Hs.eg.db', dir = results_dir)
+runAll(count_data = counts_input, group_list = group_list, 
+       test_group = "T", control_group = "C",
+       OrgDb = 'org.Hs.eg.db', dir = results_dir)
 ```
 
 ## Every step can be run separately.

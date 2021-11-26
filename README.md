@@ -4,14 +4,14 @@
 # RNAseqStat
 
 <!-- badges: start -->
-[![Netlify Status](https://api.netlify.com/api/v1/badges/1d7e5456-6648-4dde-a9d5-080cdf966ef3/deploy-status)](https://app.netlify.com/sites/cocky-shaw-501f45/deploys)
+
 [![codecov](https://codecov.io/gh/xiayh17/RNAseqStat/branch/master/graph/badge.svg?token=6rlirZDUVo)](https://codecov.io/gh/xiayh17/RNAseqStat)
 
 <!-- badges: end -->
 
 The goal of RNAseqStat is a workflow for DEG analysis.
 
-![RNAseqStat2](https://cdn.jsdelivr.net/gh/xiayh17/Figs@main/uPic/RNAseqStat2.png)
+![RNAseqStat](https://cdn.jsdelivr.net/gh/xiayh17/Figs@main/uPic/RNAseqStat.svg)
 
 ## Installation
 
@@ -52,7 +52,9 @@ This include 5 steps:
 5.  GSEA
 
 ``` r
-runAll(count_data = counts_input, group_list = group_list, OrgDb = 'org.Hs.eg.db', dir = results_dir)
+runAll(count_data = counts_input, group_list = group_list, 
+       test_group = "T", control_group = "C",
+       OrgDb = 'org.Hs.eg.db', dir = results_dir)
 ```
 
 ## Every step can be run separately.
