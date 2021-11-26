@@ -14,13 +14,13 @@
 #' \dontrun{
 #' runAll(count_data = counts_input, group_list = group_list, OrgDb = 'org.Hs.eg.db', dir = tempdir())
 #' }
-runAll <- function(count_data, group_list, OrgDb = 'org.Hs.eg.db', dir = ".") {
+runAll <- function(count_data, group_list, OrgDb = 'org.Hs.eg.db', dir = ".",test_group = "T", control_group = "C") {
 
   message(glue("Step1: Check you data"))
   pre_check(counts_data = count_data, group_list = group_list, dir = dir)
 
   message(glue("Step2: DEG analysis"))
-  deg_results <- deg_run(count_data, group_list, test_group = "T", control_group = "C",dir = dir)
+  deg_results <- deg_run(count_data, group_list, test_group = test_group, control_group = control_group,dir = dir)
 
   message(glue("Step3: EnrichGO analysis"))
   enrichGO_run(deg_results@deg_df_limma, x = "logFC", y = "P.Value",
