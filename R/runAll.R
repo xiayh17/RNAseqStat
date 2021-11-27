@@ -6,6 +6,8 @@
 #' @param group_list a list ordered by samples in counts_data
 #' @param OrgDb OrgDb
 #' @param dir a directory to store results
+#' @param test_group which one is test group in your group_list
+#' @param control_group which one is control group in your group_list
 #'
 #' @return a dir contains all results
 #' @export

@@ -4,7 +4,14 @@
 \alias{runAll}
 \title{run all step in default setting}
 \usage{
-runAll(count_data, group_list, OrgDb = "org.Hs.eg.db", dir = ".")
+runAll(
+  count_data,
+  group_list,
+  OrgDb = "org.Hs.eg.db",
+  dir = ".",
+  test_group = "T",
+  control_group = "C"
+)
 }
 \arguments{
 \item{count_data}{a counts data frame of rows in genes and columns in samples}
@@ -14,6 +21,10 @@ runAll(count_data, group_list, OrgDb = "org.Hs.eg.db", dir = ".")
 \item{OrgDb}{OrgDb}
 
 \item{dir}{a directory to store results}
+
+\item{test_group}{which one is test group in your group_list}
+
+\item{control_group}{which one is control group in your group_list}
 }
 \value{
 a dir contains all results
