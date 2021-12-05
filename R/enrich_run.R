@@ -63,7 +63,7 @@ enrichGO_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, showCategory 
     )
   } else {
     plots <- lapply(go_resl, function(x)
-      enhance_barplot(x@result,top=top)
+      enhance_barplot(x@result,showCategory=showCategory)
     )
     text_w_l <- lapply(go_resl, function(x)
       max(strwidth(x@result$Description,units = "inch"))
@@ -121,7 +121,7 @@ enrichKEGG_run <- function(deg_data, x, y, cut_FC = 1, cut_P = 0.05, top = -10,
     fs::dir_create(dir)
   }
   # enrich_kegg
-  kegg_resl <- enrich_kegg(deg_data = deg_data, x = x, y = y, cut_FC = 1,
+  kegg_resl <- enrich_kegg(deg_data = deg_data, x = x, y = y, cut_FC = cut_FC,
                            cut_P = cut_P,
                            organism = organism,
                            keyType = keyType,
