@@ -113,7 +113,7 @@ run_DESeq2 <- function(counts_data,group_list,test_group,control_group,qc = TRUE
 #' @importFrom glue glue
 #' @importFrom grDevices pdf dev.off rainbow
 #' @importFrom graphics par boxplot hist
-#' @importFrom DESeq2 plotDispEsts rlogTransformation
+#' @importFrom DESeq2 plotDispEsts rlogTransformation varianceStabilizingTransformation
 #' @importMethodsFrom SummarizedExperiment assay
 #' @importClassesFrom SummarizedExperiment SummarizedExperiment
 #'

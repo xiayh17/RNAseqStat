@@ -4,7 +4,14 @@
 \alias{deg_run}
 \title{run DEG}
 \usage{
-deg_run(counts_data, group_list, test_group = "T", control_group = "C", dir)
+deg_run(
+  counts_data,
+  group_list,
+  test_group = "T",
+  control_group = "C",
+  dir,
+  parallel = FALSE
+)
 }
 \arguments{
 \item{counts_data}{a counts data frame of rows in genes and columns in samples}
@@ -16,6 +23,8 @@ deg_run(counts_data, group_list, test_group = "T", control_group = "C", dir)
 \item{control_group}{the name of the denominator level for the fold change (Control group)}
 
 \item{dir}{a directory to store results}
+
+\item{parallel}{if FALSE, no parallelization. if TRUE, parallel execution using BiocParallel}
 }
 \value{
 a csv file and a DEG_container ob

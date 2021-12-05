@@ -11,7 +11,8 @@ run_DESeq2(
   control_group,
   qc = TRUE,
   dir = ".",
-  prefix = "2-DEG_DEseq2"
+  prefix = "2-DEG_DEseq2",
+  parallel = FALSE
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ run_DESeq2(
 \item{dir}{a directory to store results}
 
 \item{prefix}{a prefix of file names in this step}
+
+\item{parallel}{if FALSE, no parallelization. if TRUE, parallel execution using BiocParallel}
 }
 \value{
 a DEG data frame

@@ -7,6 +7,7 @@
 deg_DESeq2(
   counts_data,
   group_list,
+  parallel = F,
   test_group,
   control_group,
   qc = TRUE,
@@ -20,6 +21,8 @@ deg_DESeq2(
 \item{counts_data}{a counts data frame of rows in genes and columns in samples}
 
 \item{group_list}{a list ordered by samples in counts_data}
+
+\item{parallel}{if FALSE, no parallelization. if TRUE, parallel execution using BiocParallel}
 
 \item{test_group}{the name of the numerator level for the fold change (Test group)}
 

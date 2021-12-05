@@ -10,7 +10,8 @@ runAll(
   OrgDb = "org.Hs.eg.db",
   dir = ".",
   test_group = "T",
-  control_group = "C"
+  control_group = "C",
+  parallel = FALSE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ runAll(
 \item{test_group}{which one is test group in your group_list}
 
 \item{control_group}{which one is control group in your group_list}
+
+\item{parallel}{if FALSE, no parallelization. if TRUE, parallel execution using BiocParallel}
 }
 \value{
 a dir contains all results
