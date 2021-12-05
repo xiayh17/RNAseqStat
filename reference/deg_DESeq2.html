@@ -122,6 +122,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">deg_DESeq2</span><span class="op">(</span>
   <span class="va">counts_data</span>,
   <span class="va">group_list</span>,
+  parallel <span class="op">=</span> <span class="cn">F</span>,
   <span class="va">test_group</span>,
   <span class="va">control_group</span>,
   qc <span class="op">=</span> <span class="cn">TRUE</span>,
@@ -138,6 +139,8 @@
 <dd><p>a counts data frame of rows in genes and columns in samples</p></dd>
 <dt>group_list</dt>
 <dd><p>a list ordered by samples in counts_data</p></dd>
+<dt>parallel</dt>
+<dd><p>if FALSE, no parallelization. if TRUE, parallel execution using BiocParallel</p></dd>
 <dt>test_group</dt>
 <dd><p>the name of the numerator level for the fold change (Test group)</p></dd>
 <dt>control_group</dt>

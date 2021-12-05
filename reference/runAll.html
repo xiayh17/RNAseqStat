@@ -125,7 +125,8 @@
   OrgDb <span class="op">=</span> <span class="st">"org.Hs.eg.db"</span>,
   dir <span class="op">=</span> <span class="st">"."</span>,
   test_group <span class="op">=</span> <span class="st">"T"</span>,
-  control_group <span class="op">=</span> <span class="st">"C"</span>
+  control_group <span class="op">=</span> <span class="st">"C"</span>,
+  parallel <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -143,6 +144,8 @@
 <dd><p>which one is test group in your group_list</p></dd>
 <dt>control_group</dt>
 <dd><p>which one is control group in your group_list</p></dd>
+<dt>parallel</dt>
+<dd><p>if FALSE, no parallelization. if TRUE, parallel execution using BiocParallel</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
