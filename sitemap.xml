@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://xiayh17.top/RNAseqStat/404.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/Check_your_data.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/DEG_analysis.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/RNASeq_analysis.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/go.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/gseKegg.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/kegg.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/tools_groupDEG.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/tools_topDEG.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/visualization_deg_heatmap.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/visualization_deg_volcano.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/visualization_go_barplot.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/visualization_gsekegg_barplot.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/visualization_gseplot.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/articles/visualization_kegg_barplot.html</loc>
+  </url>
+  <url>
+    <loc>http://xiayh17.top/RNAseqStat/authors.html</loc>
+  </url>
+  <url>
     <loc>http://xiayh17.top/RNAseqStat/index.html</loc>
   </url>
   <url>
@@ -79,6 +136,9 @@
     <loc>http://xiayh17.top/RNAseqStat/reference/group_list.html</loc>
   </url>
   <url>
+    <loc>http://xiayh17.top/RNAseqStat/reference/index.html</loc>
+  </url>
+  <url>
     <loc>http://xiayh17.top/RNAseqStat/reference/kegg_barplot.html</loc>
   </url>
   <url>
@@ -101,47 +161,5 @@
   </url>
   <url>
     <loc>http://xiayh17.top/RNAseqStat/reference/top_deg.html</loc>
-  </url>
-  <url>
-    <loc>http://xiayh17.top/RNAseqStat/articles/Check_your_data.html</loc>
-  </url>
-  <url>
-    <loc>http://xiayh17.top/RNAseqStat/articles/DEG_analysis.html</loc>
-  </url>
-  <url>
-    <loc>http://xiayh17.top/RNAseqStat/articles/RNASeq_analysis.html</loc>
-  </url>
-  <url>
-    <loc>http://xiayh17.top/RNAseqStat/articles/go.html</loc>
-  </url>
-  <url>
-    <loc>http://xiayh17.top/RNAseqStat/articles/gseKegg.html</loc>
-  </url>
-  <url>
-    <loc>http://xiayh17.top/RNAseqStat/articles/kegg.html</loc>
-  </url>
-  <url>
-    <loc>http://xiayh17.top/RNAseqStat/articles/tools_groupDEG.html</loc>
-  </url>
-  <url>
-    <loc>http://xiayh17.top/RNAseqStat/articles/tools_topDEG.html</loc>
-  </url>
-  <url>
-    <loc>http://xiayh17.top/RNAseqStat/articles/visualization_deg_heatmap.html</loc>
-  </url>
-  <url>
-    <loc>http://xiayh17.top/RNAseqStat/articles/visualization_deg_volcano.html</loc>
-  </url>
-  <url>
-    <loc>http://xiayh17.top/RNAseqStat/articles/visualization_go_barplot.html</loc>
-  </url>
-  <url>
-    <loc>http://xiayh17.top/RNAseqStat/articles/visualization_gsekegg_barplot.html</loc>
-  </url>
-  <url>
-    <loc>http://xiayh17.top/RNAseqStat/articles/visualization_gseplot.html</loc>
-  </url>
-  <url>
-    <loc>http://xiayh17.top/RNAseqStat/articles/visualization_kegg_barplot.html</loc>
   </url>
 </urlset>

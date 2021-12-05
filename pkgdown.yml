@@ -1,5 +1,5 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1
+pkgdown: 2.0.1
 pkgdown_sha: ~
 articles:
   Check_your_data: Check_your_data.html
@@ -16,7 +16,7 @@ articles:
   visualization_gsekegg_barplot: visualization_gsekegg_barplot.html
   visualization_gseplot: visualization_gseplot.html
   visualization_kegg_barplot: visualization_kegg_barplot.html
-last_built: 2021-11-27T06:40Z
+last_built: 2021-12-05T02:05Z
 urls:
   reference: http://xiayh17.top/RNAseqStat/reference
   article: http://xiayh17.top/RNAseqStat/articles
