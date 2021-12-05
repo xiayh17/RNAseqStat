@@ -11,6 +11,7 @@
 #' @param x which column is log FC
 #' @param y which column is P value
 #' @param prefix a prefix of file names in this step
+#' @param parallel if FALSE, no parallelization. if TRUE, parallel execution using BiocParallel
 #'
 #' @importFrom glue glue
 #' @importFrom ggplot2 ggsave
@@ -26,7 +27,7 @@
 #'            x = "log2FoldChange", y = "pvalue",
 #'            dir = tempdir(), prefix = "2-DEG_DEseq2")
 #' }
-deg_DESeq2 <- function(counts_data,group_list,
+deg_DESeq2 <- function(counts_data,group_list, parallel = F,
                        test_group,control_group,qc = TRUE,x,y,
                        dir = ".",prefix = "2-DEG_DEseq2") {
 
@@ -34,7 +35,7 @@ deg_DESeq2 <- function(counts_data,group_list,
     fs::dir_create(dir)
   }
 
-    deg_data <- run_DESeq2(counts_data = counts_data,group_list = group_list,
+    deg_data <- run_DESeq2(counts_data = counts_data,group_list = group_list, parallel = parallel,
                            test_group = test_group,control_group=control_group,qc = qc,dir = dir,prefix = prefix)
 
     enhance_heatmap(counts_data, deg_data, group_list, x = x, y = y, dir = dir, prefix = prefix)
@@ -65,6 +66,7 @@ deg_DESeq2 <- function(counts_data,group_list,
 #' @param qc qc plots
 #' @param dir a directory to store results
 #' @param prefix a prefix of file names in this step
+#' @param parallel if FALSE, no parallelization. if TRUE, parallel execution using BiocParallel
 #'
 #' @importFrom DESeq2 DESeqDataSetFromMatrix DESeq results
 #' @importFrom stats na.omit
@@ -76,7 +78,7 @@ deg_DESeq2 <- function(counts_data,group_list,
 #' \dontrun{
 #' run_DESeq2(counts_input, group_list,test_group = "T", control_group = "C", dir = tempdir())
 #' }
-run_DESeq2 <- function(counts_data,group_list,test_group,control_group,qc = TRUE,dir = ".",prefix = "2-DEG_DEseq2") {
+run_DESeq2 <- function(counts_data,group_list,test_group,control_group,qc = TRUE,dir = ".",prefix = "2-DEG_DEseq2",parallel = FALSE) {
 
   colData <- data.frame(row.names=colnames(counts_data),
                          group_list=group_list)
@@ -92,7 +94,7 @@ run_DESeq2 <- function(counts_data,group_list,test_group,control_group,qc = TRUE
     DESeq2_qc(counts_data,dds,dir = dir,prefix = prefix)
   }
 
-  res <- results(dds,
+  res <- results(dds,parallel = parallel,
                  contrast=c("group_list",test_group,control_group))
   resOrdered <- res[order(res$padj),]
 
@@ -128,7 +130,14 @@ DESeq2_qc <- function(counts_data, dds, dir = ".", prefix = "2-DEG") {
   plotDispEsts(dds, main="Dispersion plot",cex = 0.45)
   dev.off()
 
-  rld <- rlogTransformation(dds)
+  if (length(rownames(dds@colData)) >=50 ) {
+    rld <- varianceStabilizingTransformation(dds)
+  } else {
+
+    rld <- rlogTransformation(dds)
+
+  }
+
   exprMatrix_rlog=assay(rld)
 
   pdf(glue("{dir}/{prefix}_RAWvsNORM.pdf"),height = 8,width = 8)

@@ -8,6 +8,7 @@
 #' @param dir a directory to store results
 #' @param test_group which one is test group in your group_list
 #' @param control_group which one is control group in your group_list
+#' @param parallel if FALSE, no parallelization. if TRUE, parallel execution using BiocParallel
 #'
 #' @return a dir contains all results
 #' @export
@@ -16,13 +17,13 @@
 #' \dontrun{
 #' runAll(count_data = counts_input, group_list = group_list, OrgDb = 'org.Hs.eg.db', dir = tempdir())
 #' }
-runAll <- function(count_data, group_list, OrgDb = 'org.Hs.eg.db', dir = ".",test_group = "T", control_group = "C") {
+runAll <- function(count_data, group_list, OrgDb = 'org.Hs.eg.db', dir = ".",test_group = "T", control_group = "C",parallel = FALSE) {
 
   message(glue("Step1: Check you data"))
   pre_check(counts_data = count_data, group_list = group_list, dir = dir)
 
   message(glue("Step2: DEG analysis"))
-  deg_results <- deg_run(count_data, group_list, test_group = test_group, control_group = control_group,dir = dir)
+  deg_results <- deg_run(count_data, group_list, test_group = test_group, control_group = control_group,dir = dir,parallel = parallel)
 
   message(glue("Step3: EnrichGO analysis"))
   enrichGO_run(deg_results@deg_df_limma, x = "logFC", y = "P.Value",

@@ -7,6 +7,7 @@
 #' @param dir a directory to store results
 #' @param test_group the name of the numerator level for the fold change (Test group)
 #' @param control_group the name of the denominator level for the fold change (Control group)
+#' @param parallel if FALSE, no parallelization. if TRUE, parallel execution using BiocParallel
 #'
 #' @importFrom fs dir_exists dir_create
 #' @importFrom glue glue
@@ -19,7 +20,7 @@
 #' \dontrun{
 #' deg_run(counts_input,group_list,test_group = "T", control_group = "C",dir = tempdir())
 #' }
-deg_run <- function(counts_data,group_list,test_group = "T", control_group = "C",dir) {
+deg_run <- function(counts_data,group_list,test_group = "T", control_group = "C",dir,parallel = FALSE) {
 
   if (!fs::dir_exists(dir)) {
     fs::dir_create(dir)
@@ -27,7 +28,7 @@ deg_run <- function(counts_data,group_list,test_group = "T", control_group = "C"
 
   counts_data_filtered =counts_data[apply(counts_data,1, function(x) sum(x>1) > 5),]
 
-  deg_df_DESeq2 <- deg_DESeq2(counts_data_filtered,group_list,
+  deg_df_DESeq2 <- deg_DESeq2(counts_data_filtered,group_list,parallel = parallel,
             test_group = test_group, control_group = control_group, qc = TRUE,
              x = "log2FoldChange", y = "pvalue",
              dir = dir, prefix = "2-DEG_DEseq2")
