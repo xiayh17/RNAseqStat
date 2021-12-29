@@ -133,7 +133,7 @@ show_genes <- function(data, x = "log2FoldChange", y = "pvalue", genes_list, hig
   max_lfc <- max(data[,x])
   min_lfc <- min(data[,x])
 
-  max_fdr <- max(-log10(data[,y]))
+  max_fdr <- max_fdr <- max(na.omit(-log10(data[,y])))
 
   if (max_fdr) {
     max_fdr <- 300
