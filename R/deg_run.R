@@ -26,7 +26,7 @@ deg_run <- function(counts_data,group_list,test_group = "T", control_group = "C"
     fs::dir_create(dir)
   }
 
-  counts_data_filtered =counts_data[apply(counts_data,1, function(x) sum(x>1) > 5),]
+  counts_data_filtered =counts_data
 
   deg_df_DESeq2 <- deg_DESeq2(counts_data_filtered,group_list,parallel = parallel,
             test_group = test_group, control_group = control_group, qc = TRUE,
