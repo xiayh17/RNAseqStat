@@ -123,7 +123,7 @@ corall_check <- function(data, list, dir = ".", prefix = "1-pre_check",palette =
 #' @noRd
 cor500_check <- function(data, list, dir = ".", prefix = "1-pre_check",palette = RColorBrewer::brewer.pal(3,"Set2")[1:2]) {
   filename = glue('{dir}/{prefix}_cor_top500.pdf')
-  exprSet=data[apply(data,1, function(x) sum(x>1) > 5),]
+  exprSet=data
   exprSet=log(edgeR::cpm(exprSet)+1)
   exprSet=exprSet[names(sort(apply(exprSet, 1,mad),decreasing = T)[1:500]),]
   colD=data.frame(Groups=list)
