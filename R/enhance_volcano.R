@@ -80,7 +80,7 @@ enhance_volcano <- function(deg_data,x, y,
 #' @examples
 #' enhance_volcano_plot(data,x = 'log2FoldChange', y = 'pvalue', cut_FC = 1, cut_P = 0.05)
 enhance_volcano_plot <- function(data,x,y,label = c("Down","Stable","Up"),cut_FC,cut_P,
-                                 palette = c("#1a9850","grey50","#d73027")) {
+                                 palette =  c("#2874C5", "grey", "#f87669")) {
 
   names(palette) <- label
 
