@@ -167,7 +167,6 @@ top1000_check <- function(data, list, dir = ".", prefix = "1-pre_check",palette 
   n=t(scale(t(dat[cg,])))
   n[n>2]=2
   n[n< -2]= -2
-  n[1:4,1:4]
   ac=data.frame(Groups=list)
   rownames(ac)=colnames(n)
   names(palette) <- unique(list)
