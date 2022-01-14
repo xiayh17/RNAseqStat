@@ -29,7 +29,7 @@
 #'                 genes_list = "top", highlight = NULL)
 enhance_volcano <- function(deg_data,x, y,
                             label = c("Down","Stable","Up"), label_ns = "Stable",
-                            palette = c('#66c2a5', 'grey50', '#fc8d62'),
+                            palette = c("#1a9850","grey50","#d73027"),
                             cut_FC = "auto", cut_P = 0.05, top = 10,size = 2.0,expand=c(0.25,0.25),
                             genes_list = "top", highlight = NULL) {
 
@@ -79,7 +79,8 @@ enhance_volcano <- function(deg_data,x, y,
 #' @noRd
 #' @examples
 #' enhance_volcano_plot(data,x = 'log2FoldChange', y = 'pvalue', cut_FC = 1, cut_P = 0.05)
-enhance_volcano_plot <- function(data,x,y,label = c("Down","Stable","Up"),cut_FC,cut_P, palette = c('#d53e4f', 'grey50', '#3288bd')) {
+enhance_volcano_plot <- function(data,x,y,label = c("Down","Stable","Up"),cut_FC,cut_P,
+                                 palette = c("#1a9850","grey50","#d73027")) {
 
   names(palette) <- label
 
@@ -90,6 +91,8 @@ enhance_volcano_plot <- function(data,x,y,label = c("Down","Stable","Up"),cut_FC
   FC_data <- data.frame(
     cut_FC = cut_FC
   )
+
+  count_updown <- table(deg_data_g$group)
 
   p <- ggplot(data=data, aes(x = get(x), y = -log10(get(y)), colour = group, alpha = group)) +
     geom_point(aes(color = group),size = 0.5) +
@@ -107,6 +110,7 @@ enhance_volcano_plot <- function(data,x,y,label = c("Down","Stable","Up"),cut_FC
     labs(colour = "Group",x = "log2FoldChange", y = "-log10(PValue)",
          caption = paste(sprintf('FDR:  %.3f\n', cut_P),
                          sprintf('log 2 Fold Change: %.3f & %.3f \n',cut_FC,-cut_FC),
+                         sprintf('Up: %1.0f & Down: %1.0f variables \n',count_updown[3],count_updown[1]),
                          sprintf('Total: %1.0f variables',nrow(data))
          ))
   return(p)
