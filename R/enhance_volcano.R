@@ -275,5 +275,5 @@ theme_nice <- function(...) {theme(...,
                                   legend.key = element_rect(fill = NA),
                                   legend.background = element_rect(fill = NA),
                                   legend.position = "top", legend.direction = "horizontal",
-                                  plot.caption = element_text(family = "Times", size = 6, face = "italic", colour = "dodgerblue"))}
+                                  plot.caption = element_text(family = "Times", size = 6, face = "italic", colour = "dark"))}
 
