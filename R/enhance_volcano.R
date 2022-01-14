@@ -178,9 +178,9 @@ show_genes <- function(data, x = "log2FoldChange", y = "pvalue", genes_list, hig
         max.iter = 1000000,
         max.time = 10,
         nudge_x =  label_data[which(label_data[,x] > 0),][,x] + max_lfc+max_lfc/4,
-        min.segment.length = 0,
-        bg.color = "#e0e0e0", # shadow color
-        bg.r = 0.15          # shadow radius
+        min.segment.length = 0
+        # bg.color = "#e0e0e0", # shadow color
+        # bg.r = 0.15          # shadow radius
       ) +
       geom_text_repel(
         size = size,
@@ -195,9 +195,9 @@ show_genes <- function(data, x = "log2FoldChange", y = "pvalue", genes_list, hig
         max.iter = 1000000,
         max.time = 10,
         nudge_x =  label_data[which(label_data[,x] < 0),][,x] + min_lfc+min_lfc/4,
-        min.segment.length = 0,
-        bg.color = "#e0e0e0", # shadow color
-        bg.r = 0.15          # shadow radius
+        min.segment.length = 0
+        # bg.color = "#e0e0e0", # shadow color
+        # bg.r = 0.15          # shadow radius
       )
 
     if (!is.null(highlight)) {
@@ -218,9 +218,9 @@ show_genes <- function(data, x = "log2FoldChange", y = "pvalue", genes_list, hig
           max.iter = 1000000,
           max.time = 10,
           nudge_x =  hlight_data[which(hlight_data[,x] > 0),][,x] + max_lfc+max_lfc/4,
-          min.segment.length = 0,
-          bg.color = "#26b1fb", # shadow color
-          bg.r = 0.15          # shadow radius
+          min.segment.length = 0
+          # bg.color = "#26b1fb", # shadow color
+          # bg.r = 0.15          # shadow radius
         ) +
         geom_text_repel(
           size = size,
@@ -235,9 +235,9 @@ show_genes <- function(data, x = "log2FoldChange", y = "pvalue", genes_list, hig
           max.iter = 1000000,
           max.time = 10,
           nudge_x =  hlight_data[which(hlight_data[,x] > 0),][,x] + min_lfc+min_lfc/4,
-          min.segment.length = 0,
-          bg.color = "#26b1fb", # shadow color
-          bg.r = 0.15          # shadow radius
+          min.segment.length = 0
+          # bg.color = "#26b1fb", # shadow color
+          # bg.r = 0.15          # shadow radius
         )
 
     }
