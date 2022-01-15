@@ -43,7 +43,7 @@ deg_DESeq2 <- function(counts_data,group_list, parallel = F,
 
     res <- enhance_volcano(deg_data,x = x, y = y,
                     label = c("Down","Stable","Up"), label_ns = "Stable",
-                    palette = c("#1a9850","grey50","#d73027"),
+                    palette =  c("#2874C5", "grey", "#f87669"),
                     cut_FC = "auto",cut_P = 0.05,top = 10, size = 2.0,expand = c(0.25,0.25),
                     genes_list = "top", highlight = NULL)
     ggsave(res,filename = glue("{dir}/{prefix}_volcano.pdf"), width = 1600,height = 1600,units = "px",limitsize = FALSE)
