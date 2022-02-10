@@ -92,7 +92,7 @@ enhance_volcano_plot <- function(data,x,y,label = c("Down","Stable","Up"),cut_FC
     cut_FC = cut_FC
   )
 
-  count_updown <- table(deg_data_g$group)
+  count_updown <- table(data$group)
 
   p <- ggplot(data=data, aes(x = get(x), y = -log10(get(y)), colour = group, alpha = group)) +
     geom_point(aes(color = group),size = 0.6) +
