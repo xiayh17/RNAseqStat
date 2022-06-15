@@ -1,6 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+ Please be aware that the RNAseqStat2 https://github.com/xiayh17/RNAseqStat2 is an new version of RNAseqStat.
+ RNAseqStat won't be updated any more.
+
 # RNAseqStat
 
 <!-- badges: start -->
