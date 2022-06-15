@@ -48,7 +48,7 @@ categories after FDR control."><!-- mathjax --><script src="https://cdnjs.cloudf
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="paper paper-plane"></span>
      
     Guide
@@ -150,34 +150,61 @@ categories after FDR control.</p>
     <h2>Arguments</h2>
     <dl><dt>gene</dt>
 <dd><p>a vector of entrez gene id.</p></dd>
+
+
 <dt>OrgDb</dt>
 <dd><p>OrgDb</p></dd>
+
+
 <dt>keyType</dt>
 <dd><p>keytype of input gene</p></dd>
+
+
 <dt>ont</dt>
 <dd><p>One of "BP", "MF", and "CC" subontologies, or "ALL" for all three.</p></dd>
+
+
 <dt>pvalueCutoff</dt>
 <dd><p>adjusted pvalue cutoff on enrichment tests to report</p></dd>
+
+
 <dt>pAdjustMethod</dt>
 <dd><p>one of "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none"</p></dd>
+
+
 <dt>universe</dt>
 <dd><p>background genes. If missing, the all genes listed in the database (eg TERM2GENE table) will be used as background.</p></dd>
+
+
 <dt>qvalueCutoff</dt>
 <dd><p>qvalue cutoff on enrichment tests to report as significant.  Tests must pass i) <code>pvalueCutoff</code> on unadjusted pvalues, ii) <code>pvalueCutoff</code> on adjusted pvalues and iii) <code>qvalueCutoff</code> on qvalues to be reported.</p></dd>
+
+
 <dt>minGSSize</dt>
 <dd><p>minimal size of genes annotated by Ontology term for testing.</p></dd>
+
+
 <dt>maxGSSize</dt>
 <dd><p>maximal size of genes annotated for testing</p></dd>
+
+
 <dt>readable</dt>
 <dd><p>whether mapping gene ID to gene Name</p></dd>
+
+
 <dt>pool</dt>
 <dd><p>If ont='ALL', whether pool 3 GO sub-ontologies</p></dd>
+
+
 <dt>simplify</dt>
 <dd><p>whether simplify</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An <code>enrichResult</code> instance.</p>
+    
+
+<p>An <code>enrichResult</code> instance.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -210,7 +237,7 @@ categories after FDR control.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

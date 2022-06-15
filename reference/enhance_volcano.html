@@ -42,7 +42,7 @@
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="paper paper-plane"></span>
      
     Guide
@@ -140,34 +140,61 @@
     <h2>Arguments</h2>
     <dl><dt>deg_data</dt>
 <dd><p>a DEG data frame contains logFC and p value</p></dd>
+
+
 <dt>x</dt>
 <dd><p>which column is log FC</p></dd>
+
+
 <dt>y</dt>
 <dd><p>which column is P value</p></dd>
+
+
 <dt>label</dt>
 <dd><p>symbol word for groups,default is `c("Down","Stable","Up")`</p></dd>
+
+
 <dt>label_ns</dt>
 <dd><p>which group is the stable group</p></dd>
+
+
 <dt>palette</dt>
 <dd><p>color for every label</p></dd>
+
+
 <dt>cut_FC</dt>
 <dd><p>a numeric vector in threshold value of log FC</p></dd>
+
+
 <dt>cut_P</dt>
 <dd><p>threshold value of P value, can set for every cut_FC number in numeric vector format</p></dd>
+
+
 <dt>top</dt>
 <dd><p>a single number or a length of 2 numeric vector, if 2 numeric vector, first one is top max logFC.</p></dd>
+
+
 <dt>size</dt>
 <dd><p>a single number of font size</p></dd>
+
+
 <dt>expand</dt>
 <dd><p>if labels in plot display wrong, try increase it.</p></dd>
+
+
 <dt>genes_list</dt>
 <dd><p>a gene names character vectors;</p></dd>
+
+
 <dt>highlight</dt>
 <dd><p>a gene names character vectors; default NULL</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a ggplot ob</p>
+    
+
+<p>a ggplot ob</p>
     </div>
 
     <div id="ref-examples">
@@ -195,7 +222,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

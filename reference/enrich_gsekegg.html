@@ -42,7 +42,7 @@
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="paper paper-plane"></span>
      
     Guide
@@ -143,40 +143,73 @@
     <h2>Arguments</h2>
     <dl><dt>deg_data</dt>
 <dd><p>a DEG data frame contains logFC and p value</p></dd>
+
+
 <dt>x</dt>
 <dd><p>which column is log FC</p></dd>
+
+
 <dt>organism</dt>
 <dd><p>supported organism listed in 'http://www.genome.jp/kegg/catalog/org_list.html'</p></dd>
+
+
 <dt>keyType</dt>
 <dd><p>one of "kegg", 'ncbi-geneid', 'ncib-proteinid' and 'uniprot'</p></dd>
+
+
 <dt>OrgDb</dt>
 <dd><p>OrgDb</p></dd>
+
+
 <dt>exponent</dt>
 <dd><p>weight of each step</p></dd>
+
+
 <dt>minGSSize</dt>
 <dd><p>minimal size of each geneSet for analyzing</p></dd>
+
+
 <dt>maxGSSize</dt>
 <dd><p>maximal size of genes annotated for testing</p></dd>
+
+
 <dt>eps</dt>
 <dd><p>This parameter sets the boundary for calculating the p value.</p></dd>
+
+
 <dt>pvalueCutoff</dt>
 <dd><p>pvalue Cutoff</p></dd>
+
+
 <dt>pAdjustMethod</dt>
 <dd><p>pvalue adjustment method</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>print message or not</p></dd>
+
+
 <dt>use_internal_data</dt>
 <dd><p>logical, use KEGG.db or latest online KEGG data</p></dd>
+
+
 <dt>seed</dt>
 <dd><p>logical</p></dd>
+
+
 <dt>by</dt>
 <dd><p>one of 'fgsea' or 'DOSE'</p></dd>
+
+
 <dt>...</dt>
 <dd><p>other parameter</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a gsekegg result</p>
+    
+
+<p>a gsekegg result</p>
     </div>
 
     <div id="ref-examples">
@@ -198,7 +231,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

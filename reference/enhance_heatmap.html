@@ -42,7 +42,7 @@
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="paper paper-plane"></span>
      
     Guide
@@ -137,28 +137,49 @@
     <h2>Arguments</h2>
     <dl><dt>counts_data</dt>
 <dd><p>a counts data frame of rows in genes and columns in samples</p></dd>
+
+
 <dt>deg_data</dt>
 <dd><p>a DEG data frame contains logFC and p value</p></dd>
+
+
 <dt>group_list</dt>
 <dd><p>a character vector ordered by samples in counts_data</p></dd>
+
+
 <dt>x</dt>
 <dd><p>which column is log FC</p></dd>
+
+
 <dt>y</dt>
 <dd><p>which column is P value</p></dd>
+
+
 <dt>top</dt>
 <dd><p>a single number or a length of 2 numeric vector, if 2 numeric vector, first one is top max logFC.</p></dd>
+
+
 <dt>cut_P</dt>
 <dd><p>threshold value of P value, can set for every cut_FC number in numeric vector format</p></dd>
+
+
 <dt>dir</dt>
 <dd><p>a directory to store results</p></dd>
+
+
 <dt>prefix</dt>
 <dd><p>a prefix of file names in this step</p></dd>
+
+
 <dt>palette</dt>
 <dd><p>a color palette for plots</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a heatmap plot file</p>
+    
+
+<p>a heatmap plot file</p>
     </div>
 
     <div id="ref-examples">
@@ -179,7 +200,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

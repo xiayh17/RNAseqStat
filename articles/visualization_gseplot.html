@@ -59,7 +59,7 @@
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="paper paper-plane"></span>
      
     Guide
@@ -152,45 +152,15 @@
 <p>An <code>DOSE::gseaResult-class</code> will produced by <code><a href="https://rdrr.io/pkg/clusterProfiler/man/gseKEGG.html" class="external-link">clusterProfiler::gseKEGG</a></code> or <code><a href="../reference/enrich_gsekegg.html">RNAseqStat::enrich_gsekegg</a></code>. <code><a href="../reference/enhance_gseplot.html">RNAseqStat::enhance_gseplot</a></code> make a GSE plot from <code>gseaResult</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gsekegg_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/enrich_gsekegg.html">enrich_gsekegg</a></span><span class="op">(</span><span class="va">DEG_df</span>,x <span class="op">=</span> <span class="st">"log2FoldChange"</span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: org.Hs.eg.db</span>
-<span class="co">#&gt; Loading required package: AnnotationDbi</span>
-<span class="co">#&gt; Loading required package: stats4</span>
-<span class="co">#&gt; Loading required package: BiocGenerics</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'BiocGenerics'</span>
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     IQR, mad, sd, var, xtabs</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     anyDuplicated, append, as.data.frame, basename, cbind, colnames,</span>
-<span class="co">#&gt;     dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,</span>
-<span class="co">#&gt;     grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,</span>
-<span class="co">#&gt;     order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,</span>
-<span class="co">#&gt;     rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,</span>
-<span class="co">#&gt;     union, unique, unsplit, which.max, which.min</span>
-<span class="co">#&gt; Loading required package: Biobase</span>
-<span class="co">#&gt; Welcome to Bioconductor</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     Vignettes contain introductory material; view with</span>
-<span class="co">#&gt;     'browseVignettes()'. To cite Bioconductor, see</span>
-<span class="co">#&gt;     'citation("Biobase")', and for packages 'citation("pkgname")'.</span>
-<span class="co">#&gt; Loading required package: IRanges</span>
-<span class="co">#&gt; Loading required package: S4Vectors</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'S4Vectors'</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     expand.grid, I, unname</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 'select()' returned 1:many mapping between keys and columns</span>
 <span class="co">#&gt; Warning in bitr(rownames(deg_data), fromType = "SYMBOL", toType = "ENTREZID", :</span>
-<span class="co">#&gt; 22.34% of input gene IDs are fail to map...</span>
+<span class="co">#&gt; 22.49% of input gene IDs are fail to map...</span>
 <span class="co">#&gt; Reading KEGG annotation online:</span>
 <span class="co">#&gt; Reading KEGG annotation online:</span>
 <span class="co">#&gt; preparing geneSet collections...</span>
 <span class="co">#&gt; GSEA analysis...</span>
-<span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize, gseaParam, : There are ties in the preranked stats (0.26% of the list).</span>
+<span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize, gseaParam, : There are ties in the preranked stats (0.25% of the list).</span>
 <span class="co">#&gt; The order of those tied genes will be arbitrary, which may produce unexpected results.</span>
 <span class="co">#&gt; Warning in fgseaMultilevel(...): For some pathways, in reality P-values are less</span>
 <span class="co">#&gt; than 1e-10. You can set the `eps` argument to zero for better estimation.</span>
@@ -214,7 +184,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer>

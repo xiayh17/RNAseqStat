@@ -42,7 +42,7 @@
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="paper paper-plane"></span>
      
     Guide
@@ -133,20 +133,33 @@
     <h2>Arguments</h2>
     <dl><dt>counts_data</dt>
 <dd><p>a counts data frame of rows in genes and columns in samples</p></dd>
+
+
 <dt>group_list</dt>
 <dd><p>a list ordered by samples in counts_data</p></dd>
+
+
 <dt>test_group</dt>
 <dd><p>the name of the numerator level for the fold change (Test group)</p></dd>
+
+
 <dt>control_group</dt>
 <dd><p>the name of the denominator level for the fold change (Control group)</p></dd>
+
+
 <dt>dir</dt>
 <dd><p>a directory to store results</p></dd>
+
+
 <dt>parallel</dt>
 <dd><p>if FALSE, no parallelization. if TRUE, parallel execution using BiocParallel</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a csv file and a DEG_container ob</p>
+    
+
+<p>a csv file and a DEG_container ob</p>
     </div>
 
     <div id="ref-examples">
@@ -168,7 +181,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

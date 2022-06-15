@@ -42,7 +42,7 @@
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="paper paper-plane"></span>
      
     Guide
@@ -132,18 +132,29 @@
     <h2>Arguments</h2>
     <dl><dt>counts_data</dt>
 <dd><p>a counts data frame of rows in genes and columns in samples</p></dd>
+
+
 <dt>group_list</dt>
 <dd><p>a list ordered by samples in counts_data</p></dd>
+
+
 <dt>dir</dt>
 <dd><p>a directory to store results</p></dd>
+
+
 <dt>prefix</dt>
 <dd><p>a prefix of file names in this step</p></dd>
+
+
 <dt>palette</dt>
 <dd><p>a color palette for plots</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a directory contains figures for data QC check</p>
+    
+
+<p>a directory contains figures for data QC check</p>
     </div>
 
     <div id="ref-examples">
@@ -151,10 +162,10 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">pre_check</span><span class="op">(</span><span class="va">counts_input</span>, <span class="va">group_list</span>, <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Too few points to calculate an ellipse</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Too few points to calculate an ellipse</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 🌳 PCA checking have done, a plot was store in /tmp/RtmpsTOWIi.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 🌳 Correlation checking have done, a plot was store in /tmp/RtmpsTOWIi.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 🌳 Correlation to top 500 genes checking have done, a plot was store in /tmp/RtmpsTOWIi.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 🌳 Standard Deviation top 1000 genes checking have done, a plot was store in /tmp/RtmpsTOWIi.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 🌳 PCA checking have done, a plot was store in /tmp/RtmppGBVW3.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 🌳 Correlation checking have done, a plot was store in /tmp/RtmppGBVW3.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 🌳 Correlation to top 500 genes checking have done, a plot was store in /tmp/RtmppGBVW3.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 🌳 Standard Deviation top 1000 genes checking have done, a plot was store in /tmp/RtmppGBVW3.</span>
 </code></pre></div>
     </div>
   </div>
@@ -169,7 +180,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>
